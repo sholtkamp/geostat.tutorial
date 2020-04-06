@@ -1,0 +1,16 @@
+Package: geostat.tutorial
+Title: Geostat Tutorial Builder
+Version: 1.0
+Authors@R: 
+    person(given = "Sebastian",
+           family = "Holtkamp",
+           role = c("aut", "cre"),
+           email = "Sebastian.Holtkamp@wwu.de",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package generates a learnr based tutorial in R for the Geostatistik Lecture 2020 of the WWU Münster.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports: learnr
+Depends: R (>= 2.10)
