@@ -8,14 +8,10 @@ runtime: shiny_prerendered
 library(learnr)
 library(geostat.tutorial)
 knitr::opts_chunk$set(echo = FALSE)
-
-#' Dataset für Aufgabe 8
-"students.rda"
-
 ```
 
 
-## Erste Schritte
+## 1. Erste Schritte
 
 ### Die Hilfefunktion 
 Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. `?sqrt` für die Wurzelfunktion `sqrt`). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser, oder direkt in Rstudio aufgerufen.
@@ -23,18 +19,25 @@ Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gef
 ### R als Taschenrechner
 Die R-Befehlszeile kann auch als Taschenrechner genutzt werden; führe einige Rechnungen aus. Der Zuweisungs-Operator `<-` speichert Werte, Objekte oder Funktionen in Variablen, z.B wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen (sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt).
 
-### Übung 1
-Führe folgende Rechnungen durch und speichere ihre Ergebnisse in deinem Workspace (weise sie jeweils Variablen deiner Wahl zu). Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen?
-<br><br>
 
-1.1) $\frac{5}{5+345}$
+### Übung 1
+
+Führe folgende Rechnungen durch und speichere ihre Ergebnisse in deinem Workspace (weise sie jeweils Variablen deiner Wahl zu). Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen?
+<br>
+
+1.1) $\frac{5.1}{5+345}$
 ```{r 1a, exercise=TRUE}
 a <- 
 a
 ```
-```{r 1a-solution}
-a <- 5/(5+345)
+```{r 1a-hint}
+# Befehl:
+a <- 5.1 / (5 + 345)
 a
+```
+```{r 1a-solution}
+# Ergebnis:
+a = 0.01457143
 ```
 <br>
 
@@ -43,9 +46,20 @@ a
 b <- 
 b
 ```
-```{r 1b-solution}
-b <- 2 * sin(pi/2)
+```{r 1b-hint-1}
+"Die Sinusfunktion erwartet Eingaben im Bogenmaß."
+```
+```{r 1b-hint-2}
+"Winkel im Gradmaß können durch die Formel φRAD = φDEG * (π / 180) ins Bogenmaß umgerechnet werden"
+```
+```{r 1b-hint-3}
+# Befehl:
+b <- 2 * sin(pi / 2)
 b
+```
+```{r 1b-solution}
+# Ergebnis:
+b = 2
 ```
 <br>
 
@@ -54,37 +68,52 @@ b
 c <- 
 c
 ```
-```{r 1c-solution}
-c <- sqrt(16)+sqrt(25)
+```{r 1c-hint}
+# Befehl:
+c <- sqrt(16) + sqrt(25)
 c
+```
+```{r 1c-solution}
+# Ergebnis:
+c = 9
 ```
 <br>
 
 1.4) $\frac{\frac{5}{5+345} + {2⋅sin(90°)}}{\sqrt(16) + \sqrt(25)}$
 ```{r 1d_setup}
-a <- 5/(5+345)
-b <- 2 * sin(pi/2)
-c <- sqrt(16)+sqrt(25)
+a <- 5 / (5 + 345)
+b <- 2 * sin(pi / 2)
+c <- sqrt(16) + sqrt(25)
 ```
 ```{r 1d, exercise=TRUE, exercise.setup = "1d_setup"}
 d <- 
 d
 ```
-```{r 1d-hint}
+```{r 1d-hint-1}
 "Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
 ```
-```{r 1d-solution}
-d <- ((5/(5+345)) + (2 * sin(pi/2))) / (sqrt(16)+sqrt(25)) # ist gleich
-d <- (a+b)/c
+```{r 1d-hint-2}
+# Befehl:
+d <- ((5 / (5 + 345)) + (2 * sin(pi / 2))) / (sqrt(16) + sqrt(25)) 
+# ist das Gleiche wie 
+d <- (a + b) / c
 d
+```
+```{r 1d-solution}
+# Ergebis:
+d = 0.2238095
 ```
 
 
-## Sequenzen
-"Gewisse, häufig benötigte Vektoren, deren Elemente spezielle Zahlenfolgen bilden, lassen sich in
-R einfach erzeugen. Hierzu stehen die Funktionen seq() und rep() zur Verfügung." [1, S. 16] <br><br>
+## 2. Vektoren
+Der Vektor ist eine der wichtigsten Datenstrukturen in R. Mit ihm können beliebig viele Elemente des selben Datentyps gespeichert werden. 
+<br>
+Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `a = (1, 2, 3)` mit Hilfe von `a <- c(1, 2, 3)` erzeugt werden. Darüber hinaus gibt es Vektoren die häufig benötigt werden. Diese sind spezielle Zahlenfolgen und lassen sich in
+R einfach erzeugen. Hierzu stehen die Funktionen `seq()` und `rep()` zur Verfügung. 
+<br>
+<br>
 
-Die Funktion <code>seq()</code> dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei der folgenden Parameter müssen normalerweise angegeben werden und der 4. Wert kann dann automatisch berechnet werden: <br>
+Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei der folgenden Parameter müssen angegeben werden und der 4. Wert kann dann automatisch berechnet werden: <br>
 <ul>
 <li>`from`: Anfangswert der Sequenz</li>
 <li>`to`: Endwert der Sequenz</li>
@@ -94,16 +123,15 @@ Die Funktion <code>seq()</code> dient dazu eine regelmäßige Zahlenfolge zu erz
 
 <br>
 
-Die Funktion <code>rep()</code> dient dazu einen Vektor oder Faktor beliebig oft zu wiederholen. Dazu werden die folgenden Parameter benötigt: <br>
+Die Funktion `rep()` dient dazu einen Vektor oder Faktor beliebig oft zu wiederholen. Dazu werden die folgenden Parameter benötigt: <br>
 <ul>
 <li>`x`: Vektor oder Faktor der wiederholt werden soll</li>
 <li>`times`: Anzahl der Wiederholungen</li>
 </ul>
-
 <br>
 
 ### Übung 2
-2.1) Erzeuge einen Vektor von 0 bis 1 in 0,1-Schritten <code>(0, 0.1, 0.2, ..., 1)</code>.
+2.1) Erzeuge einen Vektor von 0 bis 1 in 0,1-Schritten `(0, 0.1, 0.2, ..., 1)`.
 ```{r 2a, exercise=TRUE}
 vec_seq <- 
 vec_seq
@@ -112,12 +140,12 @@ vec_seq
 "Nutze die Hilfefunktion mit ?seq"
 ```
 ```{r 2a-solution}
-vec_seq <- seq(from = 0, to=1, by=0.1)
+vec_seq <- seq(from = 0, to = 1, by = 0.1)
 vec_seq
 ```
 <br>
 
-2.2) Erzeuge den Vektor <code>(1, 1, 1, 1, 1, 5, 5, 5)</code>.
+2.2) Erzeuge den Vektor `(1, 1, 1, 1, 1, 5, 5, 5)`.
 ```{r 2b, exercise=TRUE}
 vec_rep <- 
 vec_rep
@@ -126,14 +154,15 @@ vec_rep
 "Nutze die Hilfefunktion mit ?rep"
 ```
 ```{r 2b-solution}
-vec_rep <- rep(c(1,5), times = c(5, 3))
+vec_rep <- rep(c(1, 5), times = c(5, 3))
 vec_rep
 ```
 <br>
 
-2.3) Verwende den ersten Vektor und erzeuge durch addieren / multiplizieren die folgenden Vektoren: <code>(1, 1.1, 1.2, ..., 2)</code> und <code>(2, 2.2, 2.4, ..., 4)</code>.
+2.3) Verwende den ersten Vektor und erzeuge durch Addieren / Multiplizieren die folgenden Vektoren: `(1, 1.1, 1.2, ..., 2)` und `(2, 2.2, 2.4, ..., 4)`.
 ```{r 2c_setup}
-vec_seq = seq(from = 0, to=1, by=0.1)
+vec_seq <- seq(from = 0, to = 1, by = 0.1)
+vec_rep <- rep(c(1, 5), times = c(5, 3))
 ```
 ```{r 2c, exercise=TRUE, exercise.setup = "2c_setup"}
 vec_1 <- 
@@ -151,26 +180,22 @@ vec_2
 vec_1 <- vec_seq + 1
 
 # Multiplizierter Vektor
-vec_2 <-2 * (vec_seq + 1)
+vec_2 <- 2 * (vec_seq + 1)
   
 # Ausgabe der Vektoren
 vec_1
 vec_2
-
 ```
+<br>
 
-## Vektormultiplikation
-
-Führe den Befehl `c(1, 3, 7) * c(5, 8, 2)` und `c(1, 3, 7) %*% c(5, 8, 2)` aus (beachte, dass `c()` als Funktion verstanden wird). Was ist an den Berechnungen in R speziell verglichen mit den Vektorrechnungen in der Mathematik?
-
-```{r 3a, exercise=TRUE}
+2.4) Führe nun die Befehle `c(1, 3, 7) * c(5, 8, 2)` und `c(1, 3, 7) %*% c(5, 8, 2)` aus. Was ist an den Berechnungen in R speziell verglichen mit den Vektorrechnungen in der Mathematik?
+```{r 2d, exercise=TRUE}
 c(1, 3, 7) * c(5, 8, 2) 
 ```
-```{r 3b, exercise=TRUE}
+```{r 2e, exercise=TRUE}
 c(1, 3, 7) %*% c(5, 8, 2)
 ```
 
-### Übung 3:
 ```{r quiz1}
 quiz(
   question("Welche Art der Multiplikation wird mit dem Operator * ausgeführt?",
@@ -183,21 +208,42 @@ quiz(
   )
 )
 ```
-Durch Ausführen der normalen Multiplikation (Symbol `*`) werden zwei Vektoren elementweise multipliziert, das Ergebnis ist also wieder ein Vektor gleicher Länge. <br>
+
+<details>
+<summary>Erklärung: (Klick mich!)</summary>
+
+Durch Ausführen der normalen Multiplikation (Symbol `*`) werden zwei Vektoren elementweise multipliziert, das Ergebnis ist also wieder ein Vektor gleicher Länge. 
+<br>
 Der Matrixmultiplikationsoperator `%*%` führt in diesem Beispiel das Skalarprodukt aus, bildet also die elementweisen Produkte und summiert diese anschließend. Dies ist hier mathematisch nicht äquivalent, da eigentlich der erste Vektor als Zeilenvektor und der zweite Vektor als Spaltenvektor transponiert werden müsste, um das Skalarprodukt als Matrixmultiplikation zu interpretieren.
+</details>
+<br>
 
-## Arrays und Matrizen
-Arrays und Matrizen sind wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. [2, S. 1] <br>
-Arrays und Matrizen unterscheiden sich von den bereits bekannten  Vektoren durch ihr Dimensions-Attribut `dim`. Während Arrays beliebige Dimensionen annehmen können sind Matrizen grunsätzlich zweidimenional. <br>
-Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow` bzw. `ncol` angegeben werden, wie viele Zeilen und Spalten die Matrix haben soll. Dabei reicht es, einen der beiden Parameter anzugeben. <br>
-Standardmäßig werden Matrizen spaltenweise mit den Elementen des Vektors gefüllt, das heißt die ersten 4 Zahlen entsprechen der ersten Spalte. Um dies zu ändern muss der Parameter `byrow` auf `TRUE` gesetzt werden. <br>
-Einzelne Elemente der Matrix können durch eckige Klammern gelesen und verändert werden. Dabei ist die erste Zahl immer die Zeilennummer, die zweite Zahl die Spaltennummer. Diese Indizes fangen in R immer mit 1 an. Die oberste linke Zahl ist also `A[1,1]`. <br>
-Betrachte zur Verdeutlichung die folgenden Beispiele: <br>
+Weitere, für den Anfang wichtige Funktionen im Umgang mit Vektoren, sind `length()` und die Selektion.
+<br>
+Mit `length()` wird die Länge eines Vektors, bzw. die Anzahl seiner Elemente ermittelt.
+<br>
+Um ein bestimmtes Element des Vektors auszuwählen wird die Notation `Vektorname[Index]` benutzt. Die Indizes beginne dabei bei 1. Beide Funktionen werden im folgenden Beispiel verdeutlicht:
+```{r 2f, exercise=TRUE}
+vec <- c(4, 8, 15, 16, 23, 42) 
 
-### Beispiel: Vektor
-```{r 4a, include = TRUE, echo = TRUE}
+# Bestimme die Länge von vec
+length(vec)
+
+# Selektiere den vierten Wert in vec (nicht den Wert 4)
+selec_test <- vec[4]
+selec_test
+```
+
+
+## 3. Arrays und Matrizen
+Arrays und Matrizen sind weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. Arrays und Matrizen unterscheiden sich von Vektoren durch ihr Dimensions-Attribut `dim`. Arrays können beliebige Dimensionen annehmen, Matrizen sind hingegen grundsätzlich zweidimenional. 
+<br>
+<br>
+
+### 3.1 Erinnerung: Vektoren
+```{r 3a, include = TRUE, echo = TRUE}
 # Vektor aus Aufgabe 2.1
-vec <- seq(from = 0, to=1, by=0.1)
+vec <- seq(from = 0, to = 1, by = 0.1)
 vec
 
 # Selektion des 3. Wertes
@@ -207,9 +253,14 @@ vec[3]
 dim(vec)
 ```
 
-### Beispiel: Matrix
-```{r 4b, include = TRUE, echo = TRUE}
-mat <- matrix(1:6, nrow=3, ncol =2)
+### 3.2 Matrizen
+Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow` bzw. `ncol` angegeben werden, wie viele Zeilen und Spalten die Matrix haben soll. Dabei reicht es, einen der beiden Parameter anzugeben. Standardmäßig werden Matrizen spaltenweise mit den Elementen des Vektors gefüllt, das heißt die ersten 4 Zahlen entsprechen der ersten Spalte. Um dies zu ändern muss der Parameter `byrow` auf `TRUE` gesetzt werden. 
+<br>
+Einzelne Elemente der Matrix können durch eckige Klammern gelesen und verändert werden. Dabei ist die erste Zahl immer die Zeilennummer, die zweite Zahl die Spaltennummer. Diese Indizes fangen in R immer mit 1 an. Die oberste linke Zahl ist also `Matrixname[1,1]`. 
+<br>
+```{r 3b, include = TRUE, echo = TRUE}
+# Anmerkung: Die Notation 1:6 erzeugt die Zahlen von 1 bis 6
+mat <- matrix(1:6, nrow = 3, ncol =2)
 mat
 
 # Selektion des Wertes an Stelle [1, 2]
@@ -219,8 +270,10 @@ mat[1, 2]
 dim(mat)
 ```
 
-### Beispiel: Array
-```{r 4c, include = TRUE, echo = TRUE}
+### 3.3 Arrays
+Die Dimensionen von Arrays hingegen werden nicht mit `nrow` bzw. `ncol` bestimmt, sondern direkt über den Parameter `dim`. Dazu wird ein Vektor genutzt, der die Dimensionen widerspiegelt. Jede Stelle des Vektors entspricht einer Dimension, der Wert der Stelle, wie viele Einträge die Dimension fasst. Im folgenden Beispiel wird ein 3D-Vektor erzeugt, der insgesamt 12 (2 \* 2 \* 3) Einträge fassen kann.
+```{r 3c, include = TRUE, echo = TRUE}
+# Anmerkung: Die Notation 1:12 erzeugt die Zahlen von 1 bis 12
 arr <- array(1:12, dim = c(2, 2, 3))
 arr
 
@@ -231,44 +284,46 @@ arr[1, 2, 3]
 dim(arr)
 ```
 
-### Übung 4: 
-4.1) Erzeuge nun selbst eine Matrix mit Zahlen von 1 bis 12, die drei Spalten hat (beginnend mit 1 2 3 in der ersten Zeile).
-```{r 4d, exercise=TRUE}
+### Übung 3: 
+
+3.1) Erzeuge nun selbst eine Matrix mit Zahlen von 1 bis 12, die drei Spalten hat (beginnend mit 1 2 3 in der ersten Zeile).
+```{r 3d, exercise=TRUE}
 mat <- 
 mat
 ```
-```{r 4d-hint}
+```{r 3d-hint}
 "Nutze die Hilfefunktion mit ?matrix"
 ```
-```{r 4d-solution}
-# Addierter Vektor
-mat <- matrix(seq(1,12,by=1),nrow=4,ncol=3, byrow = TRUE)
+```{r 3d-solution}
+mat <- matrix(seq(1, 12, by = 1), nrow = 4, ncol = 3, byrow = TRUE)
 mat
 ```
+<br>
 
-4.2) Ersetze nun die Zahl 6 in der Matrix durch die Zahl 15.
-```{r 4e_setup}
-mat <- matrix(seq(1,12,by=1),nrow=4,ncol=3, byrow = TRUE)
+3.2) Ersetze nun die Zahl 6 in der Matrix durch die Zahl 15.
+```{r 3e_setup}
+mat <- matrix(seq(1, 12, by = 1), nrow = 4, ncol = 3, byrow = TRUE)
 ```
-```{r 4e, exercise=TRUE, exercise.setup = "4e_setup"}
+```{r 3e, exercise=TRUE, exercise.setup = "3e_setup"}
 mat <-
 mat
 ```
-```{r 4e-hint-1}
+```{r 3e-hint-1}
 "Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
 ```
-```{r 4e-hint-2}
+```{r 3e-hint-2}
 "Zum Austauschen muss zunächst die korrekte Stelle gewählt werden und dann eine Zuweisung ausgeführt werden."
 ```
-```{r 4e-hint-3}
-"Beachte bei der Auswahl die Reihenfolge der Indices."
+```{r 3e-hint-3}
+"Beachte bei der Auswahl die Reihenfolge der Indizes."
 ```
-```{r 4e-solution}
+```{r 3e-solution}
 mat[2, 3] <- 15
 mat
 ```
+<br>
 
-4.3) Multipliziere die entsandene Matrix nun mit 4. Welche Veränderung kannst du in der Matrix beobachten??
+3.3) Multipliziere die entsandene Matrix nun mit 4. Welche Veränderung kannst du in der Matrix beobachten??
 ```{r quiz2, echo=FALSE}
 quiz(
   question("Welche Veränderung kannst du in der Matrix beobachten?",
@@ -280,35 +335,45 @@ quiz(
 )
 ```
 
-## Vektormultiplikation und Kennwerte
-R stellt eine Vielzahl statistischer Kennwerte mit eingebauten Befehlen bereit. So erlaubt R zum Beispiel das bilden von Summen mit `sum()`, arithmetischen Mitteln mit `mean()` und das Ermitteln von Minima und Maxima mit `min()` bzw. `max()`. <br>
+
+## 4. Vektormultiplikation und Kennwerte
+R stellt eine Vielzahl statistischer Kennwerte mit eingebauten Befehlen bereit. So erlaubt R zum Beispiel das bilden von Summen mit `sum()`, arithmetischen Mitteln mit `mean()` und das Ermitteln von Maxima und Minima mit `min()` bzw. `max()`. 
+<br>
 Weitere Funktionen werden im Rahmen der Vorlesung vorgestellt, sobald diese benötigt werden.
+<br>
+<br>
 
-### Übung 5:
+### Übung 4:
 
-5.1) Weise einer Variablen den Wert 12 zu und erstelle einen Vektor mit den Werten 1,2,3,10,100. Multipliziere beide miteinander und speichere das Ergebnis als Variable z.
-```{r 5a, exercise=TRUE}
+4.1) Weise einer Variablen den Wert 12 zu und erstelle einen Vektor mit den Werten 1, 2, 3, 10, 100. Multipliziere beide miteinander und speichere das Ergebnis als Variable z.
+```{r 4a, exercise=TRUE}
 x <- 
 vec <- 
 
 z <- 
 z
 ```
-```{r 5a-solution}
+```{r 4a-hint}
+# Befehle:
 x <- 12
-vec <- c(1,2,3,10,100)
+vec <- c(1, 2, 3, 10, 100)
 
 z <- x * vec
 ```
+```{r 4a-solution}
+# Ergebnis: 
+z = c(12, 24, 36, 120, 1200)
+```
+<br>
 
-5.2) Berechne nun die Summe, den Durschnitt, das Minimum und das Maximum von Vektor z.
-```{r 5b_setup}
+4.2) Berechne nun die Summe, den Durschnitt, das Minimum und das Maximum von Vektor z.
+```{r 4b_setup}
 x <- 12
-vec <- c(1,2,3,10,100)
+vec <- c(1, 2, 3, 10, 100)
 
 z <- x * vec
 ```
-```{r 5b, exercise=TRUE, exercise.setup = "5b_setup"}
+```{r 4b, exercise=TRUE, exercise.setup = "4b_setup"}
 sum_z <- 
 mean_z <- 
 min_z <- 
@@ -319,38 +384,45 @@ mean_z
 min_z
 max_z
 ```
-```{r 5b-hint}
+```{r 4b-hint-1}
 "Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
 ```
-```{r 5b-solution}
-sum <- sum(z)
-mean <- mean(z)
-min <- min(z)
-max <- max(z)
-
-sum_z
-mean_z
-min_z
-max_z
+```{r 4b-hint-2}
+# Befehle:
+sum_z <- sum(z)
+mean_z <- mean(z)
+min_z <- min(z)
+max_z <- max(z)
+```
+```{r 4b-solution}
+# Ergebnis:
+sum_z = 1392
+mean_z = 278.4
+min_z = 12
+max_z = 1200
 ```
 
-## Plots
-Plots in R werden mittels der Funktion `plot()` erzeugt (siehe auch `?plot`). Dabei wird eine Vielzahl von Parametern angeboten, die das Verhalten und die Darstellung des Plots beeinflussen, wie zum Beispiel: <br>
+
+## 5. Plots
+Plots in R werden mittels der Funktion `plot()` erzeugt (siehe auch `?plot`). Dabei wird eine Vielzahl von Parametern angeboten, die das Verhalten und die Darstellung des Plots beeinflussen, wie zum Beispiel: 
+<br>
 <ul>
 <li>`x` und `y`: Standardmäßig Paare von Punkten</li>
 <li>`type`: Ändert das Darstellungsverhalten (z.B. Linie, Punkte, ...)</li>
 <li>`main`: Überschrift des Plots</li>
 <li>`sub`: Unterschrift des Plots</li>
 <li>`xlab`: Beschriftung der X-Achse</li>
-<li>`ylab`: Beschrfitung der Y-Achse</li>
+<li>`ylab`: Beschriftung der Y-Achse</li>
 <li>`col`: Farbe der geplotteten Elemente</li>
 </ul>
-Wenn mehrere Elemente in einem Plot angezeigt werden sollen, darf die Funktion `plot` nur <bold>einmal</bold> aufgerufen werden. Weitere punkte und Kurven können dann mittels `lines` und `points` hinzugefügt werden.
+Wenn mehrere Elemente in einem Plot angezeigt werden sollen, darf die Funktion `plot` nur <b>einmal</b> aufgerufen werden. Weitere Punkte und Kurven können dann mittels `lines()` und `points()` hinzugefügt werden.
+<br>
+<br>
 
-### Übung 6: 
+### Übung 5: 
 
-6.1) Erzeuge einen Vektor x von -3 bis 3 in 0.1-Schritten. Zeichne die Funktionen $y=x^2$, $y=1−x^2$ und $y=5+x^2$. 
-```{r 6, exercise=TRUE}
+5.1) Erzeuge einen Vektor x von -3 bis 3 in 0.1-Schritten. Zeichne die Funktionen $y=x^2$, $y=1−x^2$ und $y=5+x^2$. 
+```{r 5, exercise=TRUE}
 x <- 
 y1 <- 
 y2 <- 
@@ -360,14 +432,14 @@ plot()
 ...
 ...
 ```
-```{r 6-hint-1}
+```{r 5-hint-1}
 "Portenzen in R werden mit ^ eingegeben. Beispiel: 2^2 = 4"
 ```
-```{r 6-hint-2}
+```{r 5-hint-2}
 "Beachte plot nur einmal aufzurufen."
 ```
-```{r 6-solution}
-x <- seq(-3, 3, by=0.1)
+```{r 5-solution}
+x <- seq(-3, 3, by = 0.1)
 y1 <- x ^ 2
 y2 <- 1 - x^2
 y3 <- 5 + x^2
@@ -398,94 +470,120 @@ quiz(
 )
 ```
 
-## Dataframes
 
-Dataframes sind die häufigste Methode um in R daten zu speichern. Sie sind zweidimensionale Strukturen, die sich intern aus einer Menge gleichlanger Vektoren zusammen setzen. <br>
-Die einfachste Möglichkeit einen Dataframes zu erzeugen ist die Funktion `data.frame()`. Um nachträglich Einträge hinzuzufügen, können unter Anderem `rbind()` und `cbind()` benutzt werden. 
+## 6. Dataframes
 
-### Übung 7:
-Mache dich mit der Funktion `data.frame()` und ihren Parametern vertraut und bearbeite dann folgende Aufgaben.
+Dataframes sind die häufigste Methode um in R größere Mengen an Daten systematisch zu speichern. Sie sind zweidimensionale Strukturen, die sich intern aus einer Menge gleichlanger Vektoren zusammen setzen. 
+<br>
+Die einfachste Möglichkeit einen Dataframes zu erzeugen ist die Funktion `data.frame()`. Eine Umwandlung anderer Datenstrukturen in einen Dataframe kann mit `as.data.frame()` getätigt werden, hierbei ist jedoch Vorsicht geboten, da Strukturen in den Daten verloren gehen können.
+<br>
+Um nachträglich Einträge zu einem Dataframe hinzuzufügen, können unter Anderem `rbind()` und `cbind()` benutzt werden. 
+<br>
+<br>
 
-7.1) Erzeuge zwei Vektoren mit folgenden Daten: <br>
-t enthält Mo, Di, Mi, Do, Fr, Sa <br>
-m enthält 92, 80, 60, 20, 10, 50. <br>
-Verbinde beide Vektoren spaltenweise zu einem data.frame mit dem namen `studie`. Vergebe die Spaltennamen “Motivation”" für m und “Wochentag” für t.
-```{r 7a, exercise=TRUE}
+### Übung 6:
+
+Mache dich mit der Funktion `data.frame()` und ihren Parametern vertraut und bearbeite dann folgende Aufgaben:
+
+6.1) Erzeuge zwei Vektoren mit folgenden Daten: <br>
+<ul>
+<li>t: Mo, Di, Mi, Do, Fr, Sa </li>
+<li>m: 92, 80, 60, 20, 10, 50 </li>
+</ul>
+Verbinde beide Vektoren spaltenweise zu einem Dataframe mit dem Namen `studie`. Vergib die Spaltennamen “Motivation”" für m und “Wochentag” für t.
+```{r 6a, exercise=TRUE}
 t <- 
 m <- 
  
 studie <- 
 studie
 ```
-```{r 7a-hint}
+```{r 6a-hint}
 "Benutze die Funktion data.frame()."
 ```
-```{r 7a-solution}
+```{r 6a-solution}
 t <- c("Mo","Di","Mi","Do","Fr","Sa")
 m <- c( 92,  80,  60,  20,  10,  50)
 
 studie <- data.frame(Motivation = m, Wochentag=t)
 studie
 ```
+<br>
 
-7.2) Füge am unteren Ende von `studie` eine Zeile mit den Elementen So, 100 hinzu.
-```{r 7b_setup}
+6.2) Füge am unteren Ende von `studie` eine Zeile mit den Elementen So, 100 hinzu.
+```{r 6b_setup}
 t = c("Mo","Di","Mi","Do","Fr","Sa") 
 m = c( 92,  80,  60,  20,  10,  50)  
 
 studie = data.frame(Motivation = m, Wochentag=t) 
 ```
-```{r 7b, exercise=TRUE, exercise.setup = "7b_setup"}
+```{r 6b, exercise=TRUE, exercise.setup = "6b_setup"}
 studie <- 
 studie
 ```
-```{r 7b-hint}
+```{r 6b-hint}
 "Benutze die Funktion rbind()."
 ```
-```{r 7b-solution}
+```{r 6b-solution}
 studie <- rbind(studie, data.frame(Motivation = 100, Wochentag = "So")) 
 studie
 ```
 
-## Arbeiten mit Dataframes
-Dataframes können in Datein des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `load("students.rdata")` eingelesen und benutzt werden. <br>
-Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann. <br>
-`.rdata`-Dateien im Geostatistik-Ordner können generell auch mittels `load(datei_name.rdata)` eingelesen werden, weshalb ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil ist.
 
-### Übung 8:
+## 7. Arbeiten mit Dataframes
+Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `load("students.rdata")` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann.
+<br>
+`.rdata`-Dateien im Geostatistik-Ordner können generell auch mittels `load(datei_name.rdata)` eingelesen werden, weshalb ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil ist.
+<br>
+<br>
+
+### Übung 7:
+
 Lade den Datensatz `students.rdata` und wende die Funktion `summary(students)` an, um einen Überblick über den Datensatz zu erhalten. Beantworte anschließend die folgenden Fragen:
 
-```{r 8_setup}
+```{r 7_setup}
 data("students", package = "geostat.tutorial")
 ```
 
-8.1) Wie groß ist der Stichprobenumfang, d.h. wie viele Studierende haben an der Umfrage teilgenommen?
-```{r 8a, exercise=TRUE, exercise.setup = "8_setup"}
+7.1) Wie groß ist der Stichprobenumfang, d.h. wie viele Studierende haben an der Umfrage teilgenommen?
+```{r 7a, exercise=TRUE, exercise.setup = "7_setup"}
 n <- 
 n
 ```
-```{r 8a-hint}
+```{r 7a-hint-1}
 "Benutze die Funktion nrow()."
 ```
-```{r 8a-solution}
+```{r 7a-hint-2}
+# Befehl:
 n <- nrow(students)
 n
 ```
+```{r 7a-solution}
+# Ergebnis:
+n = 134
+```
+<br>
 
-8.2) Wie Variablen wurden erfasst?
-```{r 8b, exercise=TRUE, exercise.setup = "8_setup"}
+7.2) Wie Variablen wurden erfasst?
+```{r 7b, exercise=TRUE, exercise.setup = "7_setup"}
 variables <- 
 variables
 ```
-```{r 8b-hint}
+```{r 7b-hint-1}
 "Benutze die Funktion ncol()."
 ```
-```{r 8b-solution}
+```{r 7b-hint-2}
+# Befehl:
 variables <- ncol(students)
 variables
 ```
+```{r 7b-solution}
+# Ergebnis:
+variables = 8
+```
+<br>
 
-8.3) 
+7.3) 
 ```{r quiz4, echo=FALSE}
 quiz(
   question("Worin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Iam, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)",
@@ -498,15 +596,15 @@ quiz(
     
     answer("Die genannten Variablen sind rationalskaliert."),
     answer("Die übrigen Variablen sind rationalskaliert.", correct = TRUE)
-
   )
 )
 ```
 
 
+## Weitere Infos
 
-## Quellen
-
-[1] https://www.uni-giessen.de/fbz/fb07/fachgebiete/mathematik/mathematik/ags/stoch/personen/wimis/eichner/skriptenfiles/r1sum16.r4win17
-[2] https://www.stat.berkeley.edu/~nolan/stat133/Fall05/lectures/Lists4.pdf 
-[3] http://adv-r.had.co.nz/Data-structures.html#data-frames
+[1] [Ausfürliches, weiterführendes, deutsches Skript von Dr. Gerrit Eichner](https://www.uni-giessen.de/fbz/fb07/fachgebiete/mathematik/mathematik/ags/stoch/personen/wimis/eichner/skriptenfiles/r1sum16.r4win17)
+<br>
+[2] [Advanced R by Hadley Wickham, begleitende Website, englisch](http://adv-r.had.co.nz)
+<br>
+[3] [Efficient R programming, weiterführendes Buch über effiziente Programmierung in R, englisch](https://csgillespie.github.io/efficientR/index.html)
