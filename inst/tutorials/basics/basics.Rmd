@@ -599,7 +599,73 @@ quiz(
   )
 )
 ```
+<br>
 
+## 8. Der Umgang mit NAs
+In den bisherigen Aufgaben waren die Daten "perfekt", d.h. vollständig und fehlerfrei. Bei Datensätzen aus der realen Welt, wie z.B. dem `students`-Datensatz, besteht jedoch das Problem, dass diese eben nicht immer perfekt sind. Fehlende oder fehlerhafte Werte führen häufig zu Schwierigkeiten bei der Datenanalyse, wenn die nicht richtig behandelt werden.
+<br>
+Insbesondere fehlende Werte, in R durch `NA` repräsentiert, beeinflussen die Analyse stark. Sie können dafür sorgen, dass Funktionen gar nicht oder nur fehlerhaft ausgeführt werden.
+<br>
+Daher ist es wichtig Datensätze zu prüfen. `NAs` können relativ leicht identifiziert werden. Mit `any(is.na(Dataframename))` wird überprüft, ob der gesamte Dataframe `NAs` beinhaltet. Auch einzelne Spalten können getstet werden, wie z.B. `any(is.na(students$Semester))`. 
+<br>
+```{r NA, include = TRUE, echo = TRUE}
+# Untersuche students auf NAs
+any(is.na(students))
+
+# Da stundents NAs hat suche die betreffenden Attribute:
+any(is.na(students$Length)) # --> keine fehlenden Attribute
+any(is.na(students$Semester)) # --> fehlende Attribute
+```
+<br>
+
+In den Daten zur Größe fehlen also keine Daten, in der Semesteranzahl hingegen schon. Die Auswirkungen auf simple Funktionen werden im folgenden Beispiel deutlich:
+```{r NA_mean, include = TRUE, echo = TRUE}
+# Keine fehlenden Attribute/NAs
+mean(students$Length) 
+
+# Fehlende Attribute/NAs
+mean(students$Semester) 
+```
+<br>
+Es gibt verschiedene Möglichkeiten mit `NAs` umzugehen. Sie können ersetzt oder ausgelassen werden. Welche der Methoden sinnvoller ist liegt dabei im Ermessen de(r/s) Analysierenden und ist von Fall zu Fall unterschiedlich. In den folgenden Beispielen werden beide Möglichkeiten gezeigt.
+<br>
+
+### NAs im Datensatz entfernen:
+```{r NA_removal, include = TRUE, echo = TRUE}
+# Fehlende Attribute/NAs
+is.na(students$Semester)
+
+# Erzeuge temporäre Variable students_filled, um students nicht zu überschreiben
+students_filled <- students
+
+# Ersetze alle NAs durch 99
+students_filled$Semester[is.na(students_filled$Semester)] <- 99
+
+# Betrachte students_filled NAs:
+is.na(students_filled$Semester)
+
+# Betrachte students_filled Werte:
+students_filled$Semester
+
+# Berechne Durchschnitt mit ersetztem NA
+mean(students_filled$Semester)
+```
+
+### NAs bei Berechnungen auslassen:
+
+Einige Funktionen verfügen über einen Parameter um `NAs` auszulassen, für andere muss ein allgemeingültiger Ansatz genutzt werden.
+```{r NA_skip, include = TRUE, echo = TRUE}
+# Auslassen von NAs durch Parameter
+mean(students$Semester, na.rm = TRUE)
+
+
+# Erzeuge temporäre Variable students_no_NA, um students nicht zu überschreiben
+students_no_NA <- students
+students_no_NA <- na.omit(students_no_NA)
+
+# Berechne Durchschnitt mit Auslassen von NA
+mean(students_no_NA$Semester)
+```
 
 ## Weitere Infos
 
