@@ -106,10 +106,12 @@ d = 0.2238095
 
 
 ## 2. Vektoren
-Der Vektor ist eine der wichtigsten Datenstrukturen in R. Mit ihm können beliebig viele Elemente des selben Datentyps gespeichert werden. 
+Der Vektor ist eine der wichtigsten Datenstrukturen in R. Mit ihm können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. So können z.B. Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
 <br>
-Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `a = (1, 2, 3)` mit Hilfe von `a <- c(1, 2, 3)` erzeugt werden. Darüber hinaus gibt es Vektoren die häufig benötigt werden. Diese sind spezielle Zahlenfolgen und lassen sich in
-R einfach erzeugen. Hierzu stehen die Funktionen `seq()` und `rep()` zur Verfügung. 
+Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1,2 und 3) mit Hilfe von `a <- c(1, 2, 3)` erzeugt und der Variable `a` zugewiesen werden. Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "R")`. Übrigens: Die Anführungsstriche sind nötig, um klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt (hallo ohne "" würde versuchen, ein Objekt mit dem Namen "hallo" zu verwenden. Probiert mal `b <- c(hallo,R)`). Auch komplexere R-Objekte können in Vektoren zusammengefasst werden, es müssen nur alle Elemente in einem Vektor den selben Datentyp haben. 
+<br>
+Ihr werdet beim Umgang mit R immer wieder auf Vektoren stoßen. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in
+R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
 <br>
 <br>
 
@@ -222,7 +224,7 @@ Weitere, für den Anfang wichtige Funktionen im Umgang mit Vektoren, sind `lengt
 <br>
 Mit `length()` wird die Länge eines Vektors, bzw. die Anzahl seiner Elemente ermittelt.
 <br>
-Um ein bestimmtes Element des Vektors auszuwählen wird die Notation `Vektorname[Index]` benutzt. Die Indizes beginne dabei bei 1. Beide Funktionen werden im folgenden Beispiel verdeutlicht:
+Um ein bestimmtes Element des Vektors auszuwählen wird die Notation `Vektorname[Index]` benutzt. Die Indizes beginnen dabei bei 1. Beide Funktionen werden im folgenden Beispiel verdeutlicht:
 ```{r 2f, exercise=TRUE}
 vec <- c(4, 8, 15, 16, 23, 42) 
 
@@ -236,7 +238,7 @@ selec_test
 
 
 ## 3. Arrays und Matrizen
-Arrays und Matrizen sind weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. Arrays und Matrizen unterscheiden sich von Vektoren durch ihr Dimensions-Attribut `dim`. Arrays können beliebige Dimensionen annehmen, Matrizen sind hingegen grundsätzlich zweidimenional. 
+Arrays und Matrizen sind weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. Arrays und Matrizen unterscheiden sich von Vektoren durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. Arrays hingegen können beliebige Dimensionen annehmen: 
 <br>
 <br>
 
@@ -259,25 +261,26 @@ Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow`
 Einzelne Elemente der Matrix können durch eckige Klammern gelesen und verändert werden. Dabei ist die erste Zahl immer die Zeilennummer, die zweite Zahl die Spaltennummer. Diese Indizes fangen in R immer mit 1 an. Die oberste linke Zahl ist also `Matrixname[1,1]`. 
 <br>
 ```{r 3b, include = TRUE, echo = TRUE}
-# Anmerkung: Die Notation 1:6 erzeugt die Zahlen von 1 bis 6
+# Anmerkung: Die Notation 1:6 erzeugt automatisch einen Vektor mit den Zahlen von 1 bis 6 in 1-er Schritten
+# 1:6 ist also die Kurzform von seq(from=1,to=6,by=1)
 mat <- matrix(1:6, nrow = 3, ncol =2)
 mat
 
 # Selektion des Wertes an Stelle [1, 2]
 mat[1, 2]
 
-# Dimensionen von mat
+# Dimensionen und Einträge pro Dimension von mat
 dim(mat)
 ```
 
 ### 3.3 Arrays
 Die Dimensionen von Arrays hingegen werden nicht mit `nrow` bzw. `ncol` bestimmt, sondern direkt über den Parameter `dim`. Dazu wird ein Vektor genutzt, der die Dimensionen widerspiegelt. Jede Stelle des Vektors entspricht einer Dimension, der Wert der Stelle, wie viele Einträge die Dimension fasst. Im folgenden Beispiel wird ein 3D-Vektor erzeugt, der insgesamt 12 (2 \* 2 \* 3) Einträge fassen kann.
 ```{r 3c, include = TRUE, echo = TRUE}
-# Anmerkung: Die Notation 1:12 erzeugt die Zahlen von 1 bis 12
+# Anmerkung: Die Notation 1:12 erzeugt die Zahlen von 1 bis 12, s.o.
 arr <- array(1:12, dim = c(2, 2, 3))
 arr
 
-# Selektion des Wertes an Stelle [1, 2, 3]
+# Selektion des Wertes an Stelle [1, 2, 3], also 1. Zeile, 2. Spalte, 3. "Schicht"
 arr[1, 2, 3]
 
 # Dimensionen von arr
@@ -473,7 +476,7 @@ quiz(
 
 ## 6. Dataframes
 
-Dataframes sind die häufigste Methode um in R größere Mengen an Daten systematisch zu speichern. Sie sind zweidimensionale Strukturen, die sich intern aus einer Menge gleichlanger Vektoren zusammen setzen. 
+Dataframes sind die häufigste Methode um in R größere Mengen an Daten systematisch zu speichern. Dataframes speichern i.d.R. Datentabllen (in den Zeilen stehen die Beobachtungen und in den Spalten die Variablen, die für die Beobachtungen gemessen wurden, verlgeiche auch Folien der Übung). Sie sind zweidimensionale Strukturen, die sich intern aus einer Menge gleichlanger Vektoren zusammen setzen. 
 <br>
 Die einfachste Möglichkeit einen Dataframes zu erzeugen ist die Funktion `data.frame()`. Eine Umwandlung anderer Datenstrukturen in einen Dataframe kann mit `as.data.frame()` getätigt werden, hierbei ist jedoch Vorsicht geboten, da Strukturen in den Daten verloren gehen können.
 <br>
@@ -510,7 +513,8 @@ studie
 ```
 <br>
 
-6.2) Füge am unteren Ende von `studie` eine Zeile mit den Elementen So, 100 hinzu.
+6.2) Füge am unteren Ende von `studie` eine Zeile mit den Elementen "So" und 100 hinzu. Das Hinzufügen von Zeilen kann man z.B. bewerkstelligen, indem man einen einzeiligen Dataframe mit der gewünschten Zeile erstellt und diesen dann über rbind() mit dem usprünglichen Dataframe verbindet.
+
 ```{r 6b_setup}
 t = c("Mo","Di","Mi","Do","Fr","Sa") 
 m = c( 92,  80,  60,  20,  10,  50)  
@@ -531,9 +535,9 @@ studie
 
 
 ## 7. Arbeiten mit Dataframes
-Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `load("students.rdata")` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann.
+Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `data(students)` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann. In diesem tutorial-Dokument ist auch die Variable `students` mit dem Datensatz bereits vorhanden.
 <br>
-`.rdata`-Dateien im Geostatistik-Ordner können generell auch mittels `load(datei_name.rdata)` eingelesen werden, weshalb ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil ist.
+`.rdata`-Dateien können generell auch mittels `load("datei_name.rdata")` eingelesen werden, wenn sie im aktuellen Arbeitsverzeichnis vorhanden sind. Daher ist ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil.
 <br>
 <br>
 
@@ -564,7 +568,7 @@ n = 134
 ```
 <br>
 
-7.2) Wie Variablen wurden erfasst?
+7.2) Wieviele Variablen wurden erfasst?
 ```{r 7b, exercise=TRUE, exercise.setup = "7_setup"}
 variables <- 
 variables
@@ -586,7 +590,7 @@ variables = 8
 7.3) 
 ```{r quiz4, echo=FALSE}
 quiz(
-  question("Worin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Iam, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)",
+  question("Worin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)",
            
     answer("Die genannten Variablen sind lediglich kategorischer Natur.", correct = TRUE),
     answer("Die übrigen Variablen sind lediglich kategorischer Natur."),
@@ -627,7 +631,7 @@ mean(students$Length)
 mean(students$Semester) 
 ```
 <br>
-Es gibt verschiedene Möglichkeiten mit `NAs` umzugehen. Sie können ersetzt oder ausgelassen werden. Welche der Methoden sinnvoller ist liegt dabei im Ermessen de(r/s) Analysierenden und ist von Fall zu Fall unterschiedlich. In den folgenden Beispielen werden beide Möglichkeiten gezeigt.
+Es gibt verschiedene Möglichkeiten mit `NAs` umzugehen. Sie können ersetzt oder ausgelassen werden. Welche der Methoden sinnvoller ist liegt dabei im Ermessen der/s Analysierenden und ist von Fall zu Fall unterschiedlich. In den folgenden Beispielen werden beide Möglichkeiten gezeigt.
 <br>
 
 ### NAs im Datensatz entfernen:
@@ -638,8 +642,12 @@ is.na(students$Semester)
 # Erzeuge temporäre Variable students_filled, um students nicht zu überschreiben
 students_filled <- students
 
-# Ersetze alle NAs durch 99
+# Ersetze alle NAs in der Spalte "Semester" durch 99
 students_filled$Semester[is.na(students_filled$Semester)] <- 99
+
+# Oder entferne die Beobachtung mit dem NA ganz aus dem Datensatz
+# Erzeuge hierfür neuen data.frame und übernehme nur die Zeilen aus dem students data.frame, die kein NA (!is.na()) in der Spalte "Semester" haben
+students_NA_removed <- students[!is.na(students$Semester),]
 
 # Betrachte students_filled NAs:
 is.na(students_filled$Semester)
@@ -649,26 +657,30 @@ students_filled$Semester
 
 # Berechne Durchschnitt mit ersetztem NA
 mean(students_filled$Semester)
+
+# Berechne jetzt Durchschnitt auf den Daten nach Entfernen der Beobachtung, die ein NA enthielt
+# Beachte den Unterschied
+mean(students_NA_removed$Semester)
+
 ```
 
 ### NAs bei Berechnungen auslassen:
 
-Einige Funktionen verfügen über einen Parameter um `NAs` auszulassen, für andere muss ein allgemeingültiger Ansatz genutzt werden.
+Einige Funktionen besitzen spezielle Parameter, mit denen eingestellt werden kann, was beim Auftauchen von NAs zu tun ist. So kann zum Beipsiel der Funktion `mean` über den Parameter `na.rm=TRUE` mitgeteilt werden, dass NAs vor der Berechnung des Mittelwertes aus den Daten entfernt werden sollen.
+Der Datensatz selbst wird dabei nicht verändert:
+
 ```{r NA_skip, include = TRUE, echo = TRUE}
-# Auslassen von NAs durch Parameter
+# Auslassen von NAs durch Parameter. Ergebnis entspricht dem des Befehls mean(students_NA_removed$Semester) nach Entfernen der Beobachtung, die NA enthielt.
+# Hier bleibt der students-Datensatz selbst jedoch unverändert
 mean(students$Semester, na.rm = TRUE)
-
-
-# Erzeuge temporäre Variable students_no_NA, um students nicht zu überschreiben
-students_no_NA <- students
-students_no_NA <- na.omit(students_no_NA)
-
-# Berechne Durchschnitt mit Auslassen von NA
-mean(students_no_NA$Semester)
 ```
+
+
 
 ## Weitere Infos
 
+Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
+<br>
 [1] [Ausfürliches, weiterführendes, deutsches Skript von Dr. Gerrit Eichner](https://www.uni-giessen.de/fbz/fb07/fachgebiete/mathematik/mathematik/ags/stoch/personen/wimis/eichner/skriptenfiles/r1sum16.r4win17)
 <br>
 [2] [Advanced R by Hadley Wickham, begleitende Website, englisch](http://adv-r.had.co.nz)
