@@ -14,11 +14,52 @@ knitr::opts_chunk$set(echo = FALSE)
 ## 1. Erste Schritte
 
 ### Die Hilfefunktion 
-Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. `?sqrt` für die Wurzelfunktion `sqrt`). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser, oder direkt in Rstudio aufgerufen.
+Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. `?sqrt` für die Wurzelfunktion `sqrt`). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in Rstudio aufgerufen.
 
 ### R als Taschenrechner
-Die R-Befehlszeile kann auch als Taschenrechner genutzt werden; führe einige Rechnungen aus. Der Zuweisungs-Operator `<-` speichert Werte, Objekte oder Funktionen in Variablen, z.B wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen (sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt).
+Die R-Befehlszeile kann auch als Taschenrechner genutzt werden. Der Zuweisungs-Operator `<-` wird dabei genutzt um  Werte, Objekte oder Funktionen in Variablen zu speichern. <br>
+Beispielsweise wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Speicherst du nun auch noch `b <- 3`, kannst du `a + b` berechnen und erhältst als Ergebnis `8`.
 
+### Häufig genutzte Operatoren
+R bietet eine Vielzahl vordefinierter mathematischer Funktionen. Da einige von diesen ausgefallene Namen benutzen findest du hier eine Liste der wichtigsten Operationen. <br><br>
+
+#### Arithmetik
+```{r}
+head <- c("Zeichen", "Funktion")
+sign <- c("+", "-", "*", "/", "^", "%%")
+name <- c("Plus", "Minus", "Mal", "Geteilt", "Exponent", "Modulo")
+
+table <- data.frame(sign, name)
+colnames(table) <- head
+
+knitr::kable(table)
+```
+<br>
+
+#### Relationen
+```{r}
+head <- c("Zeichen", "Funktion")
+sign <- c("<", ">", "<=", ">=", "==", "!=")
+name <- c("Kleiner", "Größer", "Kleiner gleich", "Größer gleich", "Gleich", "Ungleich")
+
+table2 <- data.frame(sign, name)
+colnames(table2) <- head
+
+knitr::kable(table2)
+```
+<br>
+
+#### Logik
+```{r}
+head <- c("Zeichen", "Funktion")
+sign <- c("!", "&&", "||")
+name <- c("Logisch NOT", "Logisch AND", "Logisch OR")
+
+table3 <- data.frame(sign, name)
+colnames(table3) <- head
+
+knitr::kable(table3)
+```
 
 ### Übung 1
 
