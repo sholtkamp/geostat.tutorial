@@ -5,61 +5,48 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
+library(dplyr)
 library(learnr)
+library(kableExtra)
 library(geostat.tutorial)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
 ## 1. Erste Schritte
-
-### Die Hilfefunktion 
-Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. `?sqrt` für die Wurzelfunktion `sqrt`). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in Rstudio aufgerufen.
+Greetings Traveller, here an introduction will take place!
 
 ### R als Taschenrechner
-Die R-Befehlszeile kann auch als Taschenrechner genutzt werden. Der Zuweisungs-Operator `<-` wird dabei genutzt um  Werte, Objekte oder Funktionen in Variablen zu speichern. <br>
+Die R-Befehlszeile kann als Taschenrechner genutzt werden um simple Berechnungen durchzuführen, wie z.B. `5 + 3`. Auch eine Verwendung von Variablen ist dabei möglich. Dabei wird der Zuweisungs-Operator `<-` genutzt um  Werte, Objekte oder Funktionen in Variablen zu speichern.
 Beispielsweise wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Speicherst du nun auch noch `b <- 3`, kannst du `a + b` berechnen und erhältst als Ergebnis `8`.
 
 ### Häufig genutzte Operatoren
-R bietet eine Vielzahl vordefinierter mathematischer Funktionen. Da einige von diesen ausgefallene Namen benutzen findest du hier eine Liste der wichtigsten Operationen. <br><br>
+R bietet eine Vielzahl vordefinierter mathematischer Funktionen. Daher werden an dieser Stelle die wichtigsten Operationen aufgelistet. 
 
-#### Arithmetik
 ```{r}
 head <- c("Zeichen", "Funktion")
-sign <- c("+", "-", "*", "/", "^", "%%")
-name <- c("Plus", "Minus", "Mal", "Geteilt", "Exponent", "Modulo")
 
-table <- data.frame(sign, name)
-colnames(table) <- head
+h1 <- "+"
+h2 <- "-"
+h3 <- "*"
 
-knitr::kable(table)
+signs <- c("\\+", "\\-", "\\*", "/", "^", "%%", "<", ">", "<=", ">=", "==", "!=", "!", "&&", "||")
+names <- c("Plus", "Minus", "Mal", "Geteilt", "Exponent", "Modulo", "Kleiner", "Größer", "Kleiner gleich", "Größer gleich", "Gleich", "Ungleich", "Logisch NOT", "Logisch AND", "Logisch OR")
+
+table_df<- data.frame(signs, names)
+
+colnames(table_df) <- head
+
+kbl(table_df[], escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  pack_rows("Arithmetik", 1, 6) %>%
+  pack_rows("Relationen", 7, 12) %>%
+  pack_rows("Logik", 13, 15)
 ```
-<br>
 
-#### Relationen
-```{r}
-head <- c("Zeichen", "Funktion")
-sign <- c("<", ">", "<=", ">=", "==", "!=")
-name <- c("Kleiner", "Größer", "Kleiner gleich", "Größer gleich", "Gleich", "Ungleich")
 
-table2 <- data.frame(sign, name)
-colnames(table2) <- head
-
-knitr::kable(table2)
-```
-<br>
-
-#### Logik
-```{r}
-head <- c("Zeichen", "Funktion")
-sign <- c("!", "&&", "||")
-name <- c("Logisch NOT", "Logisch AND", "Logisch OR")
-
-table3 <- data.frame(sign, name)
-colnames(table3) <- head
-
-knitr::kable(table3)
-```
+### Die Hilfefunktion
+Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. <code>?sqrt</code> für die Wurzelfunktion <code>sqrt</code>). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in Rstudio aufgerufen.</p>
 
 ### Übung 1
 
@@ -149,7 +136,8 @@ d = 0.2238095
 ## 2. Vektoren
 Der Vektor ist eine der wichtigsten Datenstrukturen in R. Mit ihm können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. So können z.B. Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
 <br>
-Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1,2 und 3) mit Hilfe von `a <- c(1, 2, 3)` erzeugt und der Variable `a` zugewiesen werden. Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "R")`. Übrigens: Die Anführungsstriche sind nötig, um klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt (hallo ohne "" würde versuchen, ein Objekt mit dem Namen "hallo" zu verwenden. Probiert mal `b <- c(hallo,R)`). Auch komplexere R-Objekte können in Vektoren zusammengefasst werden, es müssen nur alle Elemente in einem Vektor den selben Datentyp haben. 
+Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `a <- c(1, 2, 3)` erzeugt und der Variable `a` zugewiesen werden.<br>
+Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "R")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt. So würde hallo (ohne "") als Verweis auf ein Objekt mit dem Namen "hallo" verstanden werden. Probiert mal `b <- c(hallo,R)`). Auch komplexere R-Objekte können in Vektoren zusammengefasst werden, es müssen nur alle Elemente in einem Vektor den selben Datentyp haben. 
 <br>
 Ihr werdet beim Umgang mit R immer wieder auf Vektoren stoßen. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in
 R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
