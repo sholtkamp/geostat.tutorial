@@ -116,16 +116,29 @@ $(document).ready(function () {
 
 <div class="topics">
 
-<div id="section-erste-schritte" class="section level2">
-<h2>1. Erste Schritte</h2>
-<p>Greetings Traveller, here an introduction will take place!</p>
+<div id="section-einführung" class="section level2">
+<h2>1. Einführung</h2>
+<p>Willkommen zum R-Tutorial für den Kurs “Einführung in die Geostatistik”. Dieses Tutorial dient dazu erste Schritte, wichtige Befehle und zentrale Datenstrukturen in R zu vermitteln. Darüber hinaus werden weiterführende Konzepte wie Datenhaltung und Funktionspakete angesprochen. <br> Dieses Tutorial findet in einer geschützten Umgebung statt. Deshalb sind einige Funktionen, die im normalen Workflow wichtig sind hier automatisiert um den Einstieg zu erleichtern. Auf diese wird im späteren Verlauf besonders eingegangen. <br><br></p>
 <div id="section-r-als-taschenrechner" class="section level3">
-<h3>R als Taschenrechner</h3>
-<p>Die R-Befehlszeile kann als Taschenrechner genutzt werden um simple Berechnungen durchzuführen, wie z.B. <code>5 + 3</code>. Auch eine Verwendung von Variablen ist dabei möglich. Dabei wird der Zuweisungs-Operator <code>&lt;-</code> genutzt um Werte, Objekte oder Funktionen in Variablen zu speichern. Beispielsweise wird mit <code>a &lt;- 5</code> einer Variablen <code>a</code> der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Speicherst du nun auch noch <code>b &lt;- 3</code>, kannst du <code>a + b</code> berechnen und erhältst als Ergebnis <code>8</code>.</p>
+<h3>1.1 R als Taschenrechner</h3>
+<p>Die R-Befehlszeile kann sowohl als Taschenrechner genutzt werden, als auch für komplexere Vorhaben. Simple Berechnungen wie z.B. <code>5 + 3</code> können mit Hilfe der Konsole leicht umgesetzt werden. Auch eine Verwendung von Variablen ist dabei möglich. Dazu wird der Zuweisungs-Operator <code>&lt;-</code> genutzt um Werte, Objekte oder Funktionen in einer Variablen zu speichern. <br> Beispielsweise wird mit <code>a &lt;- 5</code> einer Variablen <code>a</code> der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Wird dann auch noch <code>b &lt;- 3</code> genutzt, kann das simple Beispiel von oben auch mit <code>a + b</code> berechnet werden und als Ergebnis wird <code>8</code> ausgegeben. <br></p>
+<pre class="r"><code>5 + 3</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>a &lt;- 5
+b &lt;- 3
+a + b</code></pre>
+<pre><code>## [1] 8</code></pre>
 </div>
-<div id="section-häufig-genutzte-operatoren" class="section level3">
-<h3>Häufig genutzte Operatoren</h3>
-<p>R bietet eine Vielzahl vordefinierter mathematischer Funktionen. Daher werden an dieser Stelle die wichtigsten Operationen aufgelistet.</p>
+<div id="section-die-r-konsole" class="section level3">
+<h3>1.2 Die R-Konsole</h3>
+<p>Bei der Ausgabe der vorherigen Berechnungen fallen 2 Dinge auf: Die Ausgabe beginnt mit <code>##</code> und darauf folgt <code>[1]</code>. <br> Die beiden Rauten haben dabei keine tiefere Bedeutung und führen jeden Ausgabe in der Befehlszeile an. Die Zahl in den eckigen Klammern hingegen vermittelt die wichtige Information des führenden Indexes. Ein Beispiel dazu könnte folgendermaßen aussehen:</p>
+<pre><code>##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8
+## [20] 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5</code></pre>
+<p>Hier wird eine längere Zeichenfolge ausgegeben. Auch diese werden von Rauten und Zahlen in eckigen Klammern begleitet. Die Zahl <code>0.0</code> hat dabei den Index <code>1</code> und <code>1.9</code> den Index <code>20</code>. Dies ist den eckigen Klammern zu entnehmen. Diese Indizes können in vielen Anwendungsfällen nützlich sein und bieten für alle anderen Fälle zumindest mehr Übersicht über die Ausgaben.</p>
+</div>
+<div id="section-grundliegende-operatoren" class="section level3">
+<h3>1.3 Grundliegende Operatoren</h3>
+<p>R bietet eine Vielzahl vordefinierter mathematischer Operationen und Funktionen. Von diesen werden an dieser Stelle die wichtigsten aufgelistet.</p>
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -140,7 +153,7 @@ Funktion
 <tbody>
 <tr grouplength="6">
 <td colspan="2" style="border-bottom: 1px solid;">
-<strong>Arithmetik</strong>
+<strong>Arithmetische Operatoren</strong>
 </td>
 </tr>
 <tr>
@@ -273,24 +286,71 @@ Logisch AND
 Logisch OR
 </td>
 </tr>
+<tr grouplength="5">
+<td colspan="2" style="border-bottom: 1px solid;">
+<strong>Mathematische Funktionen</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+min(x)
+</td>
+<td style="text-align:left;">
+Minimum von x
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+max(x)
+</td>
+<td style="text-align:left;">
+Maximum von x
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+round(x, n)
+</td>
+<td style="text-align:left;">
+Runden von x auf n Stellen
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+sum(x)
+</td>
+<td style="text-align:left;">
+Summe von x
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+sqrt(x)
+</td>
+<td style="text-align:left;">
+Wurzel von x
+</td>
+</tr>
 </tbody>
 </table>
 </div>
 <div id="section-die-hilfefunktion" class="section level3">
-<h3>Die Hilfefunktion</h3>
-Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. <code>?sqrt</code> für die Wurzelfunktion <code>sqrt</code>). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in Rstudio aufgerufen.
-</p>
+<h3>1.4 Die Hilfefunktion</h3>
+<p>R bietet eine Hilfefunktion, um nähere Informationen über Funktionen zu erhalten. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. <code>?sqrt</code> für die Wurzelfunktion <code>sqrt</code>). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in RStudio aufgerufen. <br> Eine Suchfunktion zur Findung von Funktionsnamen wird mit <code>help.search(“FUNKTIONSNAME”)</code> auch geboten. Diese funktioniert jedoch nur auf Englisch und ist nicht sehr einsteigerfreundlich. Eine normale Websuche, im Idealfall auf Englisch, ist für den Einstieg häufig die bessere Variante neue Funktionen zu finden.</p>
 </div>
 <div id="section-übung-1" class="section level3">
 <h3>Übung 1</h3>
-<p>Führe folgende Rechnungen durch und speichere ihre Ergebnisse in deinem Workspace (weise sie jeweils Variablen deiner Wahl zu). Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen? <br></p>
+<p>Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen? <br></p>
 1.1) <span class="math inline">\(\frac{5.1}{5+345}\)</span>
 <div class="tutorial-exercise" data-label="1a" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>a &lt;- 
 a</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
-<div class="tutorial-exercise-support" data-label="1a-hint" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<div class="tutorial-exercise-support" data-label="1a-hint-1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>&quot;Um in R Kommazahlen zu benutzen muss ein . statt eines , verwendet werden.&quot;</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="1a-hint-2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Befehl:
 a &lt;- 5.1 / (5 + 345)
 a</code></pre>
@@ -340,7 +400,7 @@ c = 9</code></pre>
 <p><br></p>
 1.4) <span class="math inline">\(\frac{\frac{5}{5+345} + {2⋅sin(90°)}}{\sqrt(16) + \sqrt(25)}\)</span>
 <div class="tutorial-exercise-support" data-label="1d_setup" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>a &lt;- 5 / (5 + 345)
+<pre class="text"><code>a &lt;- 5.1 / (5 + 345)
 b &lt;- 2 * sin(pi / 2)
 c &lt;- sqrt(16) + sqrt(25)</code></pre>
 </div>
@@ -354,14 +414,14 @@ d</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="1d-hint-2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Befehl:
-d &lt;- ((5 / (5 + 345)) + (2 * sin(pi / 2))) / (sqrt(16) + sqrt(25)) 
+d &lt;- ((5.1 / (5 + 345)) + (2 * sin(pi / 2))) / (sqrt(16) + sqrt(25)) 
 # ist das Gleiche wie 
 d &lt;- (a + b) / c
 d</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="1d-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Ergebis:
-d = 0.2238095</code></pre>
+d = 0.2238413</code></pre>
 </div>
 </div>
 </div>
@@ -1024,11 +1084,11 @@ output$`tutorial-exercise-2e-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz1-1", question = structure("Welche Art der Multiplikation wird mit dem Operator * ausgeführt?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_ca72ae3",     option = "Matrixmultiplikation", value = "Matrixmultiplikation",     label = structure("Matrixmultiplikation", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ace672f",     option = "Elementweise Multiplikation", value = "Elementweise Multiplikation",     label = structure("Elementweise Multiplikation", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz1-1-answer", question = "quiz1-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Art der Multiplikation wird mit dem Operator * ausgeführt?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = FALSE,     seed = 1191491071.94517, options = list()), class = c("learnr_radio", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz1-1", question = structure("Welche Art der Multiplikation wird mit dem Operator * ausgeführt?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_6a21e84",     option = "Matrixmultiplikation", value = "Matrixmultiplikation",     label = structure("Matrixmultiplikation", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_192395d",     option = "Elementweise Multiplikation", value = "Elementweise Multiplikation",     label = structure("Elementweise Multiplikation", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz1-1-answer", question = "quiz1-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Art der Multiplikation wird mit dem Operator * ausgeführt?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = FALSE,     seed = 1283617202.40227, options = list()), class = c("learnr_radio", "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz1-2", question = structure("Welche Art der Multiplikation wird mit dem Operator %*% ausgeführt?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_a8faaee",     option = "Matrixmultiplikation", value = "Matrixmultiplikation",     label = structure("Matrixmultiplikation", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fc97a58",     option = "Elementweise Multiplikation", value = "Elementweise Multiplikation",     label = structure("Elementweise Multiplikation", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz1-2-answer", question = "quiz1-2"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Art der Multiplikation wird mit dem Operator %*% ausgeführt?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = FALSE,     seed = 2130196352.00805, options = list()), class = c("learnr_radio", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz1-2", question = structure("Welche Art der Multiplikation wird mit dem Operator %*% ausgeführt?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_fbb4414",     option = "Matrixmultiplikation", value = "Matrixmultiplikation",     label = structure("Matrixmultiplikation", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_110f7e6",     option = "Elementweise Multiplikation", value = "Elementweise Multiplikation",     label = structure("Elementweise Multiplikation", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz1-2-answer", question = "quiz1-2"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Art der Multiplikation wird mit dem Operator %*% ausgeführt?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = FALSE,     seed = 1016031498.02687, options = list()), class = c("learnr_radio", "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -1053,7 +1113,7 @@ output$`tutorial-exercise-3e-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-1", question = structure("Welche Veränderung kannst du in der Matrix beobachten?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_d5755b5",     option = "Nur das Element an Stelle [1, 1] ist vervierfacht.",     value = "Nur das Element an Stelle [1, 1] ist vervierfacht.",     label = structure("Nur das Element an Stelle [1, 1] ist vervierfacht.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c5437a1",     option = "Alle Elemente sind vervierfacht.", value = "Alle Elemente sind vervierfacht.",     label = structure("Alle Elemente sind vervierfacht.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_df37487",     option = "Keines der Elemente ist vervierfacht.", value = "Keines der Elemente ist vervierfacht.",     label = structure("Keines der Elemente ist vervierfacht.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz2-1-answer", question = "quiz2-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Veränderung kannst du in der Matrix beobachten?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = TRUE, allow_retry = FALSE,     seed = 1140668635.46883, options = list()), class = c("learnr_radio", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-1", question = structure("Welche Veränderung kannst du in der Matrix beobachten?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_23273f3",     option = "Nur das Element an Stelle [1, 1] ist vervierfacht.",     value = "Nur das Element an Stelle [1, 1] ist vervierfacht.",     label = structure("Nur das Element an Stelle [1, 1] ist vervierfacht.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4709a98",     option = "Alle Elemente sind vervierfacht.", value = "Alle Elemente sind vervierfacht.",     label = structure("Alle Elemente sind vervierfacht.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d5f0daa",     option = "Keines der Elemente ist vervierfacht.", value = "Keines der Elemente ist vervierfacht.",     label = structure("Keines der Elemente ist vervierfacht.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz2-1-answer", question = "quiz2-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Veränderung kannst du in der Matrix beobachten?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = TRUE, allow_retry = FALSE,     seed = 1732976382.69302, options = list()), class = c("learnr_radio", "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -1078,7 +1138,7 @@ output$`tutorial-exercise-5-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz3-1", question = structure("Welche Veränderung kannst du in der Matrix beobachten? (Mehrfachauswahl möglich)", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_f82f25c",     option = "y1 entspricht der Normalparabel", value = "y1 entspricht der Normalparabel",     label = structure("y1 entspricht der Normalparabel", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c240b57",     option = "y2 entspricht der Normalparabel", value = "y2 entspricht der Normalparabel",     label = structure("y2 entspricht der Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4a11594",     option = "y3 entspricht der Normalparabel", value = "y3 entspricht der Normalparabel",     label = structure("y3 entspricht der Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9d559f5",     option = "y1 entspricht einer invertierten Normalparabel",     value = "y1 entspricht einer invertierten Normalparabel",     label = structure("y1 entspricht einer invertierten Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_844b2a9",     option = "y2 entspricht einer invertierten Normalparabel",     value = "y2 entspricht einer invertierten Normalparabel",     label = structure("y2 entspricht einer invertierten Normalparabel", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c0d75da",     option = "y3 entspricht einer invertierten Normalparabel",     value = "y3 entspricht einer invertierten Normalparabel",     label = structure("y3 entspricht einer invertierten Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_515b9a3",     option = "y1 hat ein Minimum von 5", value = "y1 hat ein Minimum von 5",     label = structure("y1 hat ein Minimum von 5", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f5a5038",     option = "y2 hat ein Minimum von 5", value = "y2 hat ein Minimum von 5",     label = structure("y2 hat ein Minimum von 5", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_62d3590",     option = "y3 hat ein Minimum von 5", value = "y3 hat ein Minimum von 5",     label = structure("y3 hat ein Minimum von 5", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz3-1-answer", question = "quiz3-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Veränderung kannst du in der Matrix beobachten? (Mehrfachauswahl möglich)\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = TRUE, allow_retry = FALSE,     seed = 1677789935.71872, options = list()), class = c("learnr_checkbox", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz3-1", question = structure("Welche Veränderung kannst du in der Matrix beobachten? (Mehrfachauswahl möglich)", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_a7a4fbb",     option = "y1 entspricht der Normalparabel", value = "y1 entspricht der Normalparabel",     label = structure("y1 entspricht der Normalparabel", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7138ed5",     option = "y2 entspricht der Normalparabel", value = "y2 entspricht der Normalparabel",     label = structure("y2 entspricht der Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f4a895f",     option = "y3 entspricht der Normalparabel", value = "y3 entspricht der Normalparabel",     label = structure("y3 entspricht der Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_89470b5",     option = "y1 entspricht einer invertierten Normalparabel",     value = "y1 entspricht einer invertierten Normalparabel",     label = structure("y1 entspricht einer invertierten Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5b2ebe0",     option = "y2 entspricht einer invertierten Normalparabel",     value = "y2 entspricht einer invertierten Normalparabel",     label = structure("y2 entspricht einer invertierten Normalparabel", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f815470",     option = "y3 entspricht einer invertierten Normalparabel",     value = "y3 entspricht einer invertierten Normalparabel",     label = structure("y3 entspricht einer invertierten Normalparabel", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5436752",     option = "y1 hat ein Minimum von 5", value = "y1 hat ein Minimum von 5",     label = structure("y1 hat ein Minimum von 5", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d776bbd",     option = "y2 hat ein Minimum von 5", value = "y2 hat ein Minimum von 5",     label = structure("y2 hat ein Minimum von 5", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f262352",     option = "y3 hat ein Minimum von 5", value = "y3 hat ein Minimum von 5",     label = structure("y3 hat ein Minimum von 5", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz3-1-answer", question = "quiz3-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWelche Veränderung kannst du in der Matrix beobachten? (Mehrfachauswahl möglich)\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = TRUE, allow_retry = FALSE,     seed = 2000647123.56838, options = list()), class = c("learnr_checkbox", "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -1110,7 +1170,7 @@ output$`tutorial-exercise-7b-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz4-1", question = structure("Worin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_a242185",     option = "Die genannten Variablen sind lediglich kategorischer Natur.",     value = "Die genannten Variablen sind lediglich kategorischer Natur.",     label = structure("Die genannten Variablen sind lediglich kategorischer Natur.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8de0b9",     option = "Die übrigen Variablen sind lediglich kategorischer Natur.",     value = "Die übrigen Variablen sind lediglich kategorischer Natur.",     label = structure("Die übrigen Variablen sind lediglich kategorischer Natur.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3dd9b56",     option = "Die genannten Variablen sind nominalskaliert.",     value = "Die genannten Variablen sind nominalskaliert.",     label = structure("Die genannten Variablen sind nominalskaliert.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_84e82a6",     option = "Die übrigen Variablen sind nominalskaliert.", value = "Die übrigen Variablen sind nominalskaliert.",     label = structure("Die übrigen Variablen sind nominalskaliert.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7d8c80d",     option = "Die genannten Variablen sind rationalskaliert.",     value = "Die genannten Variablen sind rationalskaliert.",     label = structure("Die genannten Variablen sind rationalskaliert.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_53b4daf",     option = "Die übrigen Variablen sind rationalskaliert.",     value = "Die übrigen Variablen sind rationalskaliert.", label = structure("Die übrigen Variablen sind rationalskaliert.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz4-1-answer", question = "quiz4-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWorin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = FALSE,     seed = 548008368.744814, options = list()), class = c("learnr_checkbox", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz4-1", question = structure("Worin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_8e453e3",     option = "Die genannten Variablen sind lediglich kategorischer Natur.",     value = "Die genannten Variablen sind lediglich kategorischer Natur.",     label = structure("Die genannten Variablen sind lediglich kategorischer Natur.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_70eaf15",     option = "Die übrigen Variablen sind lediglich kategorischer Natur.",     value = "Die übrigen Variablen sind lediglich kategorischer Natur.",     label = structure("Die übrigen Variablen sind lediglich kategorischer Natur.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_63f85b0",     option = "Die genannten Variablen sind nominalskaliert.",     value = "Die genannten Variablen sind nominalskaliert.",     label = structure("Die genannten Variablen sind nominalskaliert.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2f8d982",     option = "Die übrigen Variablen sind nominalskaliert.", value = "Die übrigen Variablen sind nominalskaliert.",     label = structure("Die übrigen Variablen sind nominalskaliert.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4386972",     option = "Die genannten Variablen sind rationalskaliert.",     value = "Die genannten Variablen sind rationalskaliert.",     label = structure("Die genannten Variablen sind rationalskaliert.", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d7d9efc",     option = "Die übrigen Variablen sind rationalskaliert.",     value = "Die übrigen Variablen sind rationalskaliert.", label = structure("Die übrigen Variablen sind rationalskaliert.", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "quiz4-1-answer", question = "quiz4-1"), loading = structure("<strong>Loading:<\u002fstrong> \nWorin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = FALSE,     seed = 2061254444.54015, options = list()), class = c("learnr_checkbox", "tutorial_question")))
 </script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">

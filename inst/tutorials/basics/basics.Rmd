@@ -13,25 +13,52 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-## 1. Erste Schritte
-Greetings Traveller, here an introduction will take place!
+## 1. Einführung
+Willkommen zum R-Tutorial für den Kurs "Einführung in die Geostatistik". Dieses Tutorial dient dazu erste Schritte, wichtige Befehle und zentrale Datenstrukturen in R zu vermitteln. Darüber hinaus werden weiterführende Konzepte wie Datenhaltung und Funktionspakete angesprochen. <br>
+Dieses Tutorial findet in einer geschützten Umgebung statt. Deshalb sind einige Funktionen, die im normalen Workflow wichtig sind hier automatisiert um den Einstieg zu erleichtern. Auf diese wird im späteren Verlauf besonders eingegangen. 
+<br><br>
 
-### R als Taschenrechner
-Die R-Befehlszeile kann als Taschenrechner genutzt werden um simple Berechnungen durchzuführen, wie z.B. `5 + 3`. Auch eine Verwendung von Variablen ist dabei möglich. Dabei wird der Zuweisungs-Operator `<-` genutzt um  Werte, Objekte oder Funktionen in Variablen zu speichern.
-Beispielsweise wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Speicherst du nun auch noch `b <- 3`, kannst du `a + b` berechnen und erhältst als Ergebnis `8`.
+### 1.1 R als Taschenrechner
+Die R-Befehlszeile kann sowohl als Taschenrechner genutzt werden, als auch für komplexere Vorhaben. Simple Berechnungen wie z.B. `5 + 3` können mit Hilfe der Konsole leicht umgesetzt werden. Auch eine Verwendung von Variablen ist dabei möglich. Dazu wird der Zuweisungs-Operator `<-` genutzt um  Werte, Objekte oder Funktionen in einer Variablen zu speichern. 
+<br>
+Beispielsweise wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Wird dann auch noch `b <- 3` genutzt, kann das simple Beispiel von oben auch mit  `a + b` berechnet werden und als Ergebnis wird `8` ausgegeben.
+<br>
 
-### Häufig genutzte Operatoren
-R bietet eine Vielzahl vordefinierter mathematischer Funktionen. Daher werden an dieser Stelle die wichtigsten Operationen aufgelistet. 
+```{r 1.1_info, echo = TRUE}
+5 + 3
 
-```{r}
+a <- 5
+b <- 3
+a + b
+```
+
+### 1.2 Die R-Konsole
+Bei der Ausgabe der vorherigen Berechnungen fallen 2 Dinge auf: Die Ausgabe beginnt mit <code>##</code> und darauf folgt <code>[1]</code>.
+<br>
+Die beiden Rauten haben dabei keine tiefere Bedeutung und führen jeden Ausgabe in der Befehlszeile an. Die Zahl in den eckigen Klammern hingegen vermittelt die wichtige Information des führenden Indexes. Ein Beispiel dazu könnte folgendermaßen aussehen:
+
+```{r 1.2, echo = FALSE, include = TRUE}
+vec_seq <- seq(from = 0, to = 3.5, by = 0.1)
+vec_seq
+```
+
+Hier wird eine längere Zeichenfolge ausgegeben. Auch diese werden von Rauten und Zahlen in eckigen Klammern begleitet. Die Zahl <code>0.0</code> hat dabei den Index <code>1</code> und <code>1.9</code> den Index <code>20</code>. Dies ist den eckigen Klammern zu entnehmen. Diese Indizes können in vielen Anwendungsfällen nützlich sein und bieten für alle anderen Fälle zumindest mehr Übersicht über die Ausgaben.
+
+### 1.3 Grundliegende Operatoren
+R bietet eine Vielzahl vordefinierter mathematischer Operationen und Funktionen. Von diesen werden an dieser Stelle die wichtigsten aufgelistet. 
+
+```{r 1.3}
 head <- c("Zeichen", "Funktion")
 
-h1 <- "+"
-h2 <- "-"
-h3 <- "*"
+signs <- c("\\+", "\\-", "\\*", "/", "^", "%%",
+           "<", ">", "<=", ">=", "==", "!=",
+           "!", "&&", "||",
+           "min(x)", "max(x)", "round(x, n)", "sum(x)", "sqrt(x)")
 
-signs <- c("\\+", "\\-", "\\*", "/", "^", "%%", "<", ">", "<=", ">=", "==", "!=", "!", "&&", "||")
-names <- c("Plus", "Minus", "Mal", "Geteilt", "Exponent", "Modulo", "Kleiner", "Größer", "Kleiner gleich", "Größer gleich", "Gleich", "Ungleich", "Logisch NOT", "Logisch AND", "Logisch OR")
+names <- c("Plus", "Minus", "Mal", "Geteilt", "Exponent", "Modulo",
+           "Kleiner", "Größer", "Kleiner gleich", "Größer gleich", "Gleich", "Ungleich",
+           "Logisch NOT", "Logisch AND", "Logisch OR",
+           "Minimum von x", "Maximum von x", "Runden von x auf n Stellen", "Summe von x", "Wurzel von x")
 
 table_df<- data.frame(signs, names)
 
@@ -39,18 +66,19 @@ colnames(table_df) <- head
 
 kbl(table_df[], escape = FALSE) %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  pack_rows("Arithmetik", 1, 6) %>%
+  pack_rows("Arithmetische Operatoren", 1, 6) %>%
   pack_rows("Relationen", 7, 12) %>%
-  pack_rows("Logik", 13, 15)
+  pack_rows("Logik", 13, 15) %>%
+  pack_rows("Mathematische Funktionen", 16, 20) 
 ```
 
+### 1.4 Die Hilfefunktion
+R bietet eine Hilfefunktion, um nähere Informationen über Funktionen zu erhalten. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. <code>?sqrt</code> für die Wurzelfunktion <code>sqrt</code>). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in RStudio aufgerufen. <br>
+Eine Suchfunktion zur Findung von Funktionsnamen wird mit <code>help.search("FUNKTIONSNAME")</code> auch geboten. Diese funktioniert jedoch nur auf Englisch und ist nicht sehr einsteigerfreundlich. Eine normale Websuche, im Idealfall auf Englisch, ist für den Einstieg häufig die bessere Variante neue Funktionen zu finden.
 
-### Die Hilfefunktion
-Löse folgende Aufgaben unter Verwendung der Hilfefunktion. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. <code>?sqrt</code> für die Wurzelfunktion <code>sqrt</code>). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in Rstudio aufgerufen.</p>
 
 ### Übung 1
-
-Führe folgende Rechnungen durch und speichere ihre Ergebnisse in deinem Workspace (weise sie jeweils Variablen deiner Wahl zu). Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen?
+Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen?
 <br>
 
 1.1) $\frac{5.1}{5+345}$
@@ -58,7 +86,10 @@ Führe folgende Rechnungen durch und speichere ihre Ergebnisse in deinem Workspa
 a <- 
 a
 ```
-```{r 1a-hint}
+```{r 1a-hint-1}
+"Um in R Kommazahlen zu benutzen muss ein . statt eines , verwendet werden."
+```
+```{r 1a-hint-2}
 # Befehl:
 a <- 5.1 / (5 + 345)
 a
@@ -109,7 +140,7 @@ c = 9
 
 1.4) $\frac{\frac{5}{5+345} + {2⋅sin(90°)}}{\sqrt(16) + \sqrt(25)}$
 ```{r 1d_setup}
-a <- 5 / (5 + 345)
+a <- 5.1 / (5 + 345)
 b <- 2 * sin(pi / 2)
 c <- sqrt(16) + sqrt(25)
 ```
@@ -122,14 +153,14 @@ d
 ```
 ```{r 1d-hint-2}
 # Befehl:
-d <- ((5 / (5 + 345)) + (2 * sin(pi / 2))) / (sqrt(16) + sqrt(25)) 
+d <- ((5.1 / (5 + 345)) + (2 * sin(pi / 2))) / (sqrt(16) + sqrt(25)) 
 # ist das Gleiche wie 
 d <- (a + b) / c
 d
 ```
 ```{r 1d-solution}
 # Ergebis:
-d = 0.2238095
+d = 0.2238413
 ```
 
 
