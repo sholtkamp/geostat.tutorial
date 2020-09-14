@@ -78,7 +78,7 @@ Eine Suchfunktion zur Findung von Funktionsnamen wird mit <code>help.search("FUN
 
 
 ### Übung 1
-Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung durch Variablen einfacher in R ausführen?
+Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung einfacher in R ausführen?
 <br>
 
 1.1) $\frac{5.1}{5+345}$
@@ -98,7 +98,6 @@ a
 # Ergebnis:
 a = 0.01457143
 ```
-<br>
 
 1.2) $2⋅sin(90°)$
 ```{r 1b, exercise=TRUE}
@@ -120,7 +119,6 @@ b
 # Ergebnis:
 b = 2
 ```
-<br>
 
 1.3) $\sqrt(16) + \sqrt(25)$
 ```{r 1c, exercise=TRUE}
@@ -136,7 +134,6 @@ c
 # Ergebnis:
 c = 9
 ```
-<br>
 
 1.4) $\frac{\frac{5}{5+345} + {2⋅sin(90°)}}{\sqrt(16) + \sqrt(25)}$
 ```{r 1d_setup}
@@ -165,16 +162,20 @@ d = 0.2238413
 
 
 ## 2. Vektoren
-Der Vektor ist eine der wichtigsten Datenstrukturen in R. Mit ihm können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. So können z.B. Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
+Vektoren sind eine der wichtigsten Datenstrukturen in R. Mit ihnen können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. So können z.B. Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
 <br>
-Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `a <- c(1, 2, 3)` erzeugt und der Variable `a` zugewiesen werden.<br>
-Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "R")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt. So würde hallo (ohne "") als Verweis auf ein Objekt mit dem Namen "hallo" verstanden werden. Probiert mal `b <- c(hallo,R)`). Auch komplexere R-Objekte können in Vektoren zusammengefasst werden, es müssen nur alle Elemente in einem Vektor den selben Datentyp haben. 
+Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `c(1, 2, 3)` erzeugt werden. Dieser kann dann mit `a <- c(1, 2, 3)`der Variablen `a` zugewiesen werden.
 <br>
-Ihr werdet beim Umgang mit R immer wieder auf Vektoren stoßen. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in
-R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
-<br>
-<br>
+Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "R")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten (auch bekannt als <code>Strings</code>) und nicht etwa um Variablennamen handelt. So würde hallo (ohne \"\") als Verweis auf ein Objekt mit dem Namen \"hallo\" verstanden werden (siehe unten). 
 
+```{r 2_0, exercise=TRUE}
+b <- c(hallo, R)
+b
+```
+
+Im Umgang mit R tauchen immer wieder Vektoren auf. Auch komplexere Objekte können in Vektoren zusammengefasst werden. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
+
+### 2.1 Sequenzen
 Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei der folgenden Parameter müssen angegeben werden und der 4. Wert kann dann automatisch berechnet werden: <br>
 <ul>
 <li>`from`: Anfangswert der Sequenz</li>
@@ -183,14 +184,33 @@ Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei
 <li>`length.out`: Insgesamte Anzahl der Elemente der Sequenz</li>
 </ul>
 
-<br>
-
+### 2.2 Wiederholungen (Repetition)
 Die Funktion `rep()` dient dazu einen Vektor oder Faktor beliebig oft zu wiederholen. Dazu werden die folgenden Parameter benötigt: <br>
 <ul>
 <li>`x`: Vektor oder Faktor der wiederholt werden soll</li>
 <li>`times`: Anzahl der Wiederholungen</li>
 </ul>
-<br>
+
+### 2.3 Vektorfunktionen
+Vektoren verfügen über eine Vielzahl von Funktionen zur Abfrage und Manipulation ihrer Werte. Im Folgenden werden die häufigsten dieser Funktionen aufgeführt. <code>x</code> bezeichnet dabei immer einen Vektor.
+<ul>
+<li>`length(x)`: Gibt die Länge eines Vektors, bzw. die Anzahl seiner Elemente aus</li>
+<li>`sort(x)`: Gibt den Vektor mit sortierten Werten zurück</li>
+<li>`rev(x)`: Gibt den Vektor in umgekehrter Reihenfolge zurück</li>
+<li>`table(x)`: Gibt die Häufigkeiten der Werte innerhalb des Vektors zurück</li>
+<li>`unique(x)`: Gibt die Anzahl der einzigartigen Werte im Vektor zurück</li>
+<li>`x[Index] <- y`: Ersetzt den Wert des Vektors an Stelle <code>Index</code> durch y</li>
+</ul>
+
+#### 2.3.1 Selektion in Vektoren
+<ul>
+<li>`x[Index]`: Gibt das Element des Vektors an Stelle <code>Index</code> aus</li>
+<li>`x[-Index]`: Gibt alle Elemente des Vektors außer dem an Stelle <code>Index</code> aus</li>
+<li>`x[Index_1 : Index_2]`: Gibt die Elemente des Vektors von <code>Index_1</code> bis <code>Index_2</code> aus</li>
+<li>`x[c(Index_1, Index_2)]`: Gibt die Elemente des Vektors an den Stellen <code>Index_1</code> und <code>Index_2</code> aus</li>
+<li>`x[x == y]`: Gibt die Elemente des Vektors aus, die gleich y sind</li>
+<li>`x[x < y]`: Gibt die Elemente des Vektors aus, die kleiner als y sind</li>
+</ul>
 
 ### Übung 2
 2.1) Erzeuge einen Vektor von 0 bis 1 in 0,1-Schritten `(0, 0.1, 0.2, ..., 1)`.
@@ -205,7 +225,6 @@ vec_seq
 vec_seq <- seq(from = 0, to = 1, by = 0.1)
 vec_seq
 ```
-<br>
 
 2.2) Erzeuge den Vektor `(1, 1, 1, 1, 1, 5, 5, 5)`.
 ```{r 2b, exercise=TRUE}
@@ -219,7 +238,6 @@ vec_rep
 vec_rep <- rep(c(1, 5), times = c(5, 3))
 vec_rep
 ```
-<br>
 
 2.3) Verwende den ersten Vektor und erzeuge durch Addieren / Multiplizieren die folgenden Vektoren: `(1, 1.1, 1.2, ..., 2)` und `(2, 2.2, 2.4, ..., 4)`.
 ```{r 2c_setup}
@@ -248,18 +266,18 @@ vec_2 <- 2 * (vec_seq + 1)
 vec_1
 vec_2
 ```
-<br>
 
 2.4) Führe nun die Befehle `c(1, 3, 7) * c(5, 8, 2)` und `c(1, 3, 7) %*% c(5, 8, 2)` aus. Was ist an den Berechnungen in R speziell verglichen mit den Vektorrechnungen in der Mathematik?
-```{r 2d, exercise=TRUE}
+```{r 2d_1, exercise=TRUE}
 c(1, 3, 7) * c(5, 8, 2) 
 ```
-```{r 2e, exercise=TRUE}
+```{r 2d_2, exercise=TRUE}
 c(1, 3, 7) %*% c(5, 8, 2)
 ```
 
-```{r quiz1}
-quiz(
+```{r 2e}
+quiz(caption = "2.5) Beantworte folgende Fragen.",
+     
   question("Welche Art der Multiplikation wird mit dem Operator * ausgeführt?",
     answer("Matrixmultiplikation"),
     answer("Elementweise Multiplikation", correct = TRUE)
@@ -277,14 +295,8 @@ quiz(
 Durch Ausführen der normalen Multiplikation (Symbol `*`) werden zwei Vektoren elementweise multipliziert, das Ergebnis ist also wieder ein Vektor gleicher Länge. 
 <br>
 Der Matrixmultiplikationsoperator `%*%` führt in diesem Beispiel das Skalarprodukt aus, bildet also die elementweisen Produkte und summiert diese anschließend. Dies ist hier mathematisch nicht äquivalent, da eigentlich der erste Vektor als Zeilenvektor und der zweite Vektor als Spaltenvektor transponiert werden müsste, um das Skalarprodukt als Matrixmultiplikation zu interpretieren.
-</details>
-<br>
 
-Weitere, für den Anfang wichtige Funktionen im Umgang mit Vektoren, sind `length()` und die Selektion.
-<br>
-Mit `length()` wird die Länge eines Vektors, bzw. die Anzahl seiner Elemente ermittelt.
-<br>
-Um ein bestimmtes Element des Vektors auszuwählen wird die Notation `Vektorname[Index]` benutzt. Die Indizes beginnen dabei bei 1. Beide Funktionen werden im folgenden Beispiel verdeutlicht:
+Beide Funktionen werden im folgenden Beispiel verdeutlicht:
 ```{r 2f, exercise=TRUE}
 vec <- c(4, 8, 15, 16, 23, 42) 
 
@@ -295,7 +307,7 @@ length(vec)
 selec_test <- vec[4]
 selec_test
 ```
-
+</details>
 
 ## 3. Arrays und Matrizen
 Arrays und Matrizen sind weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. Arrays und Matrizen unterscheiden sich von Vektoren durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. Arrays hingegen können beliebige Dimensionen annehmen: 
@@ -746,3 +758,7 @@ Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
 [2] [Advanced R by Hadley Wickham, begleitende Website, englisch](http://adv-r.had.co.nz)
 <br>
 [3] [Efficient R programming, weiterführendes Buch über effiziente Programmierung in R, englisch](https://csgillespie.github.io/efficientR/index.html)
+
+
+Datenhaltung
+Konventionen: sprechende namen, kamelcase, underscores. englsih
