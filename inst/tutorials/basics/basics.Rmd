@@ -162,14 +162,14 @@ d = 0.2238413
 
 
 ## 2. Vektoren
-Vektoren sind eine der wichtigsten Datenstrukturen in R. Mit ihnen können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. So können z.B. Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
+Vektoren sind eine der wichtigsten Datenstrukturen in R. Mit ihnen können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. Es ist auch möglich Daten von verschiedenen Typen in einem Vektor zusammenzufassen. Dabei wird jedoch eine Typkonvertierung durchgeführt. Deshalb ist es zunächst sinnvoll, nur Daten des gleichen Typen in einem Vektor zu speichern. Vektoren können dann zum Beispiel genutzt werden, um Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
+<br><br>
+Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `c(1, 2, 3)` erzeugt werden. Dieser kann dann mit `a <- c(1, 2, 3)` der Variablen `a` zugewiesen werden.
 <br>
-Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `c(1, 2, 3)` erzeugt werden. Dieser kann dann mit `a <- c(1, 2, 3)`der Variablen `a` zugewiesen werden.
-<br>
-Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "R")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten (auch bekannt als <code>Strings</code>) und nicht etwa um Variablennamen handelt. So würde hallo (ohne \"\") als Verweis auf ein Objekt mit dem Namen \"hallo\" verstanden werden (siehe unten). 
+Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "Konsole")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt. So würde Konsole (ohne \"\") als Verweis auf ein Objekt mit dem Namen <code>Konsole</code> verstanden werden (siehe unten). 
 
 ```{r 2_0, exercise=TRUE}
-b <- c(hallo, R)
+b <- c("hallo", Konsole)
 b
 ```
 
@@ -239,7 +239,7 @@ vec_rep <- rep(c(1, 5), times = c(5, 3))
 vec_rep
 ```
 
-2.3) Verwende den ersten Vektor und erzeuge durch Addieren / Multiplizieren die folgenden Vektoren: `(1, 1.1, 1.2, ..., 2)` und `(2, 2.2, 2.4, ..., 4)`.
+2.3) Verwende den ersten Vektor und erzeuge durch Addieren und Multiplizieren die folgenden beiden Vektoren: `(1, 1.1, 1.2, ..., 2)` und `(2, 2.2, 2.4, ..., 4)`. Die Vektoren aus 2.1 und 2.2 stehen dabei zur Verfügung.
 ```{r 2c_setup}
 vec_seq <- seq(from = 0, to = 1, by = 0.1)
 vec_rep <- rep(c(1, 5), times = c(5, 3))
@@ -295,19 +295,31 @@ quiz(caption = "2.5) Beantworte folgende Fragen.",
 Durch Ausführen der normalen Multiplikation (Symbol `*`) werden zwei Vektoren elementweise multipliziert, das Ergebnis ist also wieder ein Vektor gleicher Länge. 
 <br>
 Der Matrixmultiplikationsoperator `%*%` führt in diesem Beispiel das Skalarprodukt aus, bildet also die elementweisen Produkte und summiert diese anschließend. Dies ist hier mathematisch nicht äquivalent, da eigentlich der erste Vektor als Zeilenvektor und der zweite Vektor als Spaltenvektor transponiert werden müsste, um das Skalarprodukt als Matrixmultiplikation zu interpretieren.
-
-Beide Funktionen werden im folgenden Beispiel verdeutlicht:
-```{r 2f, exercise=TRUE}
-vec <- c(4, 8, 15, 16, 23, 42) 
-
-# Bestimme die Länge von vec
-length(vec)
-
-# Selektiere den vierten Wert in vec (nicht den Wert 4)
-selec_test <- vec[4]
-selec_test
-```
 </details>
+<br>
+
+2.6) Mit welchen Befehlen kann der Wert <code>8</code> im Vektor <code>vec <- c(2, 3, 4, 7, 8, 15, 16, 23, 42)</code> selektiert werden? 
+```{r 2f_setup}
+vec <- c(2, 3, 4, 7, 8, 15, 16, 23, 42)
+```
+```{r 2f, exercise=TRUE, exercise.setup = "2f_setup"}
+# Hier können Befehle getestet werden. "vec" ist vordefiniert.
+vec
+
+```
+```{r 2f_question, echo=FALSE}
+question("Mit welchen Befehlen kann der Wert <code>8</code> selektiert werden?",
+  answer("vec[5]", correct = TRUE),
+  answer("vec[8]"),
+  answer("vec[vec = 8]"),
+  answer("vec[vec == 8]", correct = TRUE),
+  answer("vec[vec < 9]"),
+  answer("vec[vec > 7]"),
+  answer("vec[vec < 7]"),
+  answer("vec[vec > 9]"),
+  answer("vec[vec < 9 & vec > 7]", correct = TRUE)
+)
+```
 
 ## 3. Arrays und Matrizen
 Arrays und Matrizen sind weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. Arrays und Matrizen unterscheiden sich von Vektoren durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. Arrays hingegen können beliebige Dimensionen annehmen: 
@@ -760,5 +772,8 @@ Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
 [3] [Efficient R programming, weiterführendes Buch über effiziente Programmierung in R, englisch](https://csgillespie.github.io/efficientR/index.html)
 
 
-Datenhaltung
-Konventionen: sprechende namen, kamelcase, underscores. englsih
+Datenhaltung <br>
+Konventionen: sprechende namen, kamelcase, underscores. englsih <br>
+Datentypen
+probleme : . statt , 
+            , am ende der argumentliste
