@@ -338,6 +338,7 @@ vec[3]
 #Dimensionen von vec
 dim(vec)
 ```
+Randnotiz: Die Ausgabe <code>NULL</code> des Befehls <code>dim(vec)</code> ist nicht gleichzusetzen mit 0. Stattdessen bedeutet <code>NULL</code>, dass der Rückgabewert nicht definiert ist.
 
 ### 3.2 Matrizen
 Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow` bzw. `ncol` angegeben werden, wie viele Zeilen und Spalten die Matrix haben soll. Dabei reicht es, einen der beiden Parameter anzugeben. Standardmäßig werden Matrizen spaltenweise mit den Elementen des Vektors gefüllt, das heißt die ersten 4 Zahlen entsprechen der ersten Spalte. Um dies zu ändern muss der Parameter `byrow` auf `TRUE` gesetzt werden. 
