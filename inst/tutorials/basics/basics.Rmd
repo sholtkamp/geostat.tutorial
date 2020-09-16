@@ -12,7 +12,7 @@ library(geostat.tutorial)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
+<!-- Kapitel 1 Einführung --------------------------------------------------------------------------------------------------------------->
 ## 1. Einführung
 Willkommen zum R-Tutorial für den Kurs "Einführung in die Geostatistik". Dieses Tutorial dient dazu erste Schritte, wichtige Befehle und zentrale Datenstrukturen in R zu vermitteln. Darüber hinaus werden weiterführende Konzepte wie Datenhaltung und Funktionspakete angesprochen. <br>
 Dieses Tutorial findet in einer geschützten Umgebung statt. Deshalb sind einige Funktionen, die im normalen Workflow wichtig sind hier automatisiert um den Einstieg zu erleichtern. Auf diese wird im späteren Verlauf besonders eingegangen. 
@@ -23,8 +23,7 @@ Die R-Befehlszeile kann sowohl als Taschenrechner genutzt werden, als auch für 
 <br>
 Beispielsweise wird mit `a <- 5` einer Variablen `a` der Wert 5 zugewiesen. Sollte die Variable bereits existieren, wird sie durch diesen Befehl überschrieben, ansonsten wird sie neu erzeugt. Wird dann auch noch `b <- 3` genutzt, kann das simple Beispiel von oben auch mit  `a + b` berechnet werden und als Ergebnis wird `8` ausgegeben.
 <br>
-
-```{r 1.1_info, echo = TRUE}
+```{r info_1_1, echo = TRUE}
 5 + 3
 
 a <- 5
@@ -32,22 +31,22 @@ b <- 3
 a + b
 ```
 
+
 ### 1.2 Die R-Konsole
 Bei der Ausgabe der vorherigen Berechnungen fallen 2 Dinge auf: Die Ausgabe beginnt mit <code>##</code> und darauf folgt <code>[1]</code>.
 <br>
 Die beiden Rauten haben dabei keine tiefere Bedeutung und führen jeden Ausgabe in der Befehlszeile an. Die Zahl in den eckigen Klammern hingegen vermittelt die wichtige Information des führenden Indexes. Ein Beispiel dazu könnte folgendermaßen aussehen:
-
-```{r 1.2, echo = FALSE, include = TRUE}
+```{r info_1_2, echo = FALSE, include = TRUE}
 vec_seq <- seq(from = 0, to = 3.5, by = 0.1)
 vec_seq
 ```
 
 Hier wird eine längere Zeichenfolge ausgegeben. Auch diese werden von Rauten und Zahlen in eckigen Klammern begleitet. Die Zahl <code>0.0</code> hat dabei den Index <code>1</code> und <code>1.9</code> den Index <code>20</code>. Dies ist den eckigen Klammern zu entnehmen. Diese Indizes können in vielen Anwendungsfällen nützlich sein und bieten für alle anderen Fälle zumindest mehr Übersicht über die Ausgaben.
 
+
 ### 1.3 Grundliegende Operatoren
 R bietet eine Vielzahl vordefinierter mathematischer Operationen und Funktionen. Von diesen werden an dieser Stelle die wichtigsten aufgelistet. 
-
-```{r 1.3}
+```{r info_1_3}
 head <- c("Zeichen", "Funktion")
 
 signs <- c("\\+", "\\-", "\\*", "/", "^", "%%",
@@ -72,12 +71,16 @@ kbl(table_df[], escape = FALSE) %>%
   pack_rows("Mathematische Funktionen", 16, 20) 
 ```
 
+
 ### 1.4 Die Hilfefunktion
 R bietet eine Hilfefunktion, um nähere Informationen über Funktionen zu erhalten. Ein Fragezeichen gefolgt von einer R-Funktion ruft die zugehörige Hilfeseite auf (z.B. <code>?sqrt</code> für die Wurzelfunktion <code>sqrt</code>). Die Beispiele am Ende der Datei sind oft am hilfreichsten. Die Hilfeseiten werden je nach Einstellung im Browser oder direkt in RStudio aufgerufen. <br>
 Eine Suchfunktion zur Findung von Funktionsnamen wird mit <code>help.search("FUNKTIONSNAME")</code> auch geboten. Diese funktioniert jedoch nur auf Englisch und ist nicht sehr einsteigerfreundlich. Eine normale Websuche, im Idealfall auf Englisch, ist für den Einstieg häufig die bessere Variante neue Funktionen zu finden.
 
 
-### Übung 1
+
+<!-- Übung 1 ------------------------------------------------------------------------------------------------------------------------->
+
+## Übung 1: Einführung
 Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung einfacher in R ausführen?
 <br>
 
@@ -161,21 +164,34 @@ d = 0.2238413
 ```
 
 
-## 2. Vektoren
+
+<!-- Kapitel 2 Datenstrukturen-------------------------------------------------------------------------------------------------------------->
+## 2. Datenstrukturen
+
+
+```{r _2_0}
+knitr::include_graphics("images/hopr_0306.png")
+"Source: https://rstudio-education.github.io/hopr/images/hopr_0306.png"
+```
+
+
+
+<!-- Kapitel 2.1 Vektoren ------------------------------------------------------------------------------------------------------------------>
+## 2.1 Vektoren
 Vektoren sind eine der wichtigsten Datenstrukturen in R. Mit ihnen können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. Es ist auch möglich Daten von verschiedenen Typen in einem Vektor zusammenzufassen. Dabei wird jedoch eine Typkonvertierung durchgeführt. Deshalb ist es zunächst sinnvoll, nur Daten des gleichen Typen in einem Vektor zu speichern. Vektoren können dann zum Beispiel genutzt werden, um Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
 <br><br>
 Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `c(1, 2, 3)` erzeugt werden. Dieser kann dann mit `a <- c(1, 2, 3)` der Variablen `a` zugewiesen werden.
 <br>
 Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "Konsole")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt. So würde Konsole (ohne \"\") als Verweis auf ein Objekt mit dem Namen <code>Konsole</code> verstanden werden (siehe unten). 
 
-```{r 2_0, exercise=TRUE}
+```{r info_2_1, exercise=TRUE}
 b <- c("hallo", Konsole)
 b
 ```
 
 Im Umgang mit R tauchen immer wieder Vektoren auf. Auch komplexere Objekte können in Vektoren zusammengefasst werden. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
 
-### 2.1 Sequenzen
+### 2.1.1 Sequenzen
 Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei der folgenden Parameter müssen angegeben werden und der 4. Wert kann dann automatisch berechnet werden: <br>
 <ul>
 <li>`from`: Anfangswert der Sequenz</li>
@@ -184,14 +200,14 @@ Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei
 <li>`length.out`: Insgesamte Anzahl der Elemente der Sequenz</li>
 </ul>
 
-### 2.2 Wiederholungen (Repetition)
+### 2.1.2 Wiederholungen (Repetition)
 Die Funktion `rep()` dient dazu einen Vektor oder Faktor beliebig oft zu wiederholen. Dazu werden die folgenden Parameter benötigt: <br>
 <ul>
 <li>`x`: Vektor oder Faktor der wiederholt werden soll</li>
 <li>`times`: Anzahl der Wiederholungen</li>
 </ul>
 
-### 2.3 Vektorfunktionen
+### 2.1.3 Vektorfunktionen
 Vektoren verfügen über eine Vielzahl von Funktionen zur Abfrage und Manipulation ihrer Werte. Im Folgenden werden die häufigsten dieser Funktionen aufgeführt. <code>x</code> bezeichnet dabei immer einen Vektor.
 <ul>
 <li>`length(x)`: Gibt die Länge eines Vektors, bzw. die Anzahl seiner Elemente aus</li>
@@ -202,7 +218,7 @@ Vektoren verfügen über eine Vielzahl von Funktionen zur Abfrage und Manipulati
 <li>`x[Index] <- y`: Ersetzt den Wert des Vektors an Stelle <code>Index</code> durch y</li>
 </ul>
 
-#### 2.3.1 Selektion in Vektoren
+### 2.1.4 Selektion in Vektoren
 <ul>
 <li>`x[Index]`: Gibt das Element des Vektors an Stelle <code>Index</code> aus</li>
 <li>`x[-Index]`: Gibt alle Elemente des Vektors außer dem an Stelle <code>Index</code> aus</li>
@@ -212,39 +228,42 @@ Vektoren verfügen über eine Vielzahl von Funktionen zur Abfrage und Manipulati
 <li>`x[x < y]`: Gibt die Elemente des Vektors aus, die kleiner als y sind</li>
 </ul>
 
-### Übung 2
+
+
+<!-- Übung  2 Vektoren --------------------------------------------------------------------------------------------------------------------->
+## Übung 2: Vektoren
 2.1) Erzeuge einen Vektor von 0 bis 1 in 0,1-Schritten `(0, 0.1, 0.2, ..., 1)`.
-```{r 2a, exercise=TRUE}
+```{r 2_1, exercise=TRUE}
 vec_seq <- 
 vec_seq
 ```
-```{r 2a-hint}
+```{r 2_1-hint}
 "Nutze die Hilfefunktion mit ?seq"
 ```
-```{r 2a-solution}
+```{r 2_1-solution}
 vec_seq <- seq(from = 0, to = 1, by = 0.1)
 vec_seq
 ```
 
 2.2) Erzeuge den Vektor `(1, 1, 1, 1, 1, 5, 5, 5)`.
-```{r 2b, exercise=TRUE}
+```{r 2_2, exercise=TRUE}
 vec_rep <- 
 vec_rep
 ```
-```{r 2b-hint}
+```{r 2_2-hint}
 "Nutze die Hilfefunktion mit ?rep"
 ```
-```{r 2b-solution}
+```{r 2_2-solution}
 vec_rep <- rep(c(1, 5), times = c(5, 3))
 vec_rep
 ```
 
 2.3) Verwende den ersten Vektor und erzeuge durch Addieren und Multiplizieren die folgenden beiden Vektoren: `(1, 1.1, 1.2, ..., 2)` und `(2, 2.2, 2.4, ..., 4)`. Die Vektoren aus 2.1 und 2.2 stehen dabei zur Verfügung.
-```{r 2c_setup}
+```{r 2_3_setup}
 vec_seq <- seq(from = 0, to = 1, by = 0.1)
 vec_rep <- rep(c(1, 5), times = c(5, 3))
 ```
-```{r 2c, exercise=TRUE, exercise.setup = "2c_setup"}
+```{r 2_3, exercise=TRUE, exercise.setup = "2c_setup"}
 vec_1 <- 
 
 vec_2 <- 
@@ -252,10 +271,10 @@ vec_2 <-
 vec_1
 vec_2
 ```
-```{r 2c-hint}
+```{r 2_3-hint}
 "Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
 ```
-```{r 2c-solution}
+```{r 2_3-solution}
 # Addierter Vektor
 vec_1 <- vec_seq + 1
 
@@ -268,14 +287,14 @@ vec_2
 ```
 
 2.4) Führe nun die Befehle `c(1, 3, 7) * c(5, 8, 2)` und `c(1, 3, 7) %*% c(5, 8, 2)` aus. Was ist an den Berechnungen in R speziell verglichen mit den Vektorrechnungen in der Mathematik?
-```{r 2d_1, exercise=TRUE}
-c(1, 3, 7) * c(5, 8, 2) 
-```
-```{r 2d_2, exercise=TRUE}
-c(1, 3, 7) %*% c(5, 8, 2)
-```
+```{r 2_4, exercise=TRUE}
+command_1 <- c(1, 3, 7) * c(5, 8, 2) 
+command_2 <- c(1, 3, 7) %*% c(5, 8, 2)
 
-```{r 2e}
+command_1
+command_2
+```
+```{r 2_4_q}
 quiz(caption = "2.5) Beantworte folgende Fragen.",
      
   question("Welche Art der Multiplikation wird mit dem Operator * ausgeführt?",
@@ -288,7 +307,6 @@ quiz(caption = "2.5) Beantworte folgende Fragen.",
   )
 )
 ```
-
 <details>
 <summary>Erklärung: (Klick mich!)</summary>
 
@@ -298,16 +316,36 @@ Der Matrixmultiplikationsoperator `%*%` führt in diesem Beispiel das Skalarprod
 </details>
 <br>
 
+2.5) Weise einer Variablen den `x` Wert `12` zu und erstelle einen Vektor `vec` mit den Werten `1, 2, 3, 10, 100`. Multipliziere beide miteinander und speichere das Ergebnis als Variable z. Vergleiche diese Berechnung mit denen aus 2.4 betrachte die Unterschiede.
+```{r 2_5, exercise=TRUE}
+x <- 
+vec <- 
+
+z <- 
+z
+```
+```{r 2_5-hint}
+# Befehle:
+x <- 12
+vec <- c(1, 2, 3, 10, 100)
+
+z <- x * vec
+```
+```{r 2_5-solution}
+# Ergebnis: 
+z = c(12, 24, 36, 120, 1200)
+```
+
 2.6) Mit welchen Befehlen kann der Wert <code>8</code> im Vektor <code>vec <- c(2, 3, 4, 7, 8, 15, 16, 23, 42)</code> selektiert werden? 
-```{r 2f_setup}
+```{r 2_6_setup}
 vec <- c(2, 3, 4, 7, 8, 15, 16, 23, 42)
 ```
-```{r 2f, exercise=TRUE, exercise.setup = "2f_setup"}
+```{r 2_6, exercise=TRUE, exercise.setup = "2f_setup"}
 # Hier können Befehle getestet werden. "vec" ist vordefiniert.
 vec
 
 ```
-```{r 2f_question, echo=FALSE}
+```{r 2_6_q, echo=FALSE}
 question("Mit welchen Befehlen kann der Wert <code>8</code> selektiert werden?",
   answer("vec[5]", correct = TRUE),
   answer("vec[8]"),
@@ -321,98 +359,148 @@ question("Mit welchen Befehlen kann der Wert <code>8</code> selektiert werden?",
 )
 ```
 
-## 3. Arrays und Matrizen
-Arrays und Matrizen sind weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Beide können als Vektoren mit besonderen Eigenschaften angesehen werden. Arrays und Matrizen unterscheiden sich von Vektoren durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. Arrays hingegen können beliebige Dimensionen annehmen: 
+<!-- Kapitel 2.1 Matrizen ------------------------------------------------------------------------------------------------------------------>
+## 2.2 Matrizen
+Matrizen sind eine weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Sie können als Vektoren mit besonderen Eigenschaften angesehen werden und unterscheiden sich von diesen durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. 
 <br>
+Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow` bzw. `ncol` angegeben werden, wie viele Zeilen und Spalten die Matrix haben soll. Dabei reicht es, einen der beiden Parameter anzugeben. Standardmäßig werden Matrizen spaltenweise mit den Elementen des Vektors gefüllt, das heißt, dass die ersten 3 Zahlen im unteren Beispiel  der ersten Spalte entsprechen. Um dies zu ändern muss der Parameter `byrow` auf `TRUE` gesetzt werden. 
 <br>
+Einzelne Elemente der Matrix können durch eckige Klammern gelesen und verändert werden. Dabei ist die erste Zahl immer die Zeilennummer, die zweite Zahl die Spaltennummer. Diese Indizes fangen in R immer mit 1 an. Die oberste linke Zahl ist also `Matrixname[1,1]`. 
 
-### 3.1 Erinnerung: Vektoren
-```{r 3a, include = TRUE, echo = TRUE}
+### 2.2.1 Erzeugung
+```{r info_2_2_1, include = TRUE, echo = TRUE}
+# Erzeugung einer Matrix mit neuen Werten
+# 1:6 ist dabei die Kurzform von seq(from = 1,to = 6,by = 1)
+mat <- matrix(1:6, nrow = 3, ncol = 2)
+mat
+
+
+# Erzeugung einer Matrix aus einem Vektor
+vec <- c(1:6)
+mat_2 <- matrix(vec, nrow = 3, ncol = 2)
+mat_2
+```
+
+### 2.2.2 Dimensionen
+```{r info_2_2_2, include = TRUE, echo = TRUE}
 # Vektor aus Aufgabe 2.1
 vec <- seq(from = 0, to = 1, by = 0.1)
 vec
 
-# Selektion des 3. Wertes
-vec[3]
-
-#Dimensionen von vec
+# Dimensionen von vec
 dim(vec)
-```
-Randnotiz: Die Ausgabe <code>NULL</code> des Befehls <code>dim(vec)</code> ist nicht gleichzusetzen mit 0. Stattdessen bedeutet <code>NULL</code>, dass der Rückgabewert nicht definiert ist.
 
-### 3.2 Matrizen
-Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow` bzw. `ncol` angegeben werden, wie viele Zeilen und Spalten die Matrix haben soll. Dabei reicht es, einen der beiden Parameter anzugeben. Standardmäßig werden Matrizen spaltenweise mit den Elementen des Vektors gefüllt, das heißt die ersten 4 Zahlen entsprechen der ersten Spalte. Um dies zu ändern muss der Parameter `byrow` auf `TRUE` gesetzt werden. 
-<br>
-Einzelne Elemente der Matrix können durch eckige Klammern gelesen und verändert werden. Dabei ist die erste Zahl immer die Zeilennummer, die zweite Zahl die Spaltennummer. Diese Indizes fangen in R immer mit 1 an. Die oberste linke Zahl ist also `Matrixname[1,1]`. 
-<br>
-```{r 3b, include = TRUE, echo = TRUE}
-# Anmerkung: Die Notation 1:6 erzeugt automatisch einen Vektor mit den Zahlen von 1 bis 6 in 1-er Schritten
-# 1:6 ist also die Kurzform von seq(from=1,to=6,by=1)
+
+# Beliebige Matrix
+mat <- matrix(1:6, nrow = 3, ncol = 2)
+mat
+
+# Dimension von mat
+dim(mat)
+```
+<b>Randnotiz</b>:
+<br> 
+Die Ausgabe <code>NULL</code> des Befehls <code>dim(vec)</code> ist nicht gleichzusetzen mit 0. Stattdessen bedeutet <code>NULL</code>, dass der Rückgabewert nicht definiert ist. Die Ausgabe <code>## [1] 3 2</code> hingegen kann interpretiert werden als "Eine Matrix mit 3 Zeilen und 2 Spalten".
+
+### 2.2.3 Selektion
+Für die Selektion in Matrizen stehen mehr Möglichkeiten zur Verfügung als bei Vektoren. Einige davon sind jedoch deutlich komplexer als notwendig. In diesen Fällen bietet es sich an die Matrizen in Dataframes umzuwandeln, dazu später mehr. An dieser Stelle sollen jedoch die häufigsten Möglichkeiten zur Selektion in Matrizen genannt werden.
+<ul>
+<li>`x[Index_1, Index_2]`: Gibt das Element des Vektors an Stelle <code>(Index_1, Index_2)</code> zurück</li>
+<li>`x[y, ]`: Selektiert die Reihe <code>y</code></li>
+<li>`x[ , z]`: Selektiert die Spalte <code>z</code></li>
+<li>`x[y:z , ]`: Selektiert die Reihen <code>y</code> bis <code>z</code></li>
+<li>`x[ , y:z]`: Selektiert die Spalten <code>y</code> bis <code>z</code></li>
+</ul>
+
+```{r info_2_2_3, include = TRUE, echo = TRUE}
 mat <- matrix(1:6, nrow = 3, ncol =2)
 mat
 
-# Selektion des Wertes an Stelle [1, 2]
+# Selektion des Wertes an Stelle Zeile 1, Spalte 2
 mat[1, 2]
 
-# Dimensionen und Einträge pro Dimension von mat
-dim(mat)
+# Ändern des Wertes an Stelle Zeile 3, Spalte 1 auf 7
+mat[3, 1] <- 7
 ```
 
-### 3.3 Arrays
-Die Dimensionen von Arrays hingegen werden nicht mit `nrow` bzw. `ncol` bestimmt, sondern direkt über den Parameter `dim`. Dazu wird ein Vektor genutzt, der die Dimensionen widerspiegelt. Jede Stelle des Vektors entspricht einer Dimension, der Wert der Stelle, wie viele Einträge die Dimension fasst. Im folgenden Beispiel wird ein 3D-Vektor erzeugt, der insgesamt 12 (2 \* 2 \* 3) Einträge fassen kann.
-```{r 3c, include = TRUE, echo = TRUE}
+### 2.2.4 Transponieren
+Eine Matrix kann in R mit dem Befehl <code>t(Matrixname)</code> transponiert werden.
+```{r info 2_2_4, echo = TRUE}
+mat <- matrix(1:6, nrow = 3, ncol = 2)
+mat
+mat <- t(mat)
+mat
+```
+
+
+
+<!-- Kapitel 2.3 Arrays ------------------------------------------------------------------------------------------------------------------>
+## 2.3 Arrays
+Arrays können als Verallgemeinerung von Matrizen betrachtet werden. Die Dimensionen von Arrays werden nicht mit `nrow` bzw. `ncol` bestimmt, sondern direkt über den Parameter `dim`. Dabei können Arrays beliebig viele Dimensionen haben. Um die Dimensionen zu bestimmen, wird ein Vektor genutzt. Jede Stelle des Vektors entspricht einer Dimension. Der Wert an der Stelle bestimmt die Tiefe einer Dimension. Im folgenden Beispiel wird ein 3D-Vektor erzeugt, der insgesamt 12 (2 \* 2 \* 3) Einträge fassen kann. 
+
+### 2.3.1 Erzeugung und Selektion
+Das Erzeugen und Selektieren bei Arrays funktioniert wie bei Matrizen. Es werden eldiglich mehr Argumente benötigt. Die Anzahl dieser zusätzlichen Argumente hängt von der Anzahl der Dimensionen ab.
+```{r 2.3_a, include = TRUE, echo = TRUE}
 # Anmerkung: Die Notation 1:12 erzeugt die Zahlen von 1 bis 12, s.o.
 arr <- array(1:12, dim = c(2, 2, 3))
 arr
 
-# Selektion des Wertes an Stelle [1, 2, 3], also 1. Zeile, 2. Spalte, 3. "Schicht"
-arr[1, 2, 3]
-
 # Dimensionen von arr
 dim(arr)
+
+# Selektion des Wertes an Stelle [1, 2, 3], also 1. Zeile, 2. Spalte, 3. "Schicht"
+arr[1, 2, 3]
 ```
 
-### Übung 3: 
+
+
+<!-- Übung 3 Matrizen und Arrays ----------------------------------------------------------------------------------------------------------->
+## Übung 3: Matrizen und Arrays 
 
 3.1) Erzeuge nun selbst eine Matrix mit Zahlen von 1 bis 12, die drei Spalten hat (beginnend mit 1 2 3 in der ersten Zeile).
-```{r 3d, exercise=TRUE}
+```{r 3_1, exercise=TRUE}
 mat <- 
 mat
 ```
-```{r 3d-hint}
+```{r 3_1-hint}
 "Nutze die Hilfefunktion mit ?matrix"
 ```
-```{r 3d-solution}
+```{r 3_1-solution}
 mat <- matrix(seq(1, 12, by = 1), nrow = 4, ncol = 3, byrow = TRUE)
 mat
 ```
-<br>
 
 3.2) Ersetze nun die Zahl 6 in der Matrix durch die Zahl 15.
-```{r 3e_setup}
+```{r 3_2_setup}
 mat <- matrix(seq(1, 12, by = 1), nrow = 4, ncol = 3, byrow = TRUE)
 ```
-```{r 3e, exercise=TRUE, exercise.setup = "3e_setup"}
-mat <-
-mat
+```{r 3_2, exercise=TRUE, exercise.setup = "3e_setup"}
+# Die notwendige Matrix ist vordefiniert
+mat 
 ```
-```{r 3e-hint-1}
+```{r 3_2-hint-1}
 "Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
 ```
-```{r 3e-hint-2}
+```{r 3_2-hint-2}
 "Zum Austauschen muss zunächst die korrekte Stelle gewählt werden und dann eine Zuweisung ausgeführt werden."
 ```
-```{r 3e-hint-3}
+```{r 3_2-hint-3}
 "Beachte bei der Auswahl die Reihenfolge der Indizes."
 ```
-```{r 3e-solution}
+```{r 3_2-solution}
 mat[2, 3] <- 15
 mat
 ```
-<br>
 
-3.3) Multipliziere die entsandene Matrix nun mit 4. Welche Veränderung kannst du in der Matrix beobachten??
-```{r quiz2, echo=FALSE}
+3.3) Multipliziere die entstandene Matrix nun mit 4. Welche Veränderung kannst du in der Matrix beobachten?
+```{r 3_3_setup}
+mat <- matrix(seq(1, 12, by = 1), nrow = 4, ncol = 3, byrow = TRUE)
+```
+```{r 3_3, exercise=TRUE, exercise.setup = "3e_setup"}
+# Die notwendige Matrix ist vordefiniert
+mat
+```
+```{r 3_3_q, echo=FALSE}
 quiz(
   question("Welche Veränderung kannst du in der Matrix beobachten?",
     answer("Nur das Element an Stelle [1, 1] ist vervierfacht."),
@@ -424,72 +512,149 @@ quiz(
 ```
 
 
-## 4. Vektormultiplikation und Kennwerte
-R stellt eine Vielzahl statistischer Kennwerte mit eingebauten Befehlen bereit. So erlaubt R zum Beispiel das bilden von Summen mit `sum()`, arithmetischen Mitteln mit `mean()` und das Ermitteln von Maxima und Minima mit `min()` bzw. `max()`. 
-<br>
-Weitere Funktionen werden im Rahmen der Vorlesung vorgestellt, sobald diese benötigt werden.
-<br>
-<br>
 
-### Übung 4:
+<!-- Kapitel 3 ------------------------------------------------------------------------------------------------------------------>
+## 3. Statistische Kennwerte
+Als Programmiersprache für statistische Berechnungen und Analysen stellt R eine Vielzahl statistischer Kennwerte mit eingebauten Befehlen bereit. So bietet R, neben den aus Kapitel 1 bekannten Funktionen `min()` bzw. `max()` und `sum()` eine Vielzahl weiterer Funktionen, die für Statistik notwendig sind wie z.B.:
 
-4.1) Weise einer Variablen den Wert 12 zu und erstelle einen Vektor mit den Werten 1, 2, 3, 10, 100. Multipliziere beide miteinander und speichere das Ergebnis als Variable z.
-```{r 4a, exercise=TRUE}
-x <- 
-vec <- 
+<ul>
+<li>`mean(x)`: Arithmetisches Mittel von x</li>
+<li>`median(x)`: Median von x</li>
+<li>`quantile(x)`: Quantile von x</li>
+<li>`var(x)`: Varianz von x</li>
+<li>`sd(x)`: Standardabweichung von x</li>
+<li>`cor(x, y)`: Korrelation zwischen x und y</li>
+</ul>
 
-z <- 
-z
+Die Bedeutung dieser Werte wird in der Vorlesung noch tiefergehend thematisiert.
+
+### Beispiele:
+```{r info_3, echo = TRUE}
+vec <- c(0:100)
+
+mean_vec <- mean(vec)
+mean_vec
+
+median_vec <- median(vec)
+median_vec
+
+quantile_vec <- quantile(vec)
+quantile_vec
+
+var_vec <- var(vec)
+var_vec
+
+sd_vec <- sd(vec)
+sd_vec
+
+cor_vec <- cor(vec, vec)
+cor_vec
 ```
-```{r 4a-hint}
-# Befehle:
-x <- 12
-vec <- c(1, 2, 3, 10, 100)
 
-z <- x * vec
-```
-```{r 4a-solution}
-# Ergebnis: 
-z = c(12, 24, 36, 120, 1200)
-```
-<br>
 
-4.2) Berechne nun die Summe, den Durschnitt, das Minimum und das Maximum von Vektor z.
-```{r 4b_setup}
-x <- 12
-vec <- c(1, 2, 3, 10, 100)
 
-z <- x * vec
+<!-- Übung 4 ------------------------------------------------------------------------------------------------------------------>
+## Übung 4: Statistische Kennwerte
+Um den Umgang mit den statistischen Funktionen zu üben sollen diese an einem realen Besipiel angewandt werden. Dazu wird der sehr bekannte `iris`-Datensatz benutzt. Um diesen zu betrachten kann der Befehl `iris` benutzt werden, weitere Informationen können mit `?iris` abgerufen werden. 
+
+4.1) Berechne die Summe, den Durschnitt, den Median, das Minimum und das Maximum der Blütenblattlängen der Iriden. Die Werte der Blütenblattlängen sind als `petal_length` verfügbar.
+```{r 4_setup}
+petal_length <- iris$Petal.Length
+sepal_length <- iris$Sepal.Length
 ```
-```{r 4b, exercise=TRUE, exercise.setup = "4b_setup"}
-sum_z <- 
-mean_z <- 
-min_z <- 
-max_z <- 
+```{r 4_1, exercise=TRUE, exercise.setup = "4_setup"}
+# Varaible mit Blütenblattlängen: petal_length
+
+# Gesamte Länge der Blütenblätter im Datensatz
+sum_length <- 
+
+# Durchschnittliche Länge der Blütenblätter im Datensatz
+mean_length <- 
   
-sum_z
-mean_z
-min_z
-max_z
+# Median der Länge der Blütenblätter
+median_length <- 
+
+# Kleinstes und größtes Blütenblatt im Datensatz
+min_length <- 
+max_length <- 
+  
+  
+sum_length
+mean_length
+median_length
+min_length
+max_length
 ```
-```{r 4b-hint-1}
-"Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
-```
-```{r 4b-hint-2}
+```{r 4_1-hint-1}
 # Befehle:
-sum_z <- sum(z)
-mean_z <- mean(z)
-min_z <- min(z)
-max_z <- max(z)
+sum_length <- sum(petal_length)
+mean_length <- mean(petal_length)
+median_length <- median(petal_length)
+min_length <- min(petal_length)
+max_length <- max(petal_length)
 ```
-```{r 4b-solution}
-# Ergebnis:
-sum_z = 1392
-mean_z = 278.4
-min_z = 12
-max_z = 1200
+```{r 4_1-solution}
+# Ergebnisse:
+sum_length = 563.7
+mean_length = 3.758
+min_length = 1
+max_length = 6.9
 ```
 
+4.2) Berechne nun auch Quantile, Varianz und Standardabweichung der Blütenblattlängen der Iriden.
+```{r 4_2, exercise=TRUE, exercise.setup = "4_setup"}
+# Varaible mit Blütenblattlängen: petal_length
+
+# Quantile der Länge der Blütenblätter im Datensatz
+quantile_length <- 
+
+# Varianz der Blütenblättlängen
+var_length <- 
+
+# Standardabweichung der Blütenblattlängen
+sd_length <- 
+  
+  
+quantile_length
+var_length
+sd_length
+```
+```{r 4_2-hint-1}
+# Befehle:
+quantile_length <- quantile(petal_length)
+var_length <- var(petal_length)
+sd_length <-  sd(petal_length)
+```
+```{r 4_2-solution}
+# Ergebnisse:
+quantile_length = c(1, 1.6, 4.35, 5.1, 6.9) 
+var_length = 3.11628
+sd_length = 1.765298
+```
+
+4.3) Für die unterschiedlichen Größen der Blütenblätter kann eine Vielzahl von Gründen angeführt werden. Ein möglicher Grund ist verschiedene Standortbedingungen. Um diese als Einfluss abzuschätzen kann man betrachten, ob andere Merkmale der gleichen Pflanze eine ähnliche Ausprägung haben, d.h. "Wenn der Standort die Größe der Blüteblätter beeinflusst, haben Kelchblattgrößen ähnliche Größenverhätnisse wie Blütenblattlängen".
+<br>
+Betrachte deshalb die Korrelation zwischen Blütenblattlänge und Kelchblattlänge um die Aussage zu testen. Die Kelchblattlänge der Iriden ist als `sepal_length` verfügbar.
+```{r 4_3, exercise=TRUE, exercise.setup = "4_setup"}
+# Varaible mit Blütenblattlängen: petal_length
+# Variable mit Kelchblattlängen: sepal_length
+
+# Korrelation zwischen Blütenblattlänge und Art
+cor_lengths <- 
+
+  
+cor_lengths
+```
+```{r 4_3-hint-1}
+# Befehle:
+cor_lengths <- cor(petal_length, sepal_length)
+```
+```{r 4_3-solution}
+# Ergebnisse:
+cor_lengths = 0.871
+
+# 0.88 Ist eine hohe Korrelation. Daher kann man davon ausgehen, dass die Längen sich ähnlich verhalten und deshalb Standortfaktoren ein möglicher Grund sind.
+```
 
 ## 5. Plots
 Plots in R werden mittels der Funktion `plot()` erzeugt (siehe auch `?plot`). Dabei wird eine Vielzahl von Parametern angeboten, die das Verhalten und die Darstellung des Plots beeinflussen, wie zum Beispiel: 

@@ -2,3 +2,4 @@
 .Rbuildignore
 .Rhistory
 .gitattributes
+*.png
