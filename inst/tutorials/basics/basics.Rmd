@@ -12,11 +12,11 @@ library(geostat.tutorial)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-<!-- Kapitel 1 Einführung --------------------------------------------------------------------------------------------------------------->
 ## 1. Einführung
 Willkommen zum R-Tutorial für den Kurs "Einführung in die Geostatistik". Dieses Tutorial dient dazu erste Schritte, wichtige Befehle und zentrale Datenstrukturen in R zu vermitteln. Darüber hinaus werden weiterführende Konzepte wie Datenhaltung und Funktionspakete angesprochen. <br>
-Dieses Tutorial findet in einer geschützten Umgebung statt. Deshalb sind einige Funktionen, die im normalen Workflow wichtig sind hier automatisiert um den Einstieg zu erleichtern. Auf diese wird im späteren Verlauf besonders eingegangen. 
+Dieses Tutorial findet in einer geschützten Umgebung statt. Deshalb sind einige Funktionen, die im normalen Workflow wichtig sind hier automatisiert um den Einstieg zu erleichtern. 
 <br><br>
+
 
 ### 1.1 R als Taschenrechner
 Die R-Befehlszeile kann sowohl als Taschenrechner genutzt werden, als auch für komplexere Vorhaben. Simple Berechnungen wie z.B. `5 + 3` können mit Hilfe der Konsole leicht umgesetzt werden. Auch eine Verwendung von Variablen ist dabei möglich. Dazu wird der Zuweisungs-Operator `<-` genutzt um  Werte, Objekte oder Funktionen in einer Variablen zu speichern. 
@@ -30,22 +30,25 @@ a <- 5
 b <- 3
 a + b
 ```
+```{r ausprobierfeld, exercise=TRUE}
+# Hier können Befehle ausprobiert werden!
+```
 
 
-### 1.2 Die R-Konsole
+### 1.2 Ausgaben in der R-Konsole
 Bei der Ausgabe der vorherigen Berechnungen fallen 2 Dinge auf: Die Ausgabe beginnt mit <code>##</code> und darauf folgt <code>[1]</code>.
 <br>
-Die beiden Rauten haben dabei keine tiefere Bedeutung und führen jeden Ausgabe in der Befehlszeile an. Die Zahl in den eckigen Klammern hingegen vermittelt die wichtige Information des führenden Indexes. Ein Beispiel dazu könnte folgendermaßen aussehen:
+Die beiden Rauten haben dabei keine tiefere Bedeutung und führen jeden Ausgabe in der Konsole an. Die Zahl in den eckigen Klammern hingegen vermittelt die Information des führenden Indexes. Ein Index ist eine Positionsangabe, wobei Index 1 in R immer für die vorderste Stelle steht. Ein Beispiel dazu könnte folgendermaßen aussehen:
 ```{r info_1_2, echo = FALSE, include = TRUE}
 vec_seq <- seq(from = 0, to = 3.5, by = 0.1)
 vec_seq
 ```
 
-Hier wird eine längere Zeichenfolge ausgegeben. Auch diese werden von Rauten und Zahlen in eckigen Klammern begleitet. Die Zahl <code>0.0</code> hat dabei den Index <code>1</code> und <code>1.9</code> den Index <code>20</code>. Dies ist den eckigen Klammern zu entnehmen. Diese Indizes können in vielen Anwendungsfällen nützlich sein und bieten für alle anderen Fälle zumindest mehr Übersicht über die Ausgaben.
+Hier wird eine längere Zeichenfolge ausgegeben. Auch diese wird von Rauten und Zahlen in eckigen Klammern begleitet. Die Zahl <code>0.0</code> hat dabei den Index <code>1</code> und <code>1.9</code> den Index <code>20</code>. Dies ist den eckigen Klammern zu entnehmen. Diese Indizes können in vielen Anwendungsfällen nützlich sein und bieten für alle anderen Fälle zumindest mehr Übersicht über die Ausgaben. 
 
 
 ### 1.3 Grundliegende Operatoren
-R bietet eine Vielzahl vordefinierter mathematischer Operationen und Funktionen. Von diesen werden an dieser Stelle die wichtigsten aufgelistet. 
+Zum Rechnen bietet R eine Vielzahl vordefinierter, mathematischer Operationen und Funktionen. Die wichtigsten von diesen für den Einstieg sind die folgenden:
 ```{r info_1_3}
 head <- c("Zeichen", "Funktion")
 
@@ -77,148 +80,197 @@ R bietet eine Hilfefunktion, um nähere Informationen über Funktionen zu erhalt
 Eine Suchfunktion zur Findung von Funktionsnamen wird mit <code>help.search("FUNKTIONSNAME")</code> auch geboten. Diese funktioniert jedoch nur auf Englisch und ist nicht sehr einsteigerfreundlich. Eine normale Websuche, im Idealfall auf Englisch, ist für den Einstieg häufig die bessere Variante neue Funktionen zu finden.
 
 
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
-<!-- Übung 1 ------------------------------------------------------------------------------------------------------------------------->
 
-## Übung 1: Einführung
-Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung einfacher in R ausführen?
+## \ \ \ \ Übung 1: Einführung
+Führe folgende Rechnungen durch und weise sie jeweils den Variablen zu. Wie lässt sich die letzte Rechnung einfacher ausführen?
 <br>
 
 1.1) $\frac{5.1}{5+345}$
-```{r 1a, exercise=TRUE}
+```{r 1_1, exercise=TRUE}
 a <- 
 a
 ```
-```{r 1a-hint-1}
+```{r 1_1-hint-1}
 "Um in R Kommazahlen zu benutzen muss ein . statt eines , verwendet werden."
 ```
-```{r 1a-hint-2}
+```{r 1_1-hint-2}
 # Befehl:
 a <- 5.1 / (5 + 345)
 a
 ```
-```{r 1a-solution}
+```{r 1_1-solution}
 # Ergebnis:
 a = 0.01457143
 ```
 
 1.2) $2⋅sin(90°)$
-```{r 1b, exercise=TRUE}
+```{r 1_2, exercise=TRUE}
 b <- 
 b
 ```
-```{r 1b-hint-1}
+```{r 1_2-hint-1}
 "Die Sinusfunktion erwartet Eingaben im Bogenmaß."
 ```
-```{r 1b-hint-2}
+```{r 1_2-hint-2}
 "Winkel im Gradmaß können durch die Formel φRAD = φDEG * (π / 180) ins Bogenmaß umgerechnet werden"
 ```
-```{r 1b-hint-3}
+```{r 1_2-hint-3}
 # Befehl:
 b <- 2 * sin(pi / 2)
 b
 ```
-```{r 1b-solution}
+```{r 1_2-solution}
 # Ergebnis:
 b = 2
 ```
 
 1.3) $\sqrt(16) + \sqrt(25)$
-```{r 1c, exercise=TRUE}
+```{r 1_3, exercise=TRUE}
 c <- 
 c
 ```
-```{r 1c-hint}
+```{r 1_3-hint}
 # Befehl:
 c <- sqrt(16) + sqrt(25)
 c
 ```
-```{r 1c-solution}
+```{r 1_3-solution}
 # Ergebnis:
 c = 9
 ```
 
 1.4) $\frac{\frac{5}{5+345} + {2⋅sin(90°)}}{\sqrt(16) + \sqrt(25)}$
-```{r 1d_setup}
+```{r 1_4_setup}
 a <- 5.1 / (5 + 345)
 b <- 2 * sin(pi / 2)
 c <- sqrt(16) + sqrt(25)
 ```
-```{r 1d, exercise=TRUE, exercise.setup = "1d_setup"}
+```{r 1_4, exercise=TRUE, exercise.setup = "1d_setup"}
 d <- 
 d
 ```
-```{r 1d-hint-1}
+```{r 1_4-hint-1}
 "Die Variablen aus vorherigen Aufgaben stehen noch zur Verfügung."
 ```
-```{r 1d-hint-2}
+```{r 1_4-hint-2}
 # Befehl:
 d <- ((5.1 / (5 + 345)) + (2 * sin(pi / 2))) / (sqrt(16) + sqrt(25)) 
 # ist das Gleiche wie 
 d <- (a + b) / c
 d
 ```
-```{r 1d-solution}
+```{r 1_4-solution}
 # Ergebis:
 d = 0.2238413
 ```
 
 
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
-<!-- Kapitel 2 Datenstrukturen-------------------------------------------------------------------------------------------------------------->
-## 2. Datenstrukturen
+
+## 2. Datentpyen und -strukturen
+R dient in den meisten Anwendungsfällen zur staistischen Analyse von Daten. Diese Daten werden in der Programmierumgebung in sogenannten Datenstrukturen gespeichert. R unterstützt eine Vielzahl von vorgefertigten Datenstrukturen. Um mit diesen arbeiten zu können, ist es nötig sowohl Datentypen, als auch die Datentrukturen grundsätzlich zu verstehen.
+<br>
 
 
-```{r _2_0}
+### Datentypen
+Die Datentypen, die in R genutzt werden und für diese Veranstaltung wichtig sind, sind die folgenden:
+<ul>
+<li>`numeric`:<br> Numerische Werte sind Zahlen. Dieser Typ umfasst `integer` (ganze Zahlen) und `double` (relle Zahlen).</li>
+<li>`logical`:<br> Logische Werte, also wahr (`TRUE`,`t`) und falsch (`FALSE`,`f`). Diese Werte werden allgemein auch als `Booleans` bezeichnet.</li>
+<li>`character`:<br> Character Werte sind Zeichen, insbesondere auch Wörter oder Sätze.</li>
+<li>`NA`:<br> NA Werte sind nicht vorhandene Werte. Diese stammen oft aus Fehlern in den Daten oder falschen Berechnungen.</li>
+</ul>
+
+Um den Typen einer Variablen oder eines Wertes heruaszufinden wird die Funktion `typeof(x)` benutzt. Die Erzeugung dieser Datentypen setzt auf bestimmte Konventionen. Diese sehen wie folgt aus:
+```{r info_2.0, include = TRUE, echo = TRUE}
+# Numeric
+ex_int <- 42
+ex_double <- 1.99 ## Double wird mit . erzeugt statt einem ,
+
+# Logical
+ex_bool <- TRUE ## Logische Werte werden komplett in Großbuchstaben geschrieben
+ex_bool_2 <- FALSE
+
+# Character
+ex_char <- "hello, world!" ## Characters benötigen am Anfang und Ende Anführungszeichen
+
+# NA
+ex_na <- NA ## NA wird komplett großgeschrieben
+```
+
+
+### Datenstrukturen
+Mit diesen Datentypen als Grundlage können nun die Datenstrukturen betrachetet werden. Diese Grundlage ist notwendig, da die Datenstrukturen sich in zwei Gruppen einteilen lassen, basierend darauf, mit wie vielen Datentypen gleichzeitig sie kompatibel sind. Betrachte dazu die folgende Abbildung.
+<br><br>
+
+```{r img_2_0}
 knitr::include_graphics("images/hopr_0306.png")
 "Source: https://rstudio-education.github.io/hopr/images/hopr_0306.png"
 ```
 
-
-
-<!-- Kapitel 2.1 Vektoren ------------------------------------------------------------------------------------------------------------------>
-## 2.1 Vektoren
-Vektoren sind eine der wichtigsten Datenstrukturen in R. Mit ihnen können Folgen beliebig vieler Elemente des selben Datentyps in einem Objekt gespeichert werden. Es ist auch möglich Daten von verschiedenen Typen in einem Vektor zusammenzufassen. Dabei wird jedoch eine Typkonvertierung durchgeführt. Deshalb ist es zunächst sinnvoll, nur Daten des gleichen Typen in einem Vektor zu speichern. Vektoren können dann zum Beispiel genutzt werden, um Zahlenreihen oder auch Folgen von Begriffen in Vektoren gespeichert werden.
-<br><br>
-Um einen Vektor zu erzeugen wird die Funktion `c()` benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `c(1, 2, 3)` erzeugt werden. Dieser kann dann mit `a <- c(1, 2, 3)` der Variablen `a` zugewiesen werden.
+Wie hier zu sehen ist, können Vektoren, Matritzen und Arrays nur mit einem Datentyp gleichzeitig arbeiten. Dies führt dazu, dass R Typkonvertierungen durchführt, wenn man mehr als einen Datentypen zur Erzeugung nutzt. Erzeugt man beispielweise eine Vektor aus Zahlen (integer/double) und Wörtern (character) werden die Zahlen in Wörter umgewandelt. Das ist eine häufige Fehlerquelle wenn man beginnt mit R zu arbeiten.
 <br>
-Ein Vektor mit Buchstaben (oder Worten) ist ebenso möglich: `b <- c("hallo", "Konsole")`. Die Anführungsstriche sind dabei nötig, um R klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt. So würde Konsole (ohne \"\") als Verweis auf ein Objekt mit dem Namen <code>Konsole</code> verstanden werden (siehe unten). 
+In den folgenden Kapiteln werden diese Strukturen erklärt und Funktionen für den Umgang mit ihnen erläutert. In dieser Vorlesung sind davon insbesondere Vektoren und Dataframes von Bedeutung. 
 
-```{r info_2_1, exercise=TRUE}
+
+## \ \ \ \ 2.1 Vektoren
+Vektoren sind eine 1-dimensionale Datenstruktur, d.h. sie können genutzt werden, um Zahlenreihen oder auch Folgen von Begriffen zu speichern. Dabei können beliebig viele Elemente des selben Datentyps in einem Objekt gespeichert werden. Um einen Vektor zu erzeugen wird die Funktion `c()` [d.h. combine, kombiniere] benutzt. So kann zum Beispiel der Vektor `(1, 2, 3)` (hier also eine Zahlenreihe mit den Zahlen 1, 2 und 3) mit Hilfe von `c(1, 2, 3)` erzeugt werden. Dieser kann dann mit `a <- c(1, 2, 3)` der Variablen `a` zugewiesen werden.
+
+Beispiele für Vektoren können wie folgt aussehen:
+```{r info_2_1, echo = TRUE}
+# Erzeuge das Temperaturbeispiel als Vektor
+temp <- c(25, 24.5, 25, 25.5, 26)
+
+# Teste um welchen Datentypen es sich handelt
+typeof(temp)
+
+
+#!!! Achtung: Negativbeispiel !!!
+# Erzeuge das Personenbeispiel als Vektor
+versuchsperson_1 <- c("Mia", "Musterfrau", 25, 1.75, 5)
+
+# Teste um welchen Datentypen es sich handelt
+typeof(versuchsperson_1)
+```
+Der Befehl <code>temp <- c(25, 24.5, 25, 25.5, 26)</code> erzeugt einen Vektor der zunächst nur eine Reihe von Zahlen beinhaltet. Durch Interpretation können diese Zahlen jedoch mehr Inhalt bekommen, wie z.B. verschiedene Temperaturen einer Messstation, oder die Temperaturen aller Messtationen in einem Gebiet zu einer bestimmten Zeit. Um diese Interpretation zu erleichtern macht es Sinn, Variablen Namen zu geben, die für sich selbst sprechen.
+<br>
+Die Beschreibung eines Mensche durch <code>versuchsperson_1 <- c("Mia", "Musterfrau", 25, 1.75, 5)</code> ist auch ein Vektor. Hier sind die Datentypen jedoch gemischt. `"Mia"` und `"Musterfrau"` sind vom Typen `character`, `25` und `5` sind `integer` und `1.75` ist ein `double`. Da jedoch verschiedene Datentypen in einem Vektor nicht gemischt werden können, führt R eine Typkonvertierung durch. Das heißt, dass in diesem Beispiel alle Werte in `character` umgewandelt werden.
+<br>
+Bei der Verwendung von Wörtern sind Anführungsstriche sind nötig, um R klarzumachen, dass es sich um Zeichenketten und nicht etwa um Variablennamen handelt. So würde Konsole (ohne \"\") als Verweis auf ein Objekt mit dem Namen <code>Konsole</code> verstanden werden (siehe unten). 
+```{r info_2_1_2, exercise=TRUE}
 b <- c("hallo", Konsole)
 b
 ```
 
-Im Umgang mit R tauchen immer wieder Vektoren auf. Auch komplexere Objekte können in Vektoren zusammengefasst werden. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
 
-### 2.1.1 Sequenzen
-Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei der folgenden Parameter müssen angegeben werden und der 4. Wert kann dann automatisch berechnet werden: <br>
+### 2.1.1 Sequenzen und Widerholungen
+Im Umgang mit R tauchen Vektoren immer wieder auf. Auch komplexere Objekte können dabei in Vektoren zusammengefasst werden. Besonders häufig benötigt werden Vektoren mit speziellen Zahlensequenzen. Diese lassen sich in R einfach erzeugen. Hierzu stehen z.B. die Funktionen `seq()` und `rep()` zur Verfügung. 
+
+Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei der folgenden Parameter müssen angegeben werden und der 4. Wert, normalerweise `length.out`, kann dann automatisch berechnet werden: <br>
 <ul>
 <li>`from`: Anfangswert der Sequenz</li>
 <li>`to`: Endwert der Sequenz</li>
 <li>`by`: Differenz aufeinander folgender Zahlen</li>
 <li>`length.out`: Insgesamte Anzahl der Elemente der Sequenz</li>
 </ul>
-
-### 2.1.2 Wiederholungen (Repetition)
+Häufig findet man zur Erzeugung von Sequenzen auch die Kurzform `c(x : y)`. Diese ist gleichbedeutend mit `seq(from = x, to = y, by = 1)`.
+<br>
 Die Funktion `rep()` dient dazu einen Vektor oder Faktor beliebig oft zu wiederholen. Dazu werden die folgenden Parameter benötigt: <br>
 <ul>
 <li>`x`: Vektor oder Faktor der wiederholt werden soll</li>
 <li>`times`: Anzahl der Wiederholungen</li>
 </ul>
 
-### 2.1.3 Vektorfunktionen
-Vektoren verfügen über eine Vielzahl von Funktionen zur Abfrage und Manipulation ihrer Werte. Im Folgenden werden die häufigsten dieser Funktionen aufgeführt. <code>x</code> bezeichnet dabei immer einen Vektor.
-<ul>
-<li>`length(x)`: Gibt die Länge eines Vektors, bzw. die Anzahl seiner Elemente aus</li>
-<li>`sort(x)`: Gibt den Vektor mit sortierten Werten zurück</li>
-<li>`rev(x)`: Gibt den Vektor in umgekehrter Reihenfolge zurück</li>
-<li>`table(x)`: Gibt die Häufigkeiten der Werte innerhalb des Vektors zurück</li>
-<li>`unique(x)`: Gibt die Anzahl der einzigartigen Werte im Vektor zurück</li>
-<li>`x[Index] <- y`: Ersetzt den Wert des Vektors an Stelle <code>Index</code> durch y</li>
-</ul>
 
-### 2.1.4 Selektion in Vektoren
+### 2.1.2 Selektion in Vektoren
+Um die Daten, die in einem Vektor gespeichert wurden wieder zugänglich zu machen, benötigt man Selektionsfunktionen. Dabei handelt es sich beispielsweise um die folgenden Funktionen. `Index_1` und `Index_2` sind dabei integers, `x` und `y` beliebige Zahlen.
 <ul>
 <li>`x[Index]`: Gibt das Element des Vektors an Stelle <code>Index</code> aus</li>
 <li>`x[-Index]`: Gibt alle Elemente des Vektors außer dem an Stelle <code>Index</code> aus</li>
@@ -229,9 +281,24 @@ Vektoren verfügen über eine Vielzahl von Funktionen zur Abfrage und Manipulati
 </ul>
 
 
+### 2.1.3 Vektorfunktionen
+Vektoren verfügen über eine Vielzahl von Funktionen zur Manipulation. Im Folgenden werden die häufigsten dieser Funktionen aufgeführt. <code>x</code> bezeichnet dabei immer einen Vektor.
+<ul>
+<li>`length(x)`: Gibt die Länge eines Vektors, bzw. die Anzahl seiner Elemente aus</li>
+<li>`sort(x)`: Gibt den Vektor mit sortierten Werten zurück</li>
+<li>`rev(x)`: Gibt den Vektor in umgekehrter Reihenfolge zurück</li>
+<li>`table(x)`: Gibt die Häufigkeiten der Werte innerhalb des Vektors zurück</li>
+<li>`unique(x)`: Gibt die Anzahl der einzigartigen Werte im Vektor zurück</li>
+<li>`x[Index] <- y`: Ersetzt den Wert des Vektors an Stelle <code>Index</code> durch y</li>
+</ul>
 
-<!-- Übung  2 Vektoren --------------------------------------------------------------------------------------------------------------------->
-## Übung 2: Vektoren
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## \ \ \ \ \ \ \ \ \ \ Übung 2: Vektoren
 2.1) Erzeuge einen Vektor von 0 bis 1 in 0,1-Schritten `(0, 0.1, 0.2, ..., 1)`.
 ```{r 2_1, exercise=TRUE}
 vec_seq <- 
@@ -295,7 +362,7 @@ command_1
 command_2
 ```
 ```{r 2_4_q}
-quiz(caption = "2.5) Beantworte folgende Fragen.",
+quiz(caption = "\ ",
      
   question("Welche Art der Multiplikation wird mit dem Operator * ausgeführt?",
     answer("Matrixmultiplikation"),
@@ -340,7 +407,7 @@ z = c(12, 24, 36, 120, 1200)
 ```{r 2_6_setup}
 vec <- c(2, 3, 4, 7, 8, 15, 16, 23, 42)
 ```
-```{r 2_6, exercise=TRUE, exercise.setup = "2f_setup"}
+```{r 2_6, exercise=TRUE, exercise.setup = "2_6_setup"}
 # Hier können Befehle getestet werden. "vec" ist vordefiniert.
 vec
 
@@ -359,13 +426,19 @@ question("Mit welchen Befehlen kann der Wert <code>8</code> selektiert werden?",
 )
 ```
 
-<!-- Kapitel 2.1 Matrizen ------------------------------------------------------------------------------------------------------------------>
-## 2.2 Matrizen
-Matrizen sind eine weitere wichtige Datenstrukturen mit denen Daten gespeichert, verwaltet und genutzt werden können. Sie können als Vektoren mit besonderen Eigenschaften angesehen werden und unterscheiden sich von diesen durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. 
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## \ \ \ \ 2.2 Matrizen
+Matrizen können als erweiterte Vektoren mit besonderen Eigenschaften angesehen werden und unterscheiden sich von diesen durch ihr Dimensions-Attribut `dim`. Während Vektoren dimensionslos sind, sind Matrizen grundsätzlich zweidimensional. 
 <br>
 Um in R einen Vektor in eine Matrix umzuwandeln, muss durch die Parameter `nrow` bzw. `ncol` angegeben werden, wie viele Zeilen und Spalten die Matrix haben soll. Dabei reicht es, einen der beiden Parameter anzugeben. Standardmäßig werden Matrizen spaltenweise mit den Elementen des Vektors gefüllt, das heißt, dass die ersten 3 Zahlen im unteren Beispiel  der ersten Spalte entsprechen. Um dies zu ändern muss der Parameter `byrow` auf `TRUE` gesetzt werden. 
 <br>
 Einzelne Elemente der Matrix können durch eckige Klammern gelesen und verändert werden. Dabei ist die erste Zahl immer die Zeilennummer, die zweite Zahl die Spaltennummer. Diese Indizes fangen in R immer mit 1 an. Die oberste linke Zahl ist also `Matrixname[1,1]`. 
+
 
 ### 2.2.1 Erzeugung
 ```{r info_2_2_1, include = TRUE, echo = TRUE}
@@ -379,7 +452,12 @@ mat
 vec <- c(1:6)
 mat_2 <- matrix(vec, nrow = 3, ncol = 2)
 mat_2
+
+# Erzeugung einer reihenweise befüllten Matrix
+mat_row <- matrix(1:6, nrow = 3, ncol = 2, byrow = TRUE)
+mat_row
 ```
+
 
 ### 2.2.2 Dimensionen
 ```{r info_2_2_2, include = TRUE, echo = TRUE}
@@ -402,13 +480,14 @@ dim(mat)
 <br> 
 Die Ausgabe <code>NULL</code> des Befehls <code>dim(vec)</code> ist nicht gleichzusetzen mit 0. Stattdessen bedeutet <code>NULL</code>, dass der Rückgabewert nicht definiert ist. Die Ausgabe <code>## [1] 3 2</code> hingegen kann interpretiert werden als "Eine Matrix mit 3 Zeilen und 2 Spalten".
 
+
 ### 2.2.3 Selektion
 Für die Selektion in Matrizen stehen mehr Möglichkeiten zur Verfügung als bei Vektoren. Einige davon sind jedoch deutlich komplexer als notwendig. In diesen Fällen bietet es sich an die Matrizen in Dataframes umzuwandeln, dazu später mehr. An dieser Stelle sollen jedoch die häufigsten Möglichkeiten zur Selektion in Matrizen genannt werden.
 <ul>
 <li>`x[Index_1, Index_2]`: Gibt das Element des Vektors an Stelle <code>(Index_1, Index_2)</code> zurück</li>
-<li>`x[y, ]`: Selektiert die Reihe <code>y</code></li>
+<li>`x[y, ]`: Selektiert die Zeile <code>y</code></li>
 <li>`x[ , z]`: Selektiert die Spalte <code>z</code></li>
-<li>`x[y:z , ]`: Selektiert die Reihen <code>y</code> bis <code>z</code></li>
+<li>`x[y:z, ]`: Selektiert die Zeilen <code>y</code> bis <code>z</code></li>
 <li>`x[ , y:z]`: Selektiert die Spalten <code>y</code> bis <code>z</code></li>
 </ul>
 
@@ -423,6 +502,7 @@ mat[1, 2]
 mat[3, 1] <- 7
 ```
 
+
 ### 2.2.4 Transponieren
 Eine Matrix kann in R mit dem Befehl <code>t(Matrixname)</code> transponiert werden.
 ```{r info 2_2_4, echo = TRUE}
@@ -433,29 +513,12 @@ mat
 ```
 
 
-
-<!-- Kapitel 2.3 Arrays ------------------------------------------------------------------------------------------------------------------>
-## 2.3 Arrays
-Arrays können als Verallgemeinerung von Matrizen betrachtet werden. Die Dimensionen von Arrays werden nicht mit `nrow` bzw. `ncol` bestimmt, sondern direkt über den Parameter `dim`. Dabei können Arrays beliebig viele Dimensionen haben. Um die Dimensionen zu bestimmen, wird ein Vektor genutzt. Jede Stelle des Vektors entspricht einer Dimension. Der Wert an der Stelle bestimmt die Tiefe einer Dimension. Im folgenden Beispiel wird ein 3D-Vektor erzeugt, der insgesamt 12 (2 \* 2 \* 3) Einträge fassen kann. 
-
-### 2.3.1 Erzeugung und Selektion
-Das Erzeugen und Selektieren bei Arrays funktioniert wie bei Matrizen. Es werden eldiglich mehr Argumente benötigt. Die Anzahl dieser zusätzlichen Argumente hängt von der Anzahl der Dimensionen ab.
-```{r 2.3_a, include = TRUE, echo = TRUE}
-# Anmerkung: Die Notation 1:12 erzeugt die Zahlen von 1 bis 12, s.o.
-arr <- array(1:12, dim = c(2, 2, 3))
-arr
-
-# Dimensionen von arr
-dim(arr)
-
-# Selektion des Wertes an Stelle [1, 2, 3], also 1. Zeile, 2. Spalte, 3. "Schicht"
-arr[1, 2, 3]
-```
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
 
-
-<!-- Übung 3 Matrizen und Arrays ----------------------------------------------------------------------------------------------------------->
-## Übung 3: Matrizen und Arrays 
+## \ \ \ \ \ \ \ \ \ \ Übung 3: Matrizen
 
 3.1) Erzeuge nun selbst eine Matrix mit Zahlen von 1 bis 12, die drei Spalten hat (beginnend mit 1 2 3 in der ersten Zeile).
 ```{r 3_1, exercise=TRUE}
@@ -501,7 +564,7 @@ mat <- matrix(seq(1, 12, by = 1), nrow = 4, ncol = 3, byrow = TRUE)
 mat
 ```
 ```{r 3_3_q, echo=FALSE}
-quiz(
+quiz(caption = "\ ",
   question("Welche Veränderung kannst du in der Matrix beobachten?",
     answer("Nur das Element an Stelle [1, 1] ist vervierfacht."),
     answer("Alle Elemente sind vervierfacht.", correct = TRUE),
@@ -512,57 +575,401 @@ quiz(
 ```
 
 
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
-<!-- Kapitel 3 ------------------------------------------------------------------------------------------------------------------>
-## 3. Statistische Kennwerte
-Als Programmiersprache für statistische Berechnungen und Analysen stellt R eine Vielzahl statistischer Kennwerte mit eingebauten Befehlen bereit. So bietet R, neben den aus Kapitel 1 bekannten Funktionen `min()` bzw. `max()` und `sum()` eine Vielzahl weiterer Funktionen, die für Statistik notwendig sind wie z.B.:
+
+## \ \ \ \ 2.3 Arrays
+Arrays können als Erweiterung von Matrizen betrachtet werden. Die Dimensionen von Arrays werden nicht mit `nrow` bzw. `ncol` bestimmt, sondern direkt über den Parameter `dim`. Dabei können Arrays beliebig viele Dimensionen haben.
+<br>
+Um die Dimensionen zu bestimmen, wird ein Vektor genutzt. Jede Stelle des Vektors entspricht einer Dimension. Der Wert an der Stelle bestimmt die Tiefe einer Dimension. Im folgenden Beispiel wird ein Array erzeugt, das insgesamt `(2 * 2 * 3) = 12` Einträge fassen kann. 
+
+
+### 2.3.1 Erzeugung und Selektion
+Das Erzeugen und Selektieren bei Arrays funktioniert ähnlich wie bei Matrizen. Es werden lediglich mehr Argumente benötigt. Die Anzahl dieser zusätzlichen Argumente hängt von der Anzahl der Dimensionen ab.
+```{r 2.3_a, include = TRUE, echo = TRUE}
+arr <- array(1:12, dim = c(2, 2, 3))
+arr
+
+# Dimensionen von arr
+dim(arr)
+
+# Selektion des Wertes an Stelle [1, 2, 3], also 1. Zeile, 2. Spalte, 3. "Schicht"
+arr[1, 2, 3]
+```
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## \ \ \ \ 2.4 Listen 
+Listen können in R dazu genutzt werden, mehrere Elemente wie Vektoren und Matrizen zu einem Objekt zusammenzufassen. Erzeugt werden sie mit dem Befehl `list(x, y, ...)`. Dadurch wird aus den Objekten x, y und ggf. weiteren Objekten (...), eine Liste erzeugt. Listen können mit oder ohne Namen für ihre Bestandteile erzeugt werden. Betrachte dazu das folgende Beispiel:
+```{r, echo = TRUE}
+# Erzeuge Besipieldaten
+vec_1 <- c(1, 2, 3, 4, 5)
+vec_2 <- c("eins", "zwei", "drei", "vier", "fünf")
+
+# Fasse Beispieldaten zu einer Liste zusammen
+unnamed_list <- list(vec_1, vec_2)
+
+# Betrachte die Namen der Objekte in der Liste
+names(unnamed_list)
+
+
+# Fasse die Beispieldaten zu einer Liste mit Namen zusammen
+named_list <- list(zahlen = vec_1, woerter = vec_2)
+
+# Betrachte die Namen 
+names(named_list)
+```
+
+
+### 2.4.1 Selektion in Listen
+Um auf die Daten innerhalb einer Liste zuzugreifen wird eine ähnliche Notation verwendet wie bei Vektoren, Matrizen und Arrays, d.h. es werden eckige Klammern genutzt. Sollten die Listenelemente über Namen verfügen, besteht jedoch auch die Möglichkeit zur Adressierung durch `$NAME_DES_OBJEKTES`. Außerdem kann man auch direkt auf die einzelnen Elemente der Objekte in der Liste zugreifen.
+```{r, echo = TRUE}
+# Erzeuge Besipieldaten
+vec_1 <- c(1, 2, 3, 4, 5)
+vec_2 <- c("eins", "zwei", "drei", "vier", "fünf")
+
+# Fasse die Beispieldaten zu einer Liste mit Namen zusammen
+named_list <- list(zahlen = vec_1, woerter = vec_2)
+
+# Greife auf vec_1 zu
+vec_1_brackets <- named_list[[1]]
+vec_1_names <- named_list$zahlen
+
+# Greife auf vec_2 zu
+vec_2_brackets <- named_list[[2]]
+
+
+# Greife auf das dritte Element von vec_1 zu
+vec_1_3_brackets <- named_list[[1]][3]
+vec_1_3_names <- named_list$zahlen[3]
+
+
+# Zeige, das beide Zugriffsarten das gleiche Ergebnis liefern
+all.equal(vec_1_brackets, vec_1_names)
+all.equal(vec_1_3_brackets, vec_1_3_names)
+```
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## \ \ \ \ 2.5 Dataframes
+Dataframes sind die häufigste Methode um in R größere Mengen an Daten systematisch zu speichern. Dataframes speichern i.d.R. Datentabellen Dabei stehen in den Zeilen die Beobachtungen und in den Spalten die Variablen, die für die Beobachtungen gemessen wurden. Sie sind zweidimensionale Strukturen, die sich intern aus einer Menge gleichlanger Vektoren zusammen setzen. Eine Beispiel für eine dem Dataframe analoge Struktur wäre eine Excel-Tabelle.
+<br>
+Die einfachste Möglichkeit einen Dataframes zu erzeugen ist die Funktion `data.frame()`. Eine Umwandlung anderer Datenstrukturen in einen Dataframe kann mit `as.data.frame()` getätigt werden, hierbei ist jedoch Vorsicht geboten, da Strukturen in den Daten verloren gehen können.
+<br>
+Um nachträglich Einträge zu einem Dataframe hinzuzufügen, können unter anderem `rbind()` [d.h. row bind, Zeile hinzufügen] und `cbind()` [d.h. column bin, Spalte hinzufügen] benutzt werden. 
+<br>
+```{r info_2_5, echo = TRUE}
+# Erzeuge Beispielvektoren
+vec_digits <- c(1, 2, 3, 4, 5)
+vec_words <- c("eins", "zwei", "drei", "vier", "fünf")
+vec_roman <- c("I", "II", "III", "IV", "V")
+
+# Erzeuge einen Beispieldataframe aus den Vektoren
+# Die einzelnen Spaltennamen werden dabei als characters übergeben 
+numbers_df <- data.frame("digits" = vec_digits,
+                         "words" = vec_words,
+                         "roman" = vec_roman)
+
+numbers_df
+
+# Erzeuge ein weiteres Attribut mit 5 Werten
+vec_english <- c("one", "two", "three", "four", "five")
+
+# Füge das neue Attribut dem Dataframe hinzu
+numbers_df_extended <- cbind(numbers_df, "english" = vec_english)
+numbers_df_extended
+```
+Bei dem Hinzufügen von Attributen ist wichtig, dass das neue Attribut für jede Beobachtung im Dataframe einen Wert hat. Deshalb ist es nicht möglich dem Dataframe einen `vec_english` mit weniger als 5 oder mehr als 5 Einträgen hinzuzufügen.
+<br>
+Darüber hinaus ist in dem Beispiel zu sehen, wie ein Dataframe von Natur aus mit `characters` umgeht: Sie werden in `factor`, also in Faktoren umgewandelt. Faktoren können dabei als Kategorien betrachtet werden. Versucht man einen `character` hinzuzufügen, der keiner der bereits vorhandenen Kategorien angehört, erzeugt man fehlende Werte (siehe nächstes Beispiel).
+<br><br>
+
+```{r info_2_5_2, echo = TRUE}
+# Erzeuge eine weitere Beobachtung
+vec_6 <- c(6, "sechs", "VI", "six")
+
+# Füge neue Beobachtung zum Dataframe hinzu
+numbers_df_extended_6 <- rbind(numbers_df_extended, vec_6)
+numbers_df_extended_6
+```
+Um dieses Problem zu Verhindern, kann man R mitteilen, dass `characters` nicht als `factors` interpretiert werden sollen. Dazu muss der Dataframe mit einem weiteren Parameter erzeugt werden.
+
+```{r info_2_5_3, echo = TRUE}
+# Erzeuge Beispielvektoren
+vec_digits <- c(1, 2, 3, 4, 5)
+vec_words <- c("eins", "zwei", "drei", "vier", "fünf")
+vec_roman <- c("I", "II", "III", "IV", "V")
+
+# Erzeuge einen Beispieldataframe aus den Vektoren
+# Die einzelnen Spaltennamen werden dabei als characters übergeben 
+numbers_df <- data.frame("digits" = vec_digits,
+                         "words" = vec_words,
+                         "roman" = vec_roman,
+                         stringsAsFactors = FALSE) # durch diese Zeile werden characters beibehalten
+
+# Erzeuge eine weitere Beobachtung
+vec_6 <- c(6, "sechs", "VI")
+
+# Füge neue Beobachtung zum Dataframe hinzu
+numbers_df_6 <- rbind(numbers_df, vec_6)
+numbers_df_6
+```
+
+<br>
+Wie bereits erklärt wurde, werden die Zahlen in den Vektoren jedoch in `characters` umgewandelt. Wenn man mit den Zahlen weiter rechnen können möchte, muss man diese also zurückkonvertieren. Dies funktioniert folgenderweise:
+
+```{r}
+# Umwandeln der character Zahlen in Spalte 1 in integers
+numbers_df_6[ , 1] <- as.integer(numbers_df_6[ , 1])
+numbers_df_6
+```
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## \ \ \ \ \ \ \ \ \ \ Übung 4: Dataframes
+
+### Erzeugen und Erweitern von Dataframes
+4.1) Erzeuge zwei Vektoren mit folgenden Daten: <br>
+<ul>
+<li>`t`: Mo, Di, Mi, Do, Fr, Sa </li>
+<li>`m`: 92, 80, 60, 20, 10, 50 </li>
+</ul>
+Verbinde beide Vektoren spaltenweise zu einem Dataframe mit dem Namen `studie`. Vergib die Spaltennamen “Motivation”" für m und “Wochentag” für t.
+```{r 4_1, exercise=TRUE}
+t <- 
+m <- 
+ 
+studie <- 
+studie
+```
+```{r 4_1-hint}
+"Benutze die Funktion data.frame()."
+```
+```{r 4_1-solution}
+t <- c("Mo","Di","Mi","Do","Fr","Sa")
+m <- c( 92,  80,  60,  20,  10,  50)
+
+studie <- data.frame(Motivation = m, Wochentag=t)
+studie
+```
+
+4.2) Füge am unteren Ende von `studie` eine Zeile mit den Elementen "So" und 100 hinzu. Das Hinzufügen von Zeilen kann man z.B. bewerkstelligen, indem man einen einzeiligen Dataframe mit der gewünschten Zeile erstellt und diesen dann über rbind() mit dem usprünglichen Dataframe verbindet.
+```{r 4_2_setup}
+t = c("Mo","Di","Mi","Do","Fr","Sa") 
+m = c( 92,  80,  60,  20,  10,  50)  
+
+studie = data.frame(Motivation = m, Wochentag=t) 
+```
+```{r 4_2, exercise=TRUE, exercise.setup = "4_2_setup"}
+studie <- 
+studie
+```
+```{r 4_2-hint}
+"Benutze die Funktion rbind()."
+```
+```{r 4_2-solution}
+studie <- rbind(studie, data.frame(Motivation = 100, Wochentag = "So")) 
+studie
+```
+
+
+### Laden und Sichten von Dataframes
+Lade nun den vorgefertigten Datensatz `students.rdata` und wende die Funktion `summary(students)` an, um einen Überblick über den Datensatz zu erhalten. Beantworte anschließend die folgenden Fragen:
+```{r 4_3_setup}
+data("students", package = "geostat.tutorial")
+```
+
+```{r ausprobierbereich_4_1, exercise=TRUE, exercise.setup = "4_3_setup"}
+# Hier können Befehle ausprobiert werden. Der Datensatz steht als Variable students zur Verfügung
+```
+
+4.3.) Wie groß ist der Stichprobenumfang `n`, d.h. wie viele Studierende haben an der Umfrage teilgenommen?
+```{r 4_3, exercise=TRUE, exercise.setup = "4_3_setup"}
+n <- 
+n
+```
+```{r 4_3-hint-1}
+"Benutze die Funktion nrow()."
+```
+```{r 4_3-hint-2}
+# Befehl:
+n <- nrow(students)
+n
+```
+```{r 4_3-solution}
+# Ergebnis:
+n = 134
+```
+
+4.4) Wieviele Variablen wurden erfasst?
+```{r 4_4, exercise=TRUE, exercise.setup = "4_3_4_setup"}
+variables <- 
+variables
+```
+```{r 4_4-hint-1}
+"Benutze die Funktion ncol()."
+```
+```{r 4_4-hint-2}
+# Befehl:
+variables <- ncol(students)
+variables
+```
+```{r 4_4-solution}
+# Ergebnis:
+variables = 8
+```
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## 3. Statistische Eigenschaften
+Als Programmiersprache für statistische Berechnungen und Analysen stellt R eine Vielzahl statistischer Kennwerte mit eingebauten Befehlen bereit. So bietet R, neben den aus Kapitel 1 bekannten Funktionen `min()`, `max()` und `sum()` eine Vielzahl weiterer Funktionen, die für Statistik notwendig sind.
+<br>
+Bevor diese thematisiert werden, ist es jedoch sinnvoll zunächst Skalenniveaus zu thematisieren, da die Anwendbarkeit dieser Befehle von den Zieldaten abhängig ist.
+
+### 3.1 Skalenniveaus
+Nach Stevens, S.S. (1946): On the Theory of Scales of Measurement. Science 103 (2684) gibt es 4 Skalenvieaus:
 
 <ul>
-<li>`mean(x)`: Arithmetisches Mittel von x</li>
-<li>`median(x)`: Median von x</li>
-<li>`quantile(x)`: Quantile von x</li>
-<li>`var(x)`: Varianz von x</li>
-<li>`sd(x)`: Standardabweichung von x</li>
-<li>`cor(x, y)`: Korrelation zwischen x und y</li>
+
+<li>`nominal`:
+  <ul>
+    <li>Mögliche Ausprägungen sind Namen (oder Zahlen) ohne weitere Bedeutung, Ordnung oder Struktur</li>
+    <li>Teilt Daten in Klassen</li>
+    <li>Mögliche Operationen: =, ≠
+    <li>Beispiele: Farben, Bodentypen</li>
+ </ul>
+</li>
+
+<li>`ordinal`: 
+  <ul>
+    <li>Mögliche Ausprägungen sind Namen oder Zahlen, die eine implizite Ordnung haben</li>
+    <li>Teilt Daten in Klassen, die geordnet werden können</li>
+    <li>Mögliche Operationen: =, ≠, <, <=, >, >=</li>
+    <li>Beispiele: Größen, Gewichte</li>
+  </ul>
+</li>
+
+<li>`interval`:
+<ul>
+<li>Mögliche Ausprägungen sind Werte, mit denen sinnvoll Differenzen gebildet werden können</li>
+<li>Daten werden durch Zahlen repräsentiert</li>
+<li>Alle „benachbarten“ Werte sind gleich weit voneinander entfernt, Differenzbildung ist sinnvoll</li>
+<li>0 kann ein willkürlicher Wert sein</li>
+<li>Mögliche Operationen: =, ≠, <, <=, >, >=, +, -</li>
+<li>Beispiele: Grad Celsius, Grad Fahrenheit</li>
+</ul>
+</li>
+
+<li>`rational`:
+<ul>
+<li>mögliche Ausprägungen sind Werte, mit denen sinnvoll Differenzen und zudem Anteile/Verhältnisse gebildet werden können (das beobachtete Phänomen hat einen absoluten, nicht-willkürlichen Nullpunkt)</li>
+<li>Daten werden durch Zahlen repräsentiert</li>
+<li>Jede statistische Operation hat eine Bedeutung</li>
+<li>0 ist kein willkürlicher Wert</li>
+<li>Mögliche Operationen: =, ≠, <, <=, >, >=, +, -, *, /</li>
+<li>Beispiele: Grad Kelvin</li>
+</ul>
+</li>
+
+### 3.2 Lagemaße
+Lagemaße oder auch Maße der zentralen Tendenz geben Auskunft über den “üblichsten/häufigsten” Wert. Zu den Lagemaßen gehören:
+<ul>
+<li>`mean(x)`: Arithmetisches Mittel der Werte</li>
+<li>`median(x)`: Der Wert, der größer ist als 50% aller Werte</li>
+<li>`quantile(x)`: Der Wert, unterhalb dessen ein bestimmter Anteil q der Daten liegt</li>
+<li>`Modus`: Der häufigste Wert; keine Funktion vorhanden</li>
 </ul>
 
-Die Bedeutung dieser Werte wird in der Vorlesung noch tiefergehend thematisiert.
+### 3.3 Streuungsmaße
+Die zweite statistische Eigenschaft, die man sich ansieht, ist i.d.R. ein Maß der Streuung oder Variabiltät. Dies liefert eine ersten Eindruck von der Ausprägung der Unterschiede, die in den Daten vorhanden sind.
+<br>
+<b>Beachte</b>: Einige Streuungsmaße sind (sehr) anfällig für Ausreißer
+
+<ul>
+<li>`Spannweite`: Differenz zwischen dem größten und dem kleinsten Wert; keine direkte Funktion vorhanden (siehe `?range`)</li>
+<li>`Interquartilsabstand`: Differenz zwischen dem dritten Quartil (0.75-Quantil) und dem ersten Quartil (0.25-Quantil); nicht anfällig gegen Ausreißer</li>
+<li>`var(x)`: Abweichung vom Mittelwert einer Stichprobe</li>
+<li>`sd(x)`: die Wurzel der Varianz; hat daher wieder die gleiche Einheit wie die Messdaten </li>
+</ul>
+
+<br>
+Die Werte können auf den folgenden Skalenniveaus berechnet werden. Ihre Bedeutung wird in der Vorlesung noch tiefergehend thematisiert.
+```{r info_3_2}
+no <- c("ja", "nein", "nein", "Liste aller Werte", "nein", "nein")
+or <- c("ja", "ja", "nein", "vielleicht", "nein", "nein")
+int <- c("ja, [wenn diskret, selten]", "ja", "ja", "ja", "ja", "ja")
+rat <- c("ja, [wenn diskret, selten]", "ja", "ja", "ja", "ja", "ja")
+
+names <- c("Modus", "Median", "Mitellwert", "Spannweite", "IQ-Abstand", "Varianz/SD")
+
+niv_df <- data.frame(row.names = names, "nominal" = no, "ordinal" = or, "interval" = int, "rational" = rat)
+kbl(niv_df[], escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
 
 ### Beispiele:
-```{r info_3, echo = TRUE}
+```{r info_3_bsp, echo = TRUE}
 vec <- c(0:100)
 
+# Arithmetisches Mittel
 mean_vec <- mean(vec)
 mean_vec
 
+# Median
 median_vec <- median(vec)
 median_vec
 
+# Quantile
 quantile_vec <- quantile(vec)
 quantile_vec
 
+# Spannweite
+range_vec <- range(vec)[2] - range(vec)[1]
+range_vec
+
+# Interquartilsabstand
+iqa_vec <- quantile_vec[4] - quantile_vec[2]
+iqa_vec
+
+#Varianz
 var_vec <- var(vec)
 var_vec
 
+# Standardabweichung
 sd_vec <- sd(vec)
 sd_vec
-
-cor_vec <- cor(vec, vec)
-cor_vec
 ```
 
 
 
 <!-- Übung 4 ------------------------------------------------------------------------------------------------------------------>
-## Übung 4: Statistische Kennwerte
+## \ \ \ \ \ \ \ \ \ \ Übung 4: Statistische Kennwerte
 Um den Umgang mit den statistischen Funktionen zu üben sollen diese an einem realen Besipiel angewandt werden. Dazu wird der sehr bekannte `iris`-Datensatz benutzt. Um diesen zu betrachten kann der Befehl `iris` benutzt werden, weitere Informationen können mit `?iris` abgerufen werden. 
 
 4.1) Berechne die Summe, den Durschnitt, den Median, das Minimum und das Maximum der Blütenblattlängen der Iriden. Die Werte der Blütenblattlängen sind als `petal_length` verfügbar.
-```{r 4_setup}
+```{r 4x_setup}
 petal_length <- iris$Petal.Length
 sepal_length <- iris$Sepal.Length
 ```
-```{r 4_1, exercise=TRUE, exercise.setup = "4_setup"}
+```{r 4_1x, exercise=TRUE, exercise.setup = "4_setup"}
 # Varaible mit Blütenblattlängen: petal_length
 
 # Gesamte Länge der Blütenblätter im Datensatz
@@ -585,7 +992,7 @@ median_length
 min_length
 max_length
 ```
-```{r 4_1-hint-1}
+```{r 4_1x-hint-1}
 # Befehle:
 sum_length <- sum(petal_length)
 mean_length <- mean(petal_length)
@@ -593,7 +1000,7 @@ median_length <- median(petal_length)
 min_length <- min(petal_length)
 max_length <- max(petal_length)
 ```
-```{r 4_1-solution}
+```{r 4_1x-solution}
 # Ergebnisse:
 sum_length = 563.7
 mean_length = 3.758
@@ -602,7 +1009,7 @@ max_length = 6.9
 ```
 
 4.2) Berechne nun auch Quantile, Varianz und Standardabweichung der Blütenblattlängen der Iriden.
-```{r 4_2, exercise=TRUE, exercise.setup = "4_setup"}
+```{r 4_2x, exercise=TRUE, exercise.setup = "4_setup"}
 # Varaible mit Blütenblattlängen: petal_length
 
 # Quantile der Länge der Blütenblätter im Datensatz
@@ -619,13 +1026,13 @@ quantile_length
 var_length
 sd_length
 ```
-```{r 4_2-hint-1}
+```{r 4_2x-hint-1}
 # Befehle:
 quantile_length <- quantile(petal_length)
 var_length <- var(petal_length)
 sd_length <-  sd(petal_length)
 ```
-```{r 4_2-solution}
+```{r 4_2x-solution}
 # Ergebnisse:
 quantile_length = c(1, 1.6, 4.35, 5.1, 6.9) 
 var_length = 3.11628
@@ -635,7 +1042,7 @@ sd_length = 1.765298
 4.3) Für die unterschiedlichen Größen der Blütenblätter kann eine Vielzahl von Gründen angeführt werden. Ein möglicher Grund ist verschiedene Standortbedingungen. Um diese als Einfluss abzuschätzen kann man betrachten, ob andere Merkmale der gleichen Pflanze eine ähnliche Ausprägung haben, d.h. "Wenn der Standort die Größe der Blüteblätter beeinflusst, haben Kelchblattgrößen ähnliche Größenverhätnisse wie Blütenblattlängen".
 <br>
 Betrachte deshalb die Korrelation zwischen Blütenblattlänge und Kelchblattlänge um die Aussage zu testen. Die Kelchblattlänge der Iriden ist als `sepal_length` verfügbar.
-```{r 4_3, exercise=TRUE, exercise.setup = "4_setup"}
+```{r 4_3x, exercise=TRUE, exercise.setup = "4_setup"}
 # Varaible mit Blütenblattlängen: petal_length
 # Variable mit Kelchblattlängen: sepal_length
 
@@ -645,11 +1052,11 @@ cor_lengths <-
   
 cor_lengths
 ```
-```{r 4_3-hint-1}
+```{r 4_3x-hint-1}
 # Befehle:
 cor_lengths <- cor(petal_length, sepal_length)
 ```
-```{r 4_3-solution}
+```{r 4_3x-solution}
 # Ergebnisse:
 cor_lengths = 0.871
 
@@ -724,138 +1131,9 @@ quiz(
 ```
 
 
-## 6. Dataframes
+## Fortgeschrittene Themen
 
-Dataframes sind die häufigste Methode um in R größere Mengen an Daten systematisch zu speichern. Dataframes speichern i.d.R. Datentabllen (in den Zeilen stehen die Beobachtungen und in den Spalten die Variablen, die für die Beobachtungen gemessen wurden, verlgeiche auch Folien der Übung). Sie sind zweidimensionale Strukturen, die sich intern aus einer Menge gleichlanger Vektoren zusammen setzen. 
-<br>
-Die einfachste Möglichkeit einen Dataframes zu erzeugen ist die Funktion `data.frame()`. Eine Umwandlung anderer Datenstrukturen in einen Dataframe kann mit `as.data.frame()` getätigt werden, hierbei ist jedoch Vorsicht geboten, da Strukturen in den Daten verloren gehen können.
-<br>
-Um nachträglich Einträge zu einem Dataframe hinzuzufügen, können unter Anderem `rbind()` und `cbind()` benutzt werden. 
-<br>
-<br>
-
-### Übung 6:
-
-Mache dich mit der Funktion `data.frame()` und ihren Parametern vertraut und bearbeite dann folgende Aufgaben:
-
-6.1) Erzeuge zwei Vektoren mit folgenden Daten: <br>
-<ul>
-<li>t: Mo, Di, Mi, Do, Fr, Sa </li>
-<li>m: 92, 80, 60, 20, 10, 50 </li>
-</ul>
-Verbinde beide Vektoren spaltenweise zu einem Dataframe mit dem Namen `studie`. Vergib die Spaltennamen “Motivation”" für m und “Wochentag” für t.
-```{r 6a, exercise=TRUE}
-t <- 
-m <- 
- 
-studie <- 
-studie
-```
-```{r 6a-hint}
-"Benutze die Funktion data.frame()."
-```
-```{r 6a-solution}
-t <- c("Mo","Di","Mi","Do","Fr","Sa")
-m <- c( 92,  80,  60,  20,  10,  50)
-
-studie <- data.frame(Motivation = m, Wochentag=t)
-studie
-```
-<br>
-
-6.2) Füge am unteren Ende von `studie` eine Zeile mit den Elementen "So" und 100 hinzu. Das Hinzufügen von Zeilen kann man z.B. bewerkstelligen, indem man einen einzeiligen Dataframe mit der gewünschten Zeile erstellt und diesen dann über rbind() mit dem usprünglichen Dataframe verbindet.
-
-```{r 6b_setup}
-t = c("Mo","Di","Mi","Do","Fr","Sa") 
-m = c( 92,  80,  60,  20,  10,  50)  
-
-studie = data.frame(Motivation = m, Wochentag=t) 
-```
-```{r 6b, exercise=TRUE, exercise.setup = "6b_setup"}
-studie <- 
-studie
-```
-```{r 6b-hint}
-"Benutze die Funktion rbind()."
-```
-```{r 6b-solution}
-studie <- rbind(studie, data.frame(Motivation = 100, Wochentag = "So")) 
-studie
-```
-
-
-## 7. Arbeiten mit Dataframes
-Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `data(students)` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann. In diesem tutorial-Dokument ist auch die Variable `students` mit dem Datensatz bereits vorhanden.
-<br>
-`.rdata`-Dateien können generell auch mittels `load("datei_name.rdata")` eingelesen werden, wenn sie im aktuellen Arbeitsverzeichnis vorhanden sind. Daher ist ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil.
-<br>
-<br>
-
-### Übung 7:
-
-Lade den Datensatz `students.rdata` und wende die Funktion `summary(students)` an, um einen Überblick über den Datensatz zu erhalten. Beantworte anschließend die folgenden Fragen:
-
-```{r 7_setup}
-data("students", package = "geostat.tutorial")
-```
-
-7.1) Wie groß ist der Stichprobenumfang, d.h. wie viele Studierende haben an der Umfrage teilgenommen?
-```{r 7a, exercise=TRUE, exercise.setup = "7_setup"}
-n <- 
-n
-```
-```{r 7a-hint-1}
-"Benutze die Funktion nrow()."
-```
-```{r 7a-hint-2}
-# Befehl:
-n <- nrow(students)
-n
-```
-```{r 7a-solution}
-# Ergebnis:
-n = 134
-```
-<br>
-
-7.2) Wieviele Variablen wurden erfasst?
-```{r 7b, exercise=TRUE, exercise.setup = "7_setup"}
-variables <- 
-variables
-```
-```{r 7b-hint-1}
-"Benutze die Funktion ncol()."
-```
-```{r 7b-hint-2}
-# Befehl:
-variables <- ncol(students)
-variables
-```
-```{r 7b-solution}
-# Ergebnis:
-variables = 8
-```
-<br>
-
-7.3) 
-```{r quiz4, echo=FALSE}
-quiz(
-  question("Worin und warum unterscheidet sich die Ausgabe für Gender, EyeColor, Country und FieldOfStudies von anderen Variablen? (Mehrfachauswahl möglich)",
-           
-    answer("Die genannten Variablen sind lediglich kategorischer Natur.", correct = TRUE),
-    answer("Die übrigen Variablen sind lediglich kategorischer Natur."),
-    
-    answer("Die genannten Variablen sind nominalskaliert.", correct = TRUE),
-    answer("Die übrigen Variablen sind nominalskaliert."),
-    
-    answer("Die genannten Variablen sind rationalskaliert."),
-    answer("Die übrigen Variablen sind rationalskaliert.", correct = TRUE)
-  )
-)
-```
-<br>
-
-## 8. Der Umgang mit NAs
+### Der Umgang mit NAs
 In den bisherigen Aufgaben waren die Daten "perfekt", d.h. vollständig und fehlerfrei. Bei Datensätzen aus der realen Welt, wie z.B. dem `students`-Datensatz, besteht jedoch das Problem, dass diese eben nicht immer perfekt sind. Fehlende oder fehlerhafte Werte führen häufig zu Schwierigkeiten bei der Datenanalyse, wenn die nicht richtig behandelt werden.
 <br>
 Insbesondere fehlende Werte, in R durch `NA` repräsentiert, beeinflussen die Analyse stark. Sie können dafür sorgen, dass Funktionen gar nicht oder nur fehlerhaft ausgeführt werden.
@@ -943,3 +1221,9 @@ Konventionen: sprechende namen, kamelcase, underscores. englsih <br>
 Datentypen
 probleme : . statt , 
             , am ende der argumentliste
+            
+Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `data(students)` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann. In diesem tutorial-Dokument ist auch die Variable `students` mit dem Datensatz bereits vorhanden.
+<br>
+`.rdata`-Dateien können generell auch mittels `load("datei_name.rdata")` eingelesen werden, wenn sie im aktuellen Arbeitsverzeichnis vorhanden sind. Daher ist ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil.
+<br>
+<br>
