@@ -1,5 +1,5 @@
 ---
-title: "Tutorial"
+title: "Tutorial Geostatistik"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -845,7 +845,9 @@ Als Programmiersprache für statistische Berechnungen und Analysen stellt R eine
 Bevor diese thematisiert werden, ist es jedoch sinnvoll zunächst Skalenniveaus zu thematisieren, da die Anwendbarkeit dieser Befehle von den Zieldaten abhängig ist.
 
 ### 3.1 Skalenniveaus
-Nach Stevens, S.S. (1946): On the Theory of Scales of Measurement. Science 103 (2684) gibt es 4 Skalenvieaus:
+Unterschiedliche Merkmale, die wir untersuchen, lassen unterschiedliche Operationen, Analysen, Visualisierungen, Interpretationen zu. Welche Möglichkeiten bestehen hängt dabei von den Eigenschaften der Merkmale ab. Eine wichtige Eigenschaft von Merkmalen ist ihr Skalenniveau, welches aus der Art des Merkmales und der Art seiner Messung resultiert.
+<br>
+Nach Stevens, S.S. (1946): On the Theory of Scales of Measurement. Science 103 (2684), gibt es 4 Skalenvieaus:
 
 <ul>
 
@@ -880,12 +882,12 @@ Nach Stevens, S.S. (1946): On the Theory of Scales of Measurement. Science 103 (
 
 <li>`rational`:
 <ul>
-<li>mögliche Ausprägungen sind Werte, mit denen sinnvoll Differenzen und zudem Anteile/Verhältnisse gebildet werden können (das beobachtete Phänomen hat einen absoluten, nicht-willkürlichen Nullpunkt)</li>
+<li>Mögliche Ausprägungen sind Werte, mit denen sinnvoll Differenzen und zudem Anteile/Verhältnisse gebildet werden können (das beobachtete Phänomen hat einen absoluten, nicht-willkürlichen Nullpunkt)</li>
 <li>Daten werden durch Zahlen repräsentiert</li>
 <li>Jede statistische Operation hat eine Bedeutung</li>
 <li>0 ist kein willkürlicher Wert</li>
 <li>Mögliche Operationen: =, ≠, <, <=, >, >=, +, -, *, /</li>
-<li>Beispiele: Grad Kelvin</li>
+<li>Beispiel: Grad Kelvin</li>
 </ul>
 </li>
 
@@ -905,7 +907,7 @@ Die zweite statistische Eigenschaft, die man sich ansieht, ist i.d.R. ein Maß d
 
 <ul>
 <li>`Spannweite`: Differenz zwischen dem größten und dem kleinsten Wert; keine direkte Funktion vorhanden (siehe `?range`)</li>
-<li>`Interquartilsabstand`: Differenz zwischen dem dritten Quartil (0.75-Quantil) und dem ersten Quartil (0.25-Quantil); nicht anfällig gegen Ausreißer</li>
+<li>`IQR(x)`: Interquartilsabstand, Differenz zwischen dem dritten Quartil (0.75-Quantil) und dem ersten Quartil (0.25-Quantil); nicht anfällig gegen Ausreißer</li>
 <li>`var(x)`: Abweichung vom Mittelwert einer Stichprobe</li>
 <li>`sd(x)`: die Wurzel der Varianz; hat daher wieder die gleiche Einheit wie die Messdaten </li>
 </ul>
@@ -942,7 +944,7 @@ quantile_vec <- quantile(vec)
 quantile_vec
 
 # Spannweite
-range_vec <- range(vec)[2] - range(vec)[1]
+range_vec <- IQR(quantile_vec)
 range_vec
 
 # Interquartilsabstand
@@ -959,29 +961,85 @@ sd_vec
 ```
 
 
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
-<!-- Übung 4 ------------------------------------------------------------------------------------------------------------------>
-## \ \ \ \ \ \ \ \ \ \ Übung 4: Statistische Kennwerte
-Um den Umgang mit den statistischen Funktionen zu üben sollen diese an einem realen Besipiel angewandt werden. Dazu wird der sehr bekannte `iris`-Datensatz benutzt. Um diesen zu betrachten kann der Befehl `iris` benutzt werden, weitere Informationen können mit `?iris` abgerufen werden. 
 
-4.1) Berechne die Summe, den Durschnitt, den Median, das Minimum und das Maximum der Blütenblattlängen der Iriden. Die Werte der Blütenblattlängen sind als `petal_length` verfügbar.
-```{r 4x_setup}
-petal_length <- iris$Petal.Length
-sepal_length <- iris$Sepal.Length
+## \ \ \ \ \ \ \ \ \ \ Übung 5: Statistische Werte
+Benutze für die folgende Übung den aus Übung 4 bekannten Datensatz `students`.
+
+```{r 5_setup}
+data("students", package = "geostat.tutorial")
 ```
-```{r 4_1x, exercise=TRUE, exercise.setup = "4_setup"}
-# Varaible mit Blütenblattlängen: petal_length
 
-# Gesamte Länge der Blütenblätter im Datensatz
+5.1) Auf welchen Skalenniveaus liegen die folgenden Attribute vor?
+```{r 5_1_, echo=FALSE}
+quiz(caption = "\ ",
+  question("Gender",
+    answer("Nominal", correct = TRUE),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational")
+  ),
+  question("EyeColor",
+    answer("Nominal", correct = TRUE),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational")
+  ),
+  question("Age",
+    answer("Nominal"),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational", correct = TRUE)
+  ),
+  question("Length",
+    answer("Nominal"),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational", correct = TRUE)
+  ),
+  question("Iam",
+    answer("Nominal"),
+    answer("Ordinal", correct = TRUE),
+    answer("Intervall"),
+    answer("Rational")
+  ),
+  question("Country",
+    answer("Nominal", correct = TRUE),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational")
+  ),
+  question("FieldOFStudies",
+    answer("Nominal", correct = TRUE),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational")
+  ),
+  question("Semester",
+    answer("Nominal"),
+    answer("Ordinal"),
+    answer("Intervall"),
+    answer("Rational", correct = TRUE)
+  )
+)
+```
+
+5.2) Berechne die Summe, den Durschnitt, den Median, das Minimum und das Maximum der Größe der Studierenden.
+```{r 5_2, exercise=TRUE, exercise.setup = "5_setup"}
+
+# Gesamte Größe der Studierenden im Datensatz
 sum_length <- 
 
-# Durchschnittliche Länge der Blütenblätter im Datensatz
+# Durchschnittliche Größe der Studierenden im Datensatz
 mean_length <- 
   
-# Median der Länge der Blütenblätter
+# Median der Größe der Studierenden im Datensatz
 median_length <- 
 
-# Kleinstes und größtes Blütenblatt im Datensatz
+# Kleinste und größte Größe der Studierenden im Datensatz
 min_length <- 
 max_length <- 
   
@@ -992,82 +1050,70 @@ median_length
 min_length
 max_length
 ```
-```{r 4_1x-hint-1}
+```{r 5_2-hint-1}
 # Befehle:
-sum_length <- sum(petal_length)
-mean_length <- mean(petal_length)
-median_length <- median(petal_length)
-min_length <- min(petal_length)
-max_length <- max(petal_length)
+sum_length <- sum(students$Length)
+mean_length <- mean(students$Length)
+median_length <- median(students$Length)
+min_length <- min(students$Length)
+max_length <- max(students$Length)
 ```
-```{r 4_1x-solution}
+```{r 5_2-solution}
 # Ergebnisse:
-sum_length = 563.7
-mean_length = 3.758
-min_length = 1
-max_length = 6.9
+sum_length = 23644.5
+mean_length = 176.451
+median_length = 177.5
+min_length = 102
+max_length = 203
 ```
 
-4.2) Berechne nun auch Quantile, Varianz und Standardabweichung der Blütenblattlängen der Iriden.
-```{r 4_2x, exercise=TRUE, exercise.setup = "4_setup"}
-# Varaible mit Blütenblattlängen: petal_length
+5.3) Berechne nun auch den Interquantilsabstand, die Varianz und die Standardabweichung der Größe der Studierenden.
+```{r 5_3, exercise=TRUE, exercise.setup = "4_setup"}
 
-# Quantile der Länge der Blütenblätter im Datensatz
+# Quantile der Größe der Studierenden im Datensatz
 quantile_length <- 
 
-# Varianz der Blütenblättlängen
+# Interquartilsabstand der Größe der Studierenden im Datensatz
+iqa_length <- 
+
+# Varianz der Größe der Studierenden im Datensatz
 var_length <- 
 
-# Standardabweichung der Blütenblattlängen
+# Standardabweichung der Größe der Studierenden im Datensatz
 sd_length <- 
   
-  
-quantile_length
+
+quantile_length  
+iqa_length
 var_length
 sd_length
 ```
-```{r 4_2x-hint-1}
+```{r 5_3-hint-1}
 # Befehle:
-quantile_length <- quantile(petal_length)
-var_length <- var(petal_length)
-sd_length <-  sd(petal_length)
+quantile_length <- quantile(students$Length)
+iqa_length <- IQR(students$Length)
+var_length <- var(students$Length)
+sd_length <-  sd(students$Length)
 ```
-```{r 4_2x-solution}
+```{r 5_3-solution}
 # Ergebnisse:
-quantile_length = c(1, 1.6, 4.35, 5.1, 6.9) 
-var_length = 3.11628
-sd_length = 1.765298
+quantile_length = c(102, 170, 178, 185, 203) 
+iqa_length = 15
+var_length = 164.706
+sd_length = 12.834
 ```
 
-4.3) Für die unterschiedlichen Größen der Blütenblätter kann eine Vielzahl von Gründen angeführt werden. Ein möglicher Grund ist verschiedene Standortbedingungen. Um diese als Einfluss abzuschätzen kann man betrachten, ob andere Merkmale der gleichen Pflanze eine ähnliche Ausprägung haben, d.h. "Wenn der Standort die Größe der Blüteblätter beeinflusst, haben Kelchblattgrößen ähnliche Größenverhätnisse wie Blütenblattlängen".
-<br>
-Betrachte deshalb die Korrelation zwischen Blütenblattlänge und Kelchblattlänge um die Aussage zu testen. Die Kelchblattlänge der Iriden ist als `sepal_length` verfügbar.
-```{r 4_3x, exercise=TRUE, exercise.setup = "4_setup"}
-# Varaible mit Blütenblattlängen: petal_length
-# Variable mit Kelchblattlängen: sepal_length
 
-# Korrelation zwischen Blütenblattlänge und Art
-cor_lengths <- 
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
-  
-cor_lengths
-```
-```{r 4_3x-hint-1}
-# Befehle:
-cor_lengths <- cor(petal_length, sepal_length)
-```
-```{r 4_3x-solution}
-# Ergebnisse:
-cor_lengths = 0.871
 
-# 0.88 Ist eine hohe Korrelation. Daher kann man davon ausgehen, dass die Längen sich ähnlich verhalten und deshalb Standortfaktoren ein möglicher Grund sind.
-```
-
-## 5. Plots
+## 4. Plots
 Plots in R werden mittels der Funktion `plot()` erzeugt (siehe auch `?plot`). Dabei wird eine Vielzahl von Parametern angeboten, die das Verhalten und die Darstellung des Plots beeinflussen, wie zum Beispiel: 
 <br>
 <ul>
-<li>`x` und `y`: Standardmäßig Paare von Punkten</li>
+<li>`x` und `y`: Die Daten die geplottet werden sollen. `y` ist dabei häufig optional</li>
 <li>`type`: Ändert das Darstellungsverhalten (z.B. Linie, Punkte, ...)</li>
 <li>`main`: Überschrift des Plots</li>
 <li>`sub`: Unterschrift des Plots</li>
@@ -1075,14 +1121,84 @@ Plots in R werden mittels der Funktion `plot()` erzeugt (siehe auch `?plot`). Da
 <li>`ylab`: Beschriftung der Y-Achse</li>
 <li>`col`: Farbe der geplotteten Elemente</li>
 </ul>
-Wenn mehrere Elemente in einem Plot angezeigt werden sollen, darf die Funktion `plot` nur <b>einmal</b> aufgerufen werden. Weitere Punkte und Kurven können dann mittels `lines()` und `points()` hinzugefügt werden.
-<br>
-<br>
+Wenn mehrere Elemente in einem Plot angezeigt werden sollen, darf die Funktion `plot` nur <b>einmal</b> aufgerufen werden. Weitere Punkte und Kurven können dann mittels `lines()` und `points()` hinzugefügt werden. Im folgenden werden einige Beispiele für Plots und ihre Erzeugung gezeigt. Beachte dabei die Einflüsse der Skalenviveaus auf die Darstellungsweise.
+```{r info_4, echo = TRUE}
 
-### Übung 5: 
+# Plotte die Größe der Studierenden
+# Diese Daten liegen rationalskaliert vor
+plot(
+  x = students$Length,
+  type = "o", # Type o plottet Linien und Punkte
+  main = "Studierendengrößen in Zentimeter",
+  xlab = "Studierenden ID",
+  ylab = "Körpergröße [cm]",
+  col = "blue"
+)
 
-5.1) Erzeuge einen Vektor x von -3 bis 3 in 0.1-Schritten. Zeichne die Funktionen $y=x^2$, $y=1−x^2$ und $y=5+x^2$. 
-```{r 5, exercise=TRUE}
+
+# Plotte die Aufgenfarben der Studierenden
+# Diese Daten sind nominalskaliert
+plot(
+  x = students$EyeColor,
+  main = "Studierendenaugenfarben",
+  xlab = "Faktorgruppe Farbe",
+  ylab = "Anzahl der Studierenden in Faktorgruppe",
+  col = "darkgreen"
+  )
+
+
+# Plotte das Alter der Studierenden
+# Diese Daten liegen rationalskaliert vor
+plot(
+  x = students$Age,
+  type = "p", # Type p Punkte
+  main = "Studierendenalter in Jahren",
+  xlab = "Studierenden ID",
+  ylab = "Alter [Jahre]",
+  col = "red"
+)
+# Füge Linie ein
+lines(
+  students$Age,
+  col = "orange")
+```
+
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## \ \ \ \ Übung 6: Plots 
+6.1) Wie man bei der Visualisierung der Variable `Age` gesehen hat, ist die Standardvisualisierung, die R für Daten wählt nicht immer optimal. Deshalb soll in dieser Aufgabe eine bessere Visualisierung gefunden werden. Unser Ziel ist es die Hauptaltersgruppen zu finden, d.h. alle Altersklassen mit mehr als 10 Studierenden. Plotte eine entsprechende Visualisierung.
+```{r 6_1, exercise=TRUE}
+
+```
+```{r 6_1-hint-1}
+"Die Funktion table() könnte sich als hilfreich erweisen."
+```
+```{r 6_1-hint-2}
+"Betrachte die Funktion barchart()."
+```
+```{r 6_1-hint-3}
+"Die Funktion abline() kann horizontale Linien erzeugen."
+```
+```{r 6_1-solution}
+counts <- table(students$Age)
+
+barplot(
+  counts,
+  main = "Hauptaltersgruppen der Studierenden",
+  xlab = "Alter [Jahre]", 
+  ylab = "Anzahl der Studierenden")
+
+abline(h = 10, col = "red")
+
+```
+
+6.2) Erzeuge einen Vektor x von -3 bis 3 in 0.1-Schritten. Zeichne die Funktionen $y=x^2$, $y=1−x^2$ und $y=5+x^2$. 
+```{r 6_x, exercise=TRUE}
 x <- 
 y1 <- 
 y2 <- 
@@ -1092,13 +1208,13 @@ plot()
 ...
 ...
 ```
-```{r 5-hint-1}
+```{r 6_x-hint-1}
 "Portenzen in R werden mit ^ eingegeben. Beispiel: 2^2 = 4"
 ```
-```{r 5-hint-2}
-"Beachte plot nur einmal aufzurufen."
+```{r 6_x-hint-2}
+"Denke daran, plot() nur einmal aufzurufen."
 ```
-```{r 5-solution}
+```{r 6_x-solution}
 x <- seq(-3, 3, by = 0.1)
 y1 <- x ^ 2
 y2 <- 1 - x^2
@@ -1111,44 +1227,36 @@ lines(x, y3, col = "darkgreen")
 ```
 
 ```{r quiz3, echo=FALSE}
-quiz(
+quiz(caption = "\ ",
+     
   question("Welche Veränderung kannst du in der Matrix beobachten? (Mehrfachauswahl möglich)",
+           
+    answer("y1 hat ein Minimum von 5"),
+    answer("y2 hat ein Minimum von 5"),
+    answer("y3 hat ein Minimum von 5", correct = TRUE),
+    
     answer("y1 entspricht der Normalparabel", correct = TRUE),
     answer("y2 entspricht der Normalparabel"),
     answer("y3 entspricht der Normalparabel"),
     
     answer("y1 entspricht einer invertierten Normalparabel"),
-    answer("y2 entspricht einer invertierten Normalparabel",
-           correct = TRUE),
-    answer("y3 entspricht einer invertierten Normalparabel"),
-    
-    answer("y1 hat ein Minimum von 5"),
-    answer("y2 hat ein Minimum von 5"),
-    answer("y3 hat ein Minimum von 5", correct = TRUE),
-    random_answer_order = TRUE
+    answer("y2 entspricht einer invertierten Normalparabel", correct = TRUE),
+    answer("y3 entspricht einer invertierten Normalparabel")
   )
 )
 ```
 
 
-## Fortgeschrittene Themen
-
-### Der Umgang mit NAs
-In den bisherigen Aufgaben waren die Daten "perfekt", d.h. vollständig und fehlerfrei. Bei Datensätzen aus der realen Welt, wie z.B. dem `students`-Datensatz, besteht jedoch das Problem, dass diese eben nicht immer perfekt sind. Fehlende oder fehlerhafte Werte führen häufig zu Schwierigkeiten bei der Datenanalyse, wenn die nicht richtig behandelt werden.
-<br>
-Insbesondere fehlende Werte, in R durch `NA` repräsentiert, beeinflussen die Analyse stark. Sie können dafür sorgen, dass Funktionen gar nicht oder nur fehlerhaft ausgeführt werden.
-<br>
-Daher ist es wichtig Datensätze zu prüfen. `NAs` können relativ leicht identifiziert werden. Mit `any(is.na(Dataframename))` wird überprüft, ob der gesamte Dataframe `NAs` beinhaltet. Auch einzelne Spalten können getstet werden, wie z.B. `any(is.na(students$Semester))`. 
-<br>
+## 5. Der Umgang mit NAs
+In den bisherigen Aufgaben waren die Daten "perfekt", d.h. vollständig und fehlerfrei. Bei Datensätzen aus der realen Welt, wie z.B. dem `students`-Datensatz, besteht jedoch das Problem, dass diese nicht immer perfekt sind. Fehlende oder fehlerhafte Werte führen häufig zu Schwierigkeiten bei der Datenanalyse, wenn sie nicht richtig behandelt werden. Insbesondere fehlende Werte, in R durch `NA` repräsentiert, beeinflussen die Analyse stark. Sie können dafür sorgen, dass Funktionen gar nicht oder nur fehlerhaft ausgeführt werden. Daher ist es wichtig Datensätze zu prüfen. `NAs` können relativ leicht identifiziert werden. Mit `any(is.na(DATAFRAMENAME))` wird überprüft, ob der gesamte Dataframe `NAs` beinhaltet. Auch einzelne Spalten können getestet werden, wie z.B. `any(is.na(students$Semester))`. 
 ```{r NA, include = TRUE, echo = TRUE}
 # Untersuche students auf NAs
 any(is.na(students))
 
-# Da stundents NAs hat suche die betreffenden Attribute:
+# Da stundents NAs aufweist, müssen die betroffenen Attribute identifiziert werden
 any(is.na(students$Length)) # --> keine fehlenden Attribute
 any(is.na(students$Semester)) # --> fehlende Attribute
 ```
-<br>
 
 In den Daten zur Größe fehlen also keine Daten, in der Semesteranzahl hingegen schon. Die Auswirkungen auf simple Funktionen werden im folgenden Beispiel deutlich:
 ```{r NA_mean, include = TRUE, echo = TRUE}
@@ -1159,42 +1267,54 @@ mean(students$Length)
 mean(students$Semester) 
 ```
 <br>
-Es gibt verschiedene Möglichkeiten mit `NAs` umzugehen. Sie können ersetzt oder ausgelassen werden. Welche der Methoden sinnvoller ist liegt dabei im Ermessen der/s Analysierenden und ist von Fall zu Fall unterschiedlich. In den folgenden Beispielen werden beide Möglichkeiten gezeigt.
-<br>
+Es gibt verschiedene Möglichkeiten mit `NAs` umzugehen. Sie können durch Platzhalterwerte ersetzt, aufgefüllt oder ausgelassen werden. Welche der Methoden sinnvoller ist liegt dabei im Ermessen der/s Analysierenden und ist von Fall zu Fall unterschiedlich. In den folgenden Beispielen werden einige Möglichkeiten gezeigt.
 
-### NAs im Datensatz entfernen:
-```{r NA_removal, include = TRUE, echo = TRUE}
+```{r NA_replace_99, include = TRUE, echo = TRUE}
 # Fehlende Attribute/NAs
-is.na(students$Semester)
+any(is.na(students$Semester))
 
-# Erzeuge temporäre Variable students_filled, um students nicht zu überschreiben
-students_filled <- students
+# Erzeuge temporäre Variable students_filled_99, um students nicht zu überschreiben
+students_filled_99 <- students
 
-# Ersetze alle NAs in der Spalte "Semester" durch 99
-students_filled$Semester[is.na(students_filled$Semester)] <- 99
-
-# Oder entferne die Beobachtung mit dem NA ganz aus dem Datensatz
-# Erzeuge hierfür neuen data.frame und übernehme nur die Zeilen aus dem students data.frame, die kein NA (!is.na()) in der Spalte "Semester" haben
-students_NA_removed <- students[!is.na(students$Semester),]
-
-# Betrachte students_filled NAs:
-is.na(students_filled$Semester)
-
-# Betrachte students_filled Werte:
-students_filled$Semester
-
-# Berechne Durchschnitt mit ersetztem NA
-mean(students_filled$Semester)
-
-# Berechne jetzt Durchschnitt auf den Daten nach Entfernen der Beobachtung, die ein NA enthielt
-# Beachte den Unterschied
-mean(students_NA_removed$Semester)
-
+# Ersetze alle NAs in der Spalte "Semester" durch PLatzhalter 99
+students_filled_99$Semester[is.na(students_filled_99$Semester)] <- 99
 ```
 
-### NAs bei Berechnungen auslassen:
+```{r NA_replace_mean, include = TRUE, echo = TRUE}
+# Fehlende Attribute/NAs
+any(is.na(students$Semester))
 
-Einige Funktionen besitzen spezielle Parameter, mit denen eingestellt werden kann, was beim Auftauchen von NAs zu tun ist. So kann zum Beipsiel der Funktion `mean` über den Parameter `na.rm=TRUE` mitgeteilt werden, dass NAs vor der Berechnung des Mittelwertes aus den Daten entfernt werden sollen.
+# Erzeuge temporäre Variable students_filled_mean, um students nicht zu überschreiben
+students_filled_mean <- students
+
+# Berechne Durschnittswert mit Auslassen von NAs
+mean_age <- mean(students$Semester, na.rm = TRUE)
+
+# Ersetze alle NAs in der Spalte "Semester" durch 99
+students_filled_mean$Semester[is.na(students_filled_mean$Semester)] <- mean_age
+```
+
+```{r leave_out, include = TRUE, echo = TRUE}
+# Entferne die Beobachtung mit dem NA ganz aus dem Datensatz
+# Erzeuge hierfür neuen data.frame und übernehme nur die Zeilen aus dem students data.frame,
+## die keine NAs (!is.na()) in der Spalte "Semester" haben
+students_NA_removed <- students[!is.na(students$Semester), ]
+
+# Teste auf NAs:
+any(is.na(students_filled_99$Semester))
+any(is.na(students_filled_mean$Semester))
+any(is.na(students_NA_removed))
+
+
+# Berechne Durchschnitte NA
+mean(students_filled_99$Semester)
+mean(students_filled_mean$Semester)
+mean(students_NA_removed$Semester)
+```
+Durch diese drei beispiele zum Umgang mit `NAs` wird deutlich, dass verschiedene Zeile verschiedene Ansätze benötigen. So bietet das ersetzen mit einem Ausreißerwert den Vorteil, dass vorher fehlende Werte immer noch identifziert werden können, aber Berechnungen möglich sind. Das Auffüllen mit einem Durschnittswert hat den Vorteil, dass keine Beobachtungen verloren gehen und Berechnungen möglich sind, kann jedoch auch Verhältnisse in den Daten verzerren. Das Auslassen von Beobachtungen mit `NAs` hat den großen Vorteil, dass keine Annahmen getroffen werden müssen, d.h. aller Ergebnisse immer nachvollziehbar sind. Der deutliche Nachteil dabei ist jedoch, dass Beobachtungen verloren gehen.
+<br>
+
+Wie bereits zu sehen war, besitzen einige Funktionen spezielle Parameter, mit denen angegeben werden kann, was mit NAs zu tun ist. So kann zum Beispiel der Funktion `mean` über den Parameter `na.rm = TRUE` übergeben werden, dass NAs vor der Berechnung des Mittelwertes aus den Daten entfernt werden sollen.
 Der Datensatz selbst wird dabei nicht verändert:
 
 ```{r NA_skip, include = TRUE, echo = TRUE}
@@ -1203,6 +1323,11 @@ Der Datensatz selbst wird dabei nicht verändert:
 mean(students$Semester, na.rm = TRUE)
 ```
 
+## 6. Datenmanagement
+
+## 7. Troubleshooting
+. statt , 
+            , am ende der argumentliste
 
 
 ## Weitere Infos
@@ -1216,11 +1341,6 @@ Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
 [3] [Efficient R programming, weiterführendes Buch über effiziente Programmierung in R, englisch](https://csgillespie.github.io/efficientR/index.html)
 
 
-Datenhaltung <br>
-Konventionen: sprechende namen, kamelcase, underscores. englsih <br>
-Datentypen
-probleme : . statt , 
-            , am ende der argumentliste
             
 Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `data(students)` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann. In diesem tutorial-Dokument ist auch die Variable `students` mit dem Datensatz bereits vorhanden.
 <br>
