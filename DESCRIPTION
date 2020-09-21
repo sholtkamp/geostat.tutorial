@@ -1,6 +1,6 @@
 Package: geostat.tutorial
 Title: Geostat Tutorial Builder
-Version: 1.2
+Version: 1.4
 Authors@R: 
     person(given = "Sebastian",
            family = "Holtkamp",
