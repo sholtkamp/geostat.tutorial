@@ -1194,7 +1194,6 @@ barplot(
   ylab = "Anzahl der Studierenden")
 
 abline(h = 10, col = "red")
-
 ```
 
 6.2) Erzeuge einen Vektor x von -3 bis 3 in 0.1-Schritten. Zeichne die Funktionen $y=x^2$, $y=1−x^2$ und $y=5+x^2$. 
@@ -1245,6 +1244,11 @@ quiz(caption = "\ ",
   )
 )
 ```
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
 
 ## 5. Der Umgang mit NAs
@@ -1323,14 +1327,80 @@ Der Datensatz selbst wird dabei nicht verändert:
 mean(students$Semester, na.rm = TRUE)
 ```
 
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
 ## 6. Datenmanagement
+Nachdem nun der Umgang mit Daten innerhalb von R erläutert wurde, stellt sich die Frage, wie sie in R importiert und aus R heraus exportiert werden können. Um dies zu erleichtern bietet es sich an, eine strukturierte Datenhaltung anzuwenden. Darum wird diese hier auch thematisiert.
 
-## 7. Troubleshooting
-. statt , 
-            , am ende der argumentliste
+### Geostatistik Ordner
+Im Verlauf der Übung zu diesem Kurs werden verschiedene Datensätze zur Verfügung gestellt. Erfahrungsgemäß ist der Import dieser Daten eine der größten Schwierigkeiten für Studierende und einer der häufigsten Fehlerquellen. Um diese Schwierigkeiten zu umgehen sollten alle Datensätze an einem leicht erreichbaren Ort gespeichert werden. Dazu bietet sich zum Beispiel der Desktop an. Dort kann dann ein Ordner angelegt werden mit dem Namen `Geostatistik`. In diesem werden dann die Datenstäze gespeichert. Dafür kann auch ein Unterordner, z.B. `Daten`, angelegt werden.
+
+### Datenimport
+Der Import von Daten besteht aus zwei Bestandteilen: Einem Dateiformat-spezifischen Befehl und einem Pfad. In der Übung werden die Datenformate `.rdata` und `.txt`. Die Befehle um diese Formate zu importieren sind:
+
+<ul>
+  <li>`.rdata`:
+  <br>
+      Wird mit `load(PFAD)` geladen. 
+      <br>
+      Beispiel: `load("C:/Users/Beispieluser/Desktop/Geostatistik/Daten/Daten_1.rdata"`
+  </li>
+  
+  <li>`.txt`:
+  <br>
+      Wird mit `read.delim(PFAD)`oder `read.delim2(PFAD)` geladen, je nach Dezimalzeichen. 
+      <br>
+      Beispiel: `data <- read.delim("C:/Users/Beispieluser/Desktop/Geostatistik/Daten/Daten_1.txt"`
+  </li>
+  
+  <li>`.csv`:
+  <br>
+      Wird mit `read.cvs` geladen.
+      <br>
+      Beispiel: `data <- read.csv("C:/Users/Beispieluser/Desktop/Geostatistik/Daten/Daten_1.csv"`
+  </li>
+</ul>
+
+<br>
+Der Pfad "zeigt" dabei auf den Speicherort der Datei. Das Format und Teile davon sind dabei abhängig vom Betriebssystem des Computers. Wenn die vorgeschlagene Dateistruktur genutzt wird, können die folgenden Pfade benutzt werden. Dabei muss `username` durch den Benutzernamen des aktuellen Kontos ersetzt werden.
+
+<ul>
+<li>Mac: `"/Users/username/Desktop/Geostatistik/Daten/..."`</li>
+<li>Linux: `"/home/username/Desktop/Geostatistik/Daten/..."`</li>
+<li>Windows: `"C:/Users/username/Desktop/Geostatistik/Daten/..."`</li>
+</ul>
+
+### Datenexport
+in R manipulierte Daten können in Dateien verschiedenster Typen gespeichert, verteilt und wieder in R eingelesen werden. Dazu werden ebenfalls ein Befehl und ein Pfad benötigt. Die Befehle für die hier verwendeten Datentypen sind die folgenden:
+
+<ul>
+<li>`.rdata` wird mit `save(Objekt, Pfad)` gespeichert</li>
+<li>`.txt` wird mit `write.table(Objeckt, file = Pfad, ...)` gespeichert</li>
+<li>`.csv` wird mit `write.csv(Objekt, Pfad)` gespeichert</li>
+</ul>
+         
+         
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 
 
-## Weitere Infos
+## 7. Übergang zu R Studio
+```{r img_7_0, out.width = "100%"}
+knitr::include_graphics("images/overview.png")
+```
+
+
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+
+
+## Literatur
 
 Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
 <br>
@@ -1340,10 +1410,3 @@ Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
 <br>
 [3] [Efficient R programming, weiterführendes Buch über effiziente Programmierung in R, englisch](https://csgillespie.github.io/efficientR/index.html)
 
-
-            
-Dataframes können in Dateien des Typs `.rdata` gespeichert, verteilt und wieder in R eingelesen werden. Eine solche `.rdata`-Datei ist `students.rdata`. Diese Datei ist in dem vorliegenden Tutorial bereits enthalten und kann deshalb mit `data(students)` eingelesen und benutzt werden. Das Ausführen dieses Befehls legt eine Variable mit dem namen `students` in der Arbeitsumgebung an, die daraufhin benutzt werden kann. In diesem tutorial-Dokument ist auch die Variable `students` mit dem Datensatz bereits vorhanden.
-<br>
-`.rdata`-Dateien können generell auch mittels `load("datei_name.rdata")` eingelesen werden, wenn sie im aktuellen Arbeitsverzeichnis vorhanden sind. Daher ist ein organisierter Umgang mit den Daten der Vorlesung und Übung von Vorteil.
-<br>
-<br>
