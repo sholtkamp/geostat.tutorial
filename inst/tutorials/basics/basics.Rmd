@@ -262,6 +262,8 @@ Die Funktion `seq()` dient dazu eine regelmäßige Zahlenfolge zu erzeugen. Drei
 </ul>
 Häufig findet man zur Erzeugung von Sequenzen auch die Kurzform `c(x : y)`. Diese ist gleichbedeutend mit `seq(from = x, to = y, by = 1)`.
 <br>
+<br>
+
 Die Funktion `rep()` dient dazu einen Vektor oder Faktor beliebig oft zu wiederholen. Dazu werden die folgenden Parameter benötigt: <br>
 <ul>
 <li>`x`: Vektor oder Faktor der wiederholt werden soll</li>
@@ -1389,10 +1391,30 @@ in R manipulierte Daten können in Dateien verschiedenster Typen gespeichert, ve
 <!--------------------------------------------------------------------------------->
 
 
-## 7. Übergang zu R Studio
+## 7. Übergang zu RStudio
 ```{r img_7_0, out.width = "100%"}
 knitr::include_graphics("images/overview.png")
 ```
+<br><br>
+Nachdem nun alle inhaltlichen Teile der Einführung in R abgehandelt sind, kann die geschützte Umgebung verlassen werden. Zur Erleichterung des Umstiegs wird hier das Interface von RStudio erklärt und Parallelen zur Arbeit in der geschützten Umgebung gezogen. 
+<br>
+Das Fenster von RStudio ist in 4 Bereiche aufgeteilt, jeder mit seinen eigenen, wichtigen Funktionen. Die Aufgaben dieser Bereiche wird hier erklärt.
+
+### Skriptbereich
+Hier werden geöffnete Skripte und Markdown-Dateien angezeigt. Dieser Bereich ist vergleichbar mit den Eingabefeldern für Code, die im Tutorial angezeigt werden. Hier werden Befehle gesammelt, organisiert und ausgeführt.
+<br>
+Um Code von hier auszuführen kann man entweder die kleinen grünen Pfeile in der oberen, rechten Ecke des markierten Bereichs (Chunk) anklicken, den Code markieren und Strg+Enter drücken, oder den Code von Hand in die Konsole kopieren. Eine weitere Möglichkeit ist es, am oberen Rand den Run-Knopf zu drücken. Dieser führt bietet verschiedene Ausführungsoptionen, z.B. das ganze Skript oder nur den gewählten Bereich.
+
+### Konsolenbereich
+Der Konsolenbereich kann genutzt werden, um Befehle direkt auszuführen. Dies eignet sich zum Beispiel für Befehle die nicht wiederholt werden müssen und zum Ausprobieren. Befehle die vorher ausgeführt wurden können hier mit den Pfeiltasten wiederhergestellt werden.
+
+### Arbeitsbereich
+Im Arbeitsbereich werden die verfügbaren Daten, Werte, Variablen und selbsterstellte Funktionen angezeigt. Dies dient vor allem zur Übersicht. Wenn sich neben den Namen von Daten ein blauer Kreis mit einem weißen Pfeil befindet, kann dieser angeklickt werden um detaillierte Informationen auszuklappen. Mit Klicken auf das Tabellensymbol rechts neben den Namen wird eine tabellarische Ansicht der Daten geöffnet.
+<br>
+Darüber hinaus kann hier auch der Verlauf der Eingaben in der Konsole angezeigt werden. Nutze dazu den Reiter "History"
+
+### Outputbereich
+Im Outputbereich werden Plots, Hilfen und Dateien angezeigt.
 
 
 <!--------------------------------------------------------------------------------->
@@ -1409,4 +1431,4 @@ Weitere nützliche Quellen zum Einstieg in R und zum Nachschlagen sind z.B:
 [2] [Advanced R by Hadley Wickham, begleitende Website, englisch](http://adv-r.had.co.nz)
 <br>
 [3] [Efficient R programming, weiterführendes Buch über effiziente Programmierung in R, englisch](https://csgillespie.github.io/efficientR/index.html)
-
+[4] [R Cheat Sheets](https://rstudio.com/resources/cheatsheets/)
